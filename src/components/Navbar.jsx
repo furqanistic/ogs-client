@@ -27,7 +27,14 @@ const SubOptions = styled.li`
   color: white;
   font-weight: 500;
   transition: all 0.3s ease-in-out;
-
+  @media (max-width: 800px) {
+    font-size: 1em;
+    margin-right: 1rem;
+  }
+  @media (max-width: 420px) {
+    font-size: 0.8em;
+    margin-right: 0.5rem;
+  }
   &:hover {
     scale: 1.2;
     color: #0e970e;
@@ -39,6 +46,12 @@ const Logo = styled.div`
   font-weight: 600;
   color: white;
   flex: 1;
+  @media (max-width: 800px) {
+    font-size: 1.5rem;
+  }
+  @media (max-width: 420px) {
+    font-size: 1.2em;
+  }
 `
 const Social = styled.div`
   display: flex;
@@ -47,6 +60,10 @@ const Social = styled.div`
   font-size: 1.2rem;
   justify-content: flex-end;
   padding-right: 1rem;
+  @media (max-width: 800px) {
+    display: none;
+    visibility: hidden;
+  }
 `
 const Icon = styled.div`
   display: flex;
@@ -66,9 +83,9 @@ const Navbar = () => {
             <SubOptions>Home</SubOptions>
           </Link>
           {/* <SubOptions>Admission</SubOptions> */}
-          <Link to='/gallery' style={{ textDecoration: 'none' }}>
+          {/* <Link to='/gallery' style={{ textDecoration: 'none' }}>
             <SubOptions>Gallery</SubOptions>
-          </Link>
+          </Link> */}
           <Link to='/about' style={{ textDecoration: 'none' }}>
             <SubOptions>About</SubOptions>
           </Link>

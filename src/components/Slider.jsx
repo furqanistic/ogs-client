@@ -53,8 +53,21 @@ const Slide = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
-  background-color: #${(props) => props.bg};
+  /* background-color: #${(props) => props.bg}; */
+  background-image: url(${(props) => props.bp});
   flex: 5;
+  object-fit: cover;
+  background-repeat: no-repeat;
+  background-size: cover;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(8, 44, 0, 0.3);
+  }
   @media only screen and (max-width: 780px) {
     height: 40vh;
   }
@@ -68,7 +81,7 @@ const ImgContainer = styled.div`
   flex: 2;
   margin-left: 2rem;
   background: #0c5403;
-  clip-path: polygon(18% 0, 82% 0, 100% 50%, 82% 100%, 18% 100%, 0% 50%);
+  /* clip-path: polygon(18% 0, 82% 0, 100% 50%, 82% 100%, 18% 100%, 0% 50%); */
 `
 
 const Image = styled.img`
@@ -79,7 +92,12 @@ const Image = styled.img`
 
 const InfoContainer = styled.div`
   flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   padding: 50px;
+  z-index: 5;
   @media only screen and (max-width: 780px) {
     padding: 20px;
   }
@@ -89,21 +107,32 @@ const Title = styled.p`
   font-size: 3rem;
   color: white;
   text-align: center;
+  background-color: #075501;
+  padding: 1rem;
+  border-radius: 10px;
   @media only screen and (max-width: 1170px) {
-    font-size: 2.3rem;
+    font-size: 2.2rem;
+  }
+  @media only screen and (max-width: 950px) {
+    font-size: 1.7rem;
   }
   @media only screen and (max-width: 780px) {
     font-size: 1.5rem;
   }
   @media only screen and (max-width: 670px) {
-    font-size: 1.2rem;
-  }
-  @media only screen and (max-width: 480px) {
     font-size: 1rem;
+    padding: 0.6rem;
+  }
+  @media only screen and (max-width: 510px) {
+    font-size: 0.9rem;
     font-weight: 500;
+    padding: 0.4rem;
+  }
+  @media only screen and (max-width: 470px) {
+    font-size: 0.7rem;
   }
   @media only screen and (max-width: 390px) {
-    font-size: 0.8rem;
+    font-size: 0.6rem;
   }
 `
 
@@ -113,6 +142,9 @@ const Desc = styled.p`
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 3px;
+  background-color: white;
+  color: green;
+  padding: 0.5rem;
   @media only screen and (max-width: 780px) {
     font-size: 15px;
   }
@@ -126,20 +158,21 @@ const Desc = styled.p`
 `
 
 const Button = styled.button`
-  padding: 0.7rem;
-  font-size: 1rem;
+  padding: 10px 20px;
   border: none;
-  background-color: white;
-  border-radius: 30px;
-  color: green;
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.3s ease-in-out;
+  font-size: 17px;
+  color: #fff;
+  border-radius: 7px;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.5s;
+  transition-property: box-shadow;
+  background: #3aa933;
+  box-shadow: 0 0 25px #3aa933;
 
   &:hover {
-    background-color: #008000;
-    color: white;
-    border: 1px solid white;
+    box-shadow: 0 0 5px #3aa933, 0 0 25px #3aa933, 0 0 50px #3aa933,
+      0 0 100px #3aa933;
   }
   @media only screen and (max-width: 780px) {
     padding: 0.5rem;
@@ -168,10 +201,10 @@ const Slider = () => {
       </Arrow>
       <Wrapper slideIndex={slideIndex}>
         {sliderItems.map((item) => (
-          <Slide bg={item.bg} key={item.id}>
-            <ImgContainer>
+          <Slide bp={item.img} bg={item.bg} key={item.id}>
+            {/* <ImgContainer>
               <Image src={item.img} />
-            </ImgContainer>
+            </ImgContainer> */}
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>

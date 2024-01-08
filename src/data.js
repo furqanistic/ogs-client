@@ -1,7 +1,7 @@
 export const sliderItems = [
   {
     id: 1,
-    img: 'https://images.pexels.com/photos/9572721/pexels-photo-9572721.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    img: 'https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     title: 'WE ARE DETERMINED TO ACHIEVE THE HIGHEST STANDARDS',
     desc: 'ORION GRAMMER SCHOOL',
     bg: '3db83d',
@@ -9,14 +9,16 @@ export const sliderItems = [
 
   {
     id: 2,
-    img: 'https://images.pexels.com/photos/253877/pexels-photo-253877.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+
+    img: 'https://images.pexels.com/photos/261895/pexels-photo-261895.jpeg',
+
     title: 'WE TAUGHT HOW TO THINK, NOT WHAT TO THINK',
     desc: 'ORION GRAMMER SCHOOL',
     bg: '2d8d2d',
   },
   {
     id: 3,
-    img: 'https://images.pexels.com/photos/1326946/pexels-photo-1326946.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    img: 'https://images.pexels.com/photos/8613071/pexels-photo-8613071.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     title: 'CHANGE IS THE END RESULT OF ALL TRUE LEARNING',
     desc: 'ORION GRAMMER SCHOOL',
     bg: '008000',

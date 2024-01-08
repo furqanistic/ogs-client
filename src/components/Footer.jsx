@@ -24,12 +24,12 @@ export const Container = styled.div`
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
-  text-align: left;
-  margin-left: 60px;
+  text-align: center;
 `
 
 export const Row = styled.div`
   display: grid;
+
   grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
   grid-gap: 20px;
 
@@ -77,9 +77,10 @@ const Footer = () => {
           </Column>
           <Column>
             <Heading>Contact Us</Heading>
-            <FooterLink href='#'>+9231002345678</FooterLink>
+            <FooterLink href='tel:+923077879988'>0307 787 9988</FooterLink>
+            <FooterLink href='tel:+923355854455'>0335 585 4455</FooterLink>
             <FooterLink href='#'>Sargodha, Pakistan</FooterLink>
-            <FooterLink href='#'>hellp@orion.com</FooterLink>
+            <FooterLink href='#'>hello@orion.com</FooterLink>
           </Column>
           <Column>
             <Heading>Social Media</Heading>

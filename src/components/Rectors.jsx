@@ -5,38 +5,30 @@ import RectorOne from '../img/rec1.jpg'
 import RectorTwo from '../img/rec2.jpg'
 const Container = styled.div`
   display: flex;
-  height: 40vh;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
   width: 100%;
   position: relative;
 `
 const Image = styled.img`
-  height: 40vh;
+  height: 30vh;
   width: 100%;
   object-fit: cover;
 `
 const DivWrapper = styled.div`
   position: absolute;
   display: flex;
-  flex: 2;
   height: 100%;
   width: 100%;
-`
-const Left = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-const Right = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `
 const Wrapper = styled.div`
   padding: 1rem;
   color: white;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 `
 const JobTitle = styled.p`
   font-size: 1rem;
@@ -47,6 +39,7 @@ const Details = styled.div`
   flex-direction: column;
   justify-content: center;
   margin: 1rem;
+  margin-left: 2rem;
 `
 const Name = styled.h1`
   font-size: 2rem;
@@ -80,26 +73,14 @@ const Rectors = () => {
       <Container>
         <Image src={RectorBg} />
         <DivWrapper>
-          <Left>
-            <Wrapper>
-              <RecImg src={RectorTwo} />
-              <Details>
-                <JobTitle>Rector</JobTitle>
-                <Name>Prof. Waqas Zaheer</Name>
-                <Button>Read More</Button>
-              </Details>
-            </Wrapper>
-          </Left>
-          <Right>
-            <Wrapper>
-              <RecImg src={RectorOne} />
-              <Details>
-                <JobTitle>Principal</JobTitle>
-                <Name>Prof. Zaheer Waqas</Name>
-                <Button>Read More</Button>
-              </Details>
-            </Wrapper>
-          </Right>
+          <Wrapper>
+            <RecImg src='https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png' />
+            <Details>
+              <JobTitle>Rector</JobTitle>
+              <Name>Prof. Waqas Zaheer</Name>
+              {/* <Button>Read More</Button> */}
+            </Details>
+          </Wrapper>
         </DivWrapper>
       </Container>
     </>

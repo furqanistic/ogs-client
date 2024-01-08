@@ -33,9 +33,10 @@ const News = () => {
       <Container>
         <ScrollingRedeemLimit>
           <Scrolling>
-            A school is an educational institution designed to provide learning
-            spaces and learning environments for the teaching of students under
-            the direction of teachers.
+            Unlock your potential with Orion. We're on the lookout for talented
+            individuals to be part of our educational journey. Explore our job
+            openings and seize the opportunity to make a meaningful impact
+            today!
           </Scrolling>
         </ScrollingRedeemLimit>
       </Container>

@@ -10,6 +10,7 @@ const Image = styled.img`
   width: 100%;
   height: 22vh;
   object-fit: cover;
+  background-color: #024002;
 `
 const Details = styled.div`
   display: flex;
@@ -71,6 +72,12 @@ const Para = styled.p`
   font-weight: 400;
   padding: 1rem;
   text-align: center;
+  @media (max-width: 800px) {
+    font-size: 20px;
+  }
+  @media (max-width: 550px) {
+    font-size: 16px;
+  }
 `
 
 const Info = styled.div`
@@ -85,7 +92,7 @@ const AboutInfo = () => {
   return (
     <>
       <Container>
-        <Image src={ContactImg} />
+        <Image src='https://i.ibb.co/F0G9g7w/cont.png' />
         <Details>
           <Title>About</Title>
           <Desc>ORION GRAMMER SCHOOL</Desc>
@@ -94,29 +101,20 @@ const AboutInfo = () => {
       <Info>
         <ParaHeading>Vision</ParaHeading>
         <Para>
-          “A vision is your school’s goal — where you hope to see it in the
-          future. The mission provides an overview of the steps planned to
-          achieve that future. A vision is concise and easy to recall, whereas a
-          mission is lengthier and more explanatory in nature.”
+          “To empower every individual to unbridle his imagination and converge
+          it into a substantial reality”
         </Para>
       </Info>
       <Info>
-        <Para>
-          “A vision is your school’s goal — where you hope to see it in the
-          future. The mission provides an overview of the steps planned to
-          achieve that future. A vision is concise and easy to recall, whereas a
-          mission is lengthier and more explanatory in nature.”
-        </Para>
+        <Para>“To be innovative, casting aside trodden paths”</Para>
         <ParaHeadingTwo>Mission</ParaHeadingTwo>
       </Info>
       <Info>
         <ParaHeading>Why Us?</ParaHeading>
         <Para>
           “The Orion system of education that has been created for students in
-          Kindergarten through High School is the best educational system in the
-          world. No exceptions. No disclaimers. No doubt. It is simply the best.
-          While other countries may offer excellence in one area or offer an
-          outstanding education to some students.”
+          Kindergarten through High School is No exceptions. No disclaimers. No
+          doubt."
         </Para>
       </Info>
     </>

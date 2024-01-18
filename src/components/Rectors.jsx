@@ -47,9 +47,11 @@ const Name = styled.h1`
 `
 const RecImg = styled.img`
   height: 200px;
-  width: 200px;
-  object-fit: cover;
-  border-radius: 20px;
+  object-fit: contain;
+  background-color: transparent;
+  -webkit-box-shadow: 0px 0px 35px 10px rgba(57, 94, 5, 1);
+  -moz-box-shadow: 0px 0px 35px 10px rgba(57, 94, 5, 1);
+  box-shadow: 0px 0px 35px 10px rgba(57, 94, 5, 1);
 `
 const Button = styled.button`
   border: none;
@@ -57,7 +59,7 @@ const Button = styled.button`
 
   outline: none;
   margin-top: 1rem;
-  color: green;
+  color: #008000;
   cursor: pointer;
   width: 6rem;
   height: 2.2rem;
@@ -74,7 +76,7 @@ const Rectors = () => {
         <Image src={RectorBg} />
         <DivWrapper>
           <Wrapper>
-            <RecImg src='https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png' />
+            <RecImg src='https://github.com/furqanistic/ogs-client/blob/main/src/img/waqas.png?raw=true' />
             <Details>
               <JobTitle>Rector</JobTitle>
               <Name>Prof. Waqas Zaheer</Name>

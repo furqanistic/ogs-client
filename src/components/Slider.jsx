@@ -1,6 +1,6 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@mui/icons-material/'
 import { useState } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { sliderItems } from '../data'
 
 const Container = styled.div`
@@ -96,20 +96,30 @@ const InfoContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 50px;
+  /* padding: 50px; */
   z-index: 5;
-  @media only screen and (max-width: 780px) {
-    padding: 20px;
+  width: 100%;
+`
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 `
 
 const Title = styled.p`
   font-size: 3rem;
+  width: 100%;
+  border: 1px solid #0da203;
+  border-left: 0px;
+  border-right: 0px;
   color: white;
   text-align: center;
-  background-color: #075501;
+  background-color: #075501c7;
   padding: 1rem;
-  border-radius: 10px;
+
   @media only screen and (max-width: 1170px) {
     font-size: 2.2rem;
   }
@@ -142,8 +152,11 @@ const Desc = styled.p`
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 3px;
-  background-color: white;
-  color: green;
+  background-color: #ffffff36;
+  animation: ${fadeIn} 1s ease-in-out; /* Apply the fadeIn animation */
+
+  /* border: 1px solid white; */
+  color: #ffffff;
   padding: 0.5rem;
   @media only screen and (max-width: 780px) {
     font-size: 15px;

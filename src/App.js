@@ -9,6 +9,7 @@ import About from './pages/About'
 import Signin from './components/Signup/Signin'
 import Gallery from './pages/Gallery'
 import Contact from './pages/Contact'
+import Admissions from './pages/Admissions'
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
             <Route path='signup' element={<Register />} />
             <Route path='gallery' element={<Gallery />} />
             <Route path='contact' element={<Contact />} />
+            <Route path='admissions' element={<Admissions />} />
           </Route>
         </Routes>
       </BrowserRouter>

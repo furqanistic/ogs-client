@@ -91,7 +91,6 @@ const Image = styled.img`
 `
 
 const InfoContainer = styled.div`
-  flex: 2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,6 +118,7 @@ const Title = styled.p`
   text-align: center;
   background-color: #075501c7;
   padding: 1rem;
+  margin-bottom: 50px;
 
   @media only screen and (max-width: 1170px) {
     font-size: 2.2rem;
@@ -148,7 +148,7 @@ const Title = styled.p`
 
 const Desc = styled.p`
   text-align: center;
-  margin: 50px 0px;
+  margin-bottom: 50px;
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 3px;
@@ -219,8 +219,8 @@ const Slider = () => {
               <Image src={item.img} />
             </ImgContainer> */}
             <InfoContainer>
-              <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
+              <Title>{item.title}</Title>
               <Button>More Details</Button>
             </InfoContainer>
           </Slide>

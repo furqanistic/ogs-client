@@ -24,10 +24,16 @@ const Details = styled.div`
 const Title = styled.h1`
   font-size: 80px;
   font-weight: 600;
+  @media (max-width: 768px) {
+    font-size: 50px;
+  }
 `
 const Desc = styled.p`
   font-size: 30px;
   font-weight: 400;
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `
 const PhotoGrid = () => {
   return (

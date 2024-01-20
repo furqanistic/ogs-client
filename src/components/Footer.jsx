@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 export const Box = styled.div`
   padding: 40px 30px;
-  background: #012501;
+  background: #001800;
   bottom: 0;
   width: 100%;
 
@@ -80,7 +80,7 @@ const Footer = () => {
             <FooterLink href='tel:+923077879988'>0307 787 9988</FooterLink>
             <FooterLink href='tel:+923355854455'>0335 585 4455</FooterLink>
             <FooterLink href='#'>Sargodha, Pakistan</FooterLink>
-            <FooterLink href='#'>hello@orion.com</FooterLink>
+            <FooterLink href='#'>help@orionedu.net</FooterLink>
           </Column>
           <Column>
             <Heading>Social Media</Heading>

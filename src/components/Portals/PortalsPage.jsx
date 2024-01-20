@@ -1,7 +1,6 @@
-import { Email, Phone } from '@mui/icons-material'
+import { Face6, Wc } from '@mui/icons-material'
 import React from 'react'
 import styled from 'styled-components'
-import ContactImg from '../../img/cont.png'
 const Container = styled.div`
   display: flex;
   position: relative;
@@ -23,7 +22,6 @@ const Details = styled.div`
   position: absolute;
   width: 100%;
   color: white;
-
   justify-content: center;
   align-items: center;
 `
@@ -41,95 +39,72 @@ const Desc = styled.p`
     font-size: 20px;
   }
 `
-const ParaHeading = styled.h1`
-  font-size: 80px;
-  font-weight: 500;
-  width: 50vw;
-  height: 50vh;
-  background-color: white;
-  color: #024002;
-
-  writing-mode: vertical-rl;
+const Slider = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  -moz-transform: scale(-1, -1);
-  -webkit-transform: scale(-1, -1);
-  -o-transform: scale(-1, -1);
-  -ms-transform: scale(-1, -1);
-  transform: scale(-1, -1);
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
 `
-const ParaHeadingTwo = styled.h1`
-  font-size: 80px;
-  font-weight: 500;
-  width: 50vw;
-  height: 50vh;
-  background-color: white;
-  color: #024002;
-
-  writing-mode: vertical-rl;
+const Item = styled.div`
+  background-color: ${(props) => props.bg || '#014006'};
+  padding: 2rem;
+  color: #ffffff;
+  margin: 2rem;
+  margin-right: 20px;
+  height: 400px;
+  width: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
-`
-const Para = styled.p`
-  font-size: 25px;
-  height: 50vh;
-  width: 50vw;
-  font-weight: 300;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 400;
-  padding: 1rem;
-  text-align: center;
-  @media (max-width: 800px) {
-    font-size: 20px;
-  }
-  @media (max-width: 550px) {
-    font-size: 16px;
+  @media (max-width: 768px) {
+    height: 300px;
+    width: 300px;
   }
 `
-
-const Info = styled.div`
+const ItemWrap = styled.div`
   display: flex;
-  width: 100vw;
-  background-color: #024002;
-
-  color: white;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `
-
-const AboutInfo = () => {
+const IconSet = styled.div`
+  border-radius: 50%;
+`
+const IconText = styled.p`
+  font-size: 2rem;
+`
+const PortalsPage = () => {
   return (
     <>
       <Container>
         <Image></Image>
         <Details>
-          <Title>About</Title>
+          <Title>Portals</Title>
           <Desc>ORION GRAMMER SCHOOL</Desc>
         </Details>
       </Container>
-      <Info>
-        <ParaHeading>Vision</ParaHeading>
-        <Para>
-          “To empower every individual to unbridle his imagination and converge
-          it into a substantial reality”
-        </Para>
-      </Info>
-      <Info>
-        <Para>“To be innovative, casting aside trodden paths”</Para>
-        <ParaHeadingTwo>Mission</ParaHeadingTwo>
-      </Info>
-      <Info>
-        <ParaHeading>Why Us?</ParaHeading>
-        <Para>
-          “The Orion system of education that has been created for students in
-          Kindergarten through High School is No exceptions. No disclaimers. No
-          doubt."
-        </Para>
-      </Info>
+      <Slider>
+        <Item>
+          <ItemWrap>
+            <IconSet>
+              <Face6 style={{ fontSize: '12rem' }} />
+            </IconSet>
+            <IconText>Student Portal</IconText>
+          </ItemWrap>
+        </Item>
+        <Item bg='#070156'>
+          <ItemWrap>
+            <IconSet>
+              <Wc style={{ fontSize: '12rem' }} />
+            </IconSet>
+            <IconText>Faculty Portal</IconText>
+          </ItemWrap>
+        </Item>
+      </Slider>
     </>
   )
 }
 
-export default AboutInfo
+export default PortalsPage

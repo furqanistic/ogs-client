@@ -10,7 +10,7 @@ const Navbar = () => {
         <Nav>
           <Link to='/' style={{ textDecoration: 'none' }}>
             <Logo>
-              Orion
+              The Orion School
               {/* <LogoImg src='https://github.com/furqanistic/ogs-client/blob/main/src/img/logo.png?raw=true' /> */}
             </Logo>
           </Link>
@@ -89,7 +89,8 @@ const Nav = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  background: #013701;
+  /* background: #013701; */
+  background-color: #272763;
   position: absolute;
   top: 0;
   left: 0;
@@ -105,6 +106,7 @@ const Logo = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-transform: uppercase;
 
   span {
     font-weight: 300;

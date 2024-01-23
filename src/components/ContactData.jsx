@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import School from '../img/front_11zon.png'
+import School from '../img/front.jpg'
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -127,9 +127,9 @@ const ContactData = () => {
     <>
       <Imp>Get in Touch 🤙</Imp>
       <Container>
-        <Image src='https://github.com/furqanistic/ogs-client/blob/main/src/img/bg.png?raw=true' />
+        <Image src={School} />
         <Information>
-          <Title>Orion Grammer School</Title>
+          <Title>The Orion School</Title>
           <a href='tel:+923077879988'>
             <Button>Contact</Button>
           </a>

@@ -9,7 +9,7 @@ import G5 from '../img/g5.jpg'
 const Container = styled.div`
   width: 100%;
   min-height: 500px;
-  background-color: #013919;
+  background-color: #1443d1;
 
   background-attachment: fixed;
   background-size: cover;
@@ -30,14 +30,14 @@ const Wrapper = styled.div`
 `
 const Box = styled.div`
   width: 40vw;
-  background-color: #1ac61aa8;
+  background-color: #1d1ac6a8;
   @media only screen and (max-width: 700px) {
     width: 95vw;
   }
 `
 const NewsBox = styled.div`
-  border: 1px solid #1ac61aa8;
-  background-color: #3ba9338b;
+  border: 1px solid #1a25c6a8;
+  background-color: #3733a98a;
   height: 500px;
   width: 40vw;
   padding: 0.5rem;

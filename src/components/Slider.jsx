@@ -66,7 +66,7 @@ const Slide = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(8, 44, 0, 0.3);
+    /* background-color: rgba(8, 44, 0, 0.3); */
   }
   @media only screen and (max-width: 780px) {
     height: 40vh;
@@ -80,7 +80,7 @@ const ImgContainer = styled.div`
   height: 100%;
   flex: 2;
   margin-left: 2rem;
-  background: #0c5403;
+  background: #1443d1;
   /* clip-path: polygon(18% 0, 82% 0, 100% 50%, 82% 100%, 18% 100%, 0% 50%); */
 `
 
@@ -111,14 +111,15 @@ const fadeIn = keyframes`
 const Title = styled.p`
   font-size: 3rem;
   width: 100%;
-  border: 1px solid #0da203;
+  /* border: 1px solid #0da203; */
   border-left: 0px;
   border-right: 0px;
   color: white;
   text-align: center;
-  background-color: #075501c7;
+  /* background-color: #075501c7; */
   padding: 1rem;
   margin-bottom: 50px;
+  font-weight: 800;
 
   @media only screen and (max-width: 1170px) {
     font-size: 2.2rem;
@@ -180,12 +181,12 @@ const Button = styled.button`
   text-transform: uppercase;
   transition: 0.5s;
   transition-property: box-shadow;
-  background: #3aa933;
-  box-shadow: 0 0 25px #3aa933;
+  background: #1443d1;
+  box-shadow: 0 0 25px #1443d1;
 
   &:hover {
-    box-shadow: 0 0 5px #3aa933, 0 0 25px #3aa933, 0 0 50px #3aa933,
-      0 0 100px #3aa933;
+    box-shadow: 0 0 5px #1443d1, 0 0 25px #1443d1, 0 0 50px #1443d1,
+      0 0 100px #1443d1;
   }
   @media only screen and (max-width: 780px) {
     padding: 0.5rem;

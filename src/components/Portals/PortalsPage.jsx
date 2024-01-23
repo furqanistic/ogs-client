@@ -1,6 +1,7 @@
 import { Face6, Wc } from '@mui/icons-material'
 import React from 'react'
 import styled from 'styled-components'
+import Loader from '../Loader/Loader'
 const Container = styled.div`
   display: flex;
   position: relative;

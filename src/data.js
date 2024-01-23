@@ -4,7 +4,7 @@ export const sliderItems = [
     img: 'https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     title: 'WE ARE DETERMINED TO ACHIEVE THE HIGHEST STANDARDS',
     desc: 'ORION GRAMMER SCHOOL',
-    bg: '3db83d',
+    bg: '#1443d1',
   },
 
   {

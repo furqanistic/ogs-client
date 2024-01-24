@@ -1,5 +1,6 @@
+import { PhoneInTalk } from '@mui/icons-material'
 import React from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import School from '../img/front.jpg'
 const Container = styled.div`
   display: flex;
@@ -15,13 +16,17 @@ const Container = styled.div`
     height: 30vh;
   }
 `
-const Image = styled.img`
+const Image = styled.div`
   height: 60vh;
   width: 100%;
   object-fit: cover;
-  background-color: #024002;
+  background-color: #0b0a45;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%231d2acc' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%232c23aa' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%230062f2' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%230051ca' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23007ee4' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%230068bd' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%230091b1' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23007691' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%2300a070' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23008158' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%2316aa34' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%230f8822' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
   position: relative;
-  background-position: center bottom; /* Add this line */
+  background-position: center;
+
   @media only screen and (max-width: 510px) {
     height: 40vh;
   }
@@ -53,51 +58,32 @@ const Title = styled.h1`
     font-size: 1.5rem;
   }
 `
-const Button = styled.button`
-  font-family: inherit;
-  display: inline-block;
-  width: 8em;
-  height: 2.6em;
-  line-height: 2.5em;
+const vibrateAnimation = keyframes`
+  0% { transform: translateY(0); }
+  20% { transform: translateY(-5px); }
+  40% { transform: translateY(5px); }
+  60% { transform: translateY(-3px); }
+  80% { transform: translateY(3px); }
+  100% { transform: translateY(0); }
+`
+const Button = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 17px;
+  padding: 0.7rem;
+  text-transform: uppercase;
   margin: 20px;
-  position: relative;
-  overflow: hidden;
-  border: 0px solid white;
-  transition: color 0.5s;
+  border: 0;
   z-index: 1;
-  border-radius: 10px;
   font-weight: 500;
-  color: #ffffff;
-  background-color: #03043f;
+  color: #04076d;
+  background-color: #ffffff;
   cursor: pointer;
-  &::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    background: white;
-    height: 150px;
-    width: 200px;
-    border-radius: 50%;
-    top: 100%;
-    left: 100%;
-    transition: all 0.7s;
-  }
-  &:hover::before {
-    top: -30px;
-    left: -30px;
-  }
-  &:hover {
-    color: green;
-  }
-  &active:before {
-    background: green;
-    transition: background 0s;
-  }
+  outline: none;
+  animation: ${vibrateAnimation} 3s ease infinite, static 5s 1; /* Apply the animation here */
+
   @media only screen and (max-width: 510px) {
-    width: 6em;
-    height: 2.5em;
-    line-height: 2em;
     font-size: 14px;
   }
 `
@@ -122,17 +108,23 @@ const Imp = styled.div`
   color: #25265f;
   font-weight: 600;
 `
+const CallLink = styled.a`
+  text-decoration: none;
+`
 const ContactData = () => {
   return (
     <>
       <Imp>Get in Touch 🤙</Imp>
       <Container>
-        <Image src={School} />
+        <Image></Image>
         <Information>
           <Title>The Orion School</Title>
-          <a href='tel:+923077879988'>
-            <Button>Contact</Button>
-          </a>
+          <CallLink href='tel:+923077879988'>
+            <Button>
+              Click here to speak with us{' '}
+              <PhoneInTalk style={{ marginLeft: '8px' }} />
+            </Button>
+          </CallLink>
           <Slogan>Making you proud is our vision!</Slogan>
         </Information>
       </Container>

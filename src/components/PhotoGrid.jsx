@@ -42,7 +42,7 @@ const PhotoGrid = () => {
         <Image src={ContactImg} />
         <Details>
           <Title>Gallery</Title>
-          <Desc>ORION GRAMMER SCHOOL</Desc>
+          <Desc>The Orion School</Desc>
         </Details>
       </Container>
     </>

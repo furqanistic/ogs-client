@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
 import styled from 'styled-components'
 import Loader from '../components/Loader/Loader'
+import Navbar from '../components/Navbar'
 
 const Container = styled.div`
   display: flex;
@@ -66,7 +66,7 @@ const Jobs = () => {
         <Image></Image>
         <Details>
           <Title>JOBS</Title>
-          <Desc>ORION GRAMMER SCHOOL</Desc>
+          <Desc>The Orion School</Desc>
         </Details>
       </Container>
       {show && (

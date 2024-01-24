@@ -83,7 +83,7 @@ const PortalsPage = () => {
         <Image></Image>
         <Details>
           <Title>Portals</Title>
-          <Desc>ORION GRAMMER SCHOOL</Desc>
+          <Desc>The Orion School</Desc>
         </Details>
       </Container>
       <Slider>

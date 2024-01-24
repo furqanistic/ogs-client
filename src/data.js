@@ -1,9 +1,10 @@
 export const sliderItems = [
   {
     id: 1,
-    img: 'https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    img: 'https://github.com/furqanistic/ogs-client/blob/main/src/img/sc-whitee.jpg?raw=true',
+
     title: 'WE ARE DETERMINED TO ACHIEVE THE HIGHEST STANDARDS',
-    desc: 'ORION GRAMMER SCHOOL',
+    desc: 'The Orion School',
     bg: '#1443d1',
   },
 
@@ -13,22 +14,16 @@ export const sliderItems = [
     img: 'https://images.pexels.com/photos/296301/pexels-photo-296301.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
 
     title: 'WE TAUGHT HOW TO THINK, NOT WHAT TO THINK',
-    desc: 'ORION GRAMMER SCHOOL',
+    desc: 'The Orion School',
     bg: '2d8d2d',
   },
   {
     id: 3,
-    img: 'https://images.pexels.com/photos/8613071/pexels-photo-8613071.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    img: 'https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+
     title: 'CHANGE IS THE END RESULT OF ALL TRUE LEARNING',
-    desc: 'ORION GRAMMER SCHOOL',
+    desc: 'The Orion School',
     bg: '008000',
-  },
-  {
-    id: 4,
-    img: 'https://images.pexels.com/photos/3791242/pexels-photo-3791242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-    title: 'LOUNGEWEAR LOVE',
-    desc: 'ORION GRAMMER SCHOOL',
-    bg: '2d8d2d',
   },
 ]
 

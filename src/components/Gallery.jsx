@@ -1,15 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import G1 from '../img/g1.jpg'
-import G2 from '../img/g2.jpg'
-import G3 from '../img/g3.jpg'
-import G4 from '../img/g4.jpg'
-import G5 from '../img/g5.jpg'
 
 const Container = styled.div`
   width: 100%;
   min-height: 500px;
-  background-color: #1443d1;
+  background-color: #0b0a45;
 
   background-attachment: fixed;
   background-size: cover;
@@ -30,14 +25,14 @@ const Wrapper = styled.div`
 `
 const Box = styled.div`
   width: 40vw;
-  background-color: #1d1ac6a8;
+  background-color: #0b0a45;
   @media only screen and (max-width: 700px) {
     width: 95vw;
   }
 `
 const NewsBox = styled.div`
   border: 1px solid #1a25c6a8;
-  background-color: #3733a98a;
+  background-color: #060275;
   height: 500px;
   width: 40vw;
   padding: 0.5rem;
@@ -52,18 +47,13 @@ const NewsOne = styled.div`
   /* border: 2px solid white; */
   padding: 0.5rem;
   font-size: 0.8rem;
-  background-color: #ffffffc5;
-  color: #013f01;
+  background-color: #202ae2cb;
+  color: #ffffff;
   margin: 1rem;
   transition: all 0.5s ease-in-out;
-  &:hover {
-    scale: 1.1;
-    border-radius: 0px;
-  }
 `
 const Heading = styled.h1`
   font-size: 2rem;
-  border: 1px solid #1ac61aa8;
 
   font-weight: 400;
   display: flex;
@@ -71,7 +61,7 @@ const Heading = styled.h1`
   justify-content: center;
   align-items: center;
   color: #ffffff;
-  background-color: #25265f;
+  background-color: #2420ee;
 `
 const Parent = styled.div`
   padding: 1rem;

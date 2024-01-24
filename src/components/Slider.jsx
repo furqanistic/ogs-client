@@ -5,6 +5,7 @@ import { sliderItems } from '../data'
 
 const Container = styled.div`
   width: 100%;
+  background-color: #272763;
   height: 100vh;
   display: flex;
   position: relative;
@@ -53,12 +54,12 @@ const Slide = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
-  /* background-color: #${(props) => props.bg}; */
   background-image: url(${(props) => props.bp});
-  flex: 5;
-  object-fit: cover;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  flex: 5;
+  object-fit: cover;
   &::before {
     content: '';
     position: absolute;
@@ -66,7 +67,6 @@ const Slide = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    /* background-color: rgba(8, 44, 0, 0.3); */
   }
   @media only screen and (max-width: 780px) {
     height: 40vh;
@@ -82,6 +82,7 @@ const InfoContainer = styled.div`
   align-items: center;
   flex-direction: column;
   /* padding: 50px; */
+  height: 100%;
   z-index: 5;
   width: 100%;
 `
@@ -105,7 +106,6 @@ const Title = styled.p`
   text-align: center;
   /* background-color: #075501c7; */
   padding: 1rem;
-  margin-bottom: 50px;
   font-weight: 800;
 
   @media only screen and (max-width: 1170px) {
@@ -118,16 +118,14 @@ const Title = styled.p`
     font-size: 1.8rem;
   }
   @media only screen and (max-width: 670px) {
-    font-size: 1rem;
-    padding: 0.6rem;
+    font-size: 1.45rem;
   }
   @media only screen and (max-width: 510px) {
-    font-size: 0.9rem;
-    font-weight: 500;
-    padding: 0.4rem;
+    font-size: 1.3rem;
+    -webkit-text-stroke: 0.5px black;
   }
   @media only screen and (max-width: 470px) {
-    font-size: 0.7rem;
+    font-size: 1.1rem;
   }
   @media only screen and (max-width: 390px) {
     font-size: 0.6rem;
@@ -135,12 +133,13 @@ const Title = styled.p`
 `
 
 const Desc = styled.p`
+  position: absolute;
+  top: 150px;
   text-align: center;
-  margin-bottom: 50px;
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 3px;
-  background-color: #0e00559a;
+  background-color: #0e005564;
   animation: ${fadeIn} 1s ease-in-out; /* Apply the fadeIn animation */
   border-radius: 9px;
   border: 1px solid white;
@@ -148,6 +147,7 @@ const Desc = styled.p`
   padding: 0.5rem;
   @media only screen and (max-width: 780px) {
     font-size: 15px;
+    top: 30px;
   }
   @media only screen and (max-width: 670px) {
     font-size: 10px;
@@ -155,33 +155,6 @@ const Desc = styled.p`
   @media only screen and (max-width: 480px) {
     font-size: 7px;
     letter-spacing: 1px;
-  }
-`
-
-const Button = styled.button`
-  padding: 10px 20px;
-  border: none;
-  font-size: 17px;
-  color: #fff;
-  border-radius: 7px;
-  font-weight: 700;
-  text-transform: uppercase;
-  transition: 0.5s;
-  transition-property: box-shadow;
-  background: #1443d1;
-  box-shadow: 0 0 25px #1443d1;
-
-  &:hover {
-    box-shadow: 0 0 5px #1443d1, 0 0 25px #1443d1, 0 0 50px #1443d1,
-      0 0 100px #1443d1;
-  }
-  @media only screen and (max-width: 780px) {
-    padding: 0.5rem;
-    font-size: 0.7rem;
-  }
-  @media only screen and (max-width: 480px) {
-    padding: 0.3rem;
-    font-size: 0.5rem;
   }
 `
 

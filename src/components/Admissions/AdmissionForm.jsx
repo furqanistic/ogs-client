@@ -1,8 +1,8 @@
+import { Delete } from '@mui/icons-material'
+import html2canvas from 'html2canvas'
+import { jsPDF } from 'jspdf'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { Delete } from '@mui/icons-material'
-import { jsPDF } from 'jspdf'
-import html2canvas from 'html2canvas'
 // import { useQuery } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 // import BookingDataCard from '../../components/Booking/BookingDataCard'
@@ -235,7 +235,7 @@ const AdmissionForm = () => {
         <Image></Image>
         <Details>
           <Title>Admissions</Title>
-          <Desc>ORION GRAMMER SCHOOL</Desc>
+          <Desc>The Orion School</Desc>
         </Details>
       </Container>
       <ToastContainer />

@@ -173,7 +173,7 @@ const ContactPage = () => {
         <Image></Image>
         <Details>
           <Title>Contact</Title>
-          <Desc>ORION GRAMMER SCHOOL</Desc>
+          <Desc>The Orion School</Desc>
         </Details>
       </Container>
       <Container>

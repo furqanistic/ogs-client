@@ -76,20 +76,6 @@ const Slide = styled.div`
   }
 `
 
-const ImgContainer = styled.div`
-  height: 100%;
-  flex: 2;
-  margin-left: 2rem;
-  background: #1443d1;
-  /* clip-path: polygon(18% 0, 82% 0, 100% 50%, 82% 100%, 18% 100%, 0% 50%); */
-`
-
-const Image = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-`
-
 const InfoContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -109,8 +95,9 @@ const fadeIn = keyframes`
 `
 
 const Title = styled.p`
-  font-size: 3rem;
-  width: 100%;
+  font-size: 3.5rem;
+  width: 80%;
+  -webkit-text-stroke: 1px black;
   /* border: 1px solid #0da203; */
   border-left: 0px;
   border-right: 0px;
@@ -122,13 +109,13 @@ const Title = styled.p`
   font-weight: 800;
 
   @media only screen and (max-width: 1170px) {
-    font-size: 2.2rem;
+    font-size: 3rem;
   }
   @media only screen and (max-width: 950px) {
-    font-size: 1.7rem;
+    font-size: 2.4rem;
   }
   @media only screen and (max-width: 780px) {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
   @media only screen and (max-width: 670px) {
     font-size: 1rem;
@@ -153,10 +140,10 @@ const Desc = styled.p`
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 3px;
-  background-color: #ffffff36;
+  background-color: #0e00559a;
   animation: ${fadeIn} 1s ease-in-out; /* Apply the fadeIn animation */
-
-  /* border: 1px solid white; */
+  border-radius: 9px;
+  border: 1px solid white;
   color: #ffffff;
   padding: 0.5rem;
   @media only screen and (max-width: 780px) {
@@ -222,7 +209,6 @@ const Slider = () => {
             <InfoContainer>
               <Desc>{item.desc}</Desc>
               <Title>{item.title}</Title>
-              <Button>More Details</Button>
             </InfoContainer>
           </Slide>
         ))}

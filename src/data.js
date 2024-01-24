@@ -1,7 +1,7 @@
 export const sliderItems = [
   {
     id: 1,
-    img: 'https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    img: 'https://images.pexels.com/photos/8535230/pexels-photo-8535230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     title: 'WE ARE DETERMINED TO ACHIEVE THE HIGHEST STANDARDS',
     desc: 'ORION GRAMMER SCHOOL',
     bg: '#1443d1',
@@ -10,7 +10,7 @@ export const sliderItems = [
   {
     id: 2,
 
-    img: 'https://images.pexels.com/photos/261895/pexels-photo-261895.jpeg',
+    img: 'https://images.pexels.com/photos/296301/pexels-photo-296301.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
 
     title: 'WE TAUGHT HOW TO THINK, NOT WHAT TO THINK',
     desc: 'ORION GRAMMER SCHOOL',

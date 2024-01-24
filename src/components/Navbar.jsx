@@ -90,7 +90,7 @@ const Nav = styled.div`
   align-items: center;
   flex-wrap: wrap;
   /* background: #013701; */
-  background-color: #272763;
+  background-color: #0b0a45;
   position: absolute;
   top: 0;
   left: 0;

@@ -173,7 +173,7 @@ const SubmitBtn = styled.button`
   border-radius: 500px;
   overflow: hidden;
   background: ghostwhite;
-  color: #016401;
+  color: #100164;
 
   span {
     position: relative;
@@ -183,7 +183,7 @@ const SubmitBtn = styled.button`
   }
 
   &:hover span {
-    color: #003d00;
+    color: #04003d;
   }
 
   &::before,
@@ -198,7 +198,7 @@ const SubmitBtn = styled.button`
 
   &::before {
     content: '';
-    background: #015601;
+    background: #03002e;
     width: 120%;
     left: -10%;
     transform: skew(30deg);
@@ -224,8 +224,18 @@ const CardBase = styled.div`
 const AdmissionForm = () => {
   const [host, setHost] = useState('')
   const [functionType, setFunctionType] = useState('')
+  const [dateOfBirth, setDateOfBirth] = useState('')
+  const [fatherName, setFatherName] = useState('')
+  const [fatherCNIC, setFatherCNIC] = useState('')
+  const [fatherCellNo, setFatherCellNo] = useState('')
+  const [fatherEmail, setFatherEmail] = useState('')
+  const [fatherOccupation, setFatherOccupation] = useState('')
+  const [motherName, setMotherName] = useState('')
+  const [motherOccupation, setMotherOccupation] = useState('')
+  const [motherCellNo, setMotherCellNo] = useState('')
+  const [address, setAddress] = useState('')
+  const [medicalProblems, setMedicalProblems] = useState('')
   const [showCard, setShowCard] = useState(false)
-  const [contact, setContact] = useState('')
 
   const navigate = useNavigate()
 
@@ -268,121 +278,93 @@ const AdmissionForm = () => {
             <FormInput
               placeholder='Date of Birth...'
               type='date'
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
+              value={dateOfBirth}
+              onChange={(e) => setDateOfBirth(e.target.value)}
             />
           </InputSet>
-          {/* <InputSet>
-            <FormText>Whatsapp # :</FormText>
-            <FormInput
-              placeholder='Whatsapp Number...'
-              type='text'
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
-            />
-          </InputSet> */}
         </InputWrap>
-        {/* <InputWrap>
-          <InputSet>
-            <FormText>Nationality: </FormText>
-            <FormInput
-              placeholder=' (Pakistani/Others)...'
-              type='text'
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
-            />
-          </InputSet>
-          <InputSet>
-            <FormText>Student's Email # :</FormText>
-            <FormInput
-              placeholder='Email (if any)...'
-              type='text'
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
-            />
-          </InputSet>
-        </InputWrap> */}
+
         <FieldsHeading>Father's Information</FieldsHeading>
         <InputWrap>
           <InputSet>
-            <FormText>Father's Name:</FormText>
+            <FormText> Name:</FormText>
             <FormInput
               placeholder='Enter Name ...'
               type='text'
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
+              value={fatherName}
+              onChange={(e) => setFatherName(e.target.value)}
             />
           </InputSet>
           <InputSet>
-            <FormText>Father's CNIC:</FormText>
+            <FormText> CNIC:</FormText>
             <FormInput
               placeholder='Enter CNIC..'
               type='text'
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
+              value={fatherCNIC}
+              onChange={(e) => setFatherCNIC(e.target.value)}
             />
           </InputSet>
         </InputWrap>
         <InputWrap>
           <InputSet>
-            <FormText>Father's Cell No: </FormText>
+            <FormText> Cell No: </FormText>
             <FormInput
               placeholder='Phone Number...'
               type='text'
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
+              value={fatherCellNo}
+              onChange={(e) => setFatherCellNo(e.target.value)}
             />
           </InputSet>
           <InputSet>
-            <FormText>Father's Email:</FormText>
+            <FormText>Email:</FormText>
             <FormInput
               placeholder='Enter Email (if any)...'
               type='text'
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
+              value={fatherEmail}
+              onChange={(e) => setFatherEmail(e.target.value)}
             />
           </InputSet>
         </InputWrap>
         <InputWrap>
           <InputSet>
-            <FormText>Father's Occupation: </FormText>
+            <FormText>Occupation: </FormText>
             <FormInput
               placeholder='Enter Occupation...'
               type='text'
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
+              value={fatherOccupation}
+              onChange={(e) => setFatherOccupation(e.target.value)}
             />
           </InputSet>
         </InputWrap>
         <FieldsHeading>Mother's Information : </FieldsHeading>
         <InputWrap>
           <InputSet>
-            <FormText>Mother's Name:</FormText>
+            <FormText> Name:</FormText>
             <FormInput
               placeholder='Enter Number...'
               type='text'
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
+              value={motherName}
+              onChange={(e) => setMotherName(e.target.value)}
             />
           </InputSet>
           <InputSet>
-            <FormText>Mother's Occupation:</FormText>
+            <FormText> Occupation:</FormText>
             <FormInput
               placeholder='Enter Occupation...'
               type='text'
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
+              value={motherOccupation}
+              onChange={(e) => setMotherOccupation(e.target.value)}
             />
           </InputSet>
         </InputWrap>
         <InputWrap>
           <InputSet>
-            <FormText>Mother's Cell No: </FormText>
+            <FormText> Cell No: </FormText>
             <FormInput
               placeholder='Phone Number...'
               type='text'
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
+              value={motherCellNo}
+              onChange={(e) => setMotherCellNo(e.target.value)}
             />
           </InputSet>
         </InputWrap>
@@ -393,8 +375,8 @@ const AdmissionForm = () => {
             <FormInput
               placeholder='Enter Home Address...'
               type='text'
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
             />
           </InputSet>
         </InputWrap>
@@ -407,8 +389,8 @@ const AdmissionForm = () => {
             <FormTextField
               placeholder='Write here...'
               type='text'
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
+              value={medicalProblems}
+              onChange={(e) => setMedicalProblems(e.target.value)}
             />
           </InputSet>
         </InputWrap>

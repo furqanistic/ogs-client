@@ -46,7 +46,7 @@ const Image = styled.div`
   display: flex;
   margin-left: auto;
   margin-right: auto;
-  background-color: #e2feee;
+  background-color: #e7e2fe;
   flex-shrink: 0;
   justify-content: center;
   align-items: center;
@@ -57,7 +57,7 @@ const Image = styled.div`
   transition: 0.6s ease;
 
   svg {
-    color: #0afa2a;
+    color: #420afa;
     width: 2rem;
     height: 2rem;
   }
@@ -69,7 +69,7 @@ const Content = styled.div`
 `
 
 const Title = styled.span`
-  color: #066e29;
+  color: #10066e;
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.5rem;
@@ -89,7 +89,7 @@ const Actions = styled.div`
 const HistoryButton = styled.button`
   display: inline-flex;
   padding: 0.5rem 1rem;
-  background-color: #005d30;
+  background-color: #b70505;
   color: #ffffff;
   font-size: 1rem;
   line-height: 1.5rem;

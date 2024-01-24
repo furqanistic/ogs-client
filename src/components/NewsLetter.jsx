@@ -95,7 +95,7 @@ const Button = styled.button`
   outline: none;
   width: 300px;
   border-radius: 30px;
-  color: green;
+  color: #0b0a45;
   cursor: pointer;
   background-color: white;
   width: 6rem;
@@ -106,7 +106,7 @@ const Button = styled.button`
 
   &:hover {
     color: white;
-    background-color: green;
+    background-color: #0b0a45;
     border: 1px solid white;
   }
 `

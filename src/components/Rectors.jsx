@@ -10,12 +10,10 @@ const Container = styled.div`
   height: 30vh;
   width: 100%;
   position: relative;
+  background-color: #030533;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250' viewBox='0 0 20 20'%3E%3Cg %3E%3Cpolygon fill='%23091C58' points='20 10 10 0 0 0 20 20'/%3E%3Cpolygon fill='%23091C58' points='0 10 0 20 10 20'/%3E%3C/g%3E%3C/svg%3E");
 `
-const Image = styled.img`
-  height: 30vh;
-  width: 100%;
-  object-fit: cover;
-`
+
 const DivWrapper = styled.div`
   position: absolute;
   display: flex;
@@ -31,8 +29,11 @@ const Wrapper = styled.div`
   width: 100%;
 `
 const JobTitle = styled.p`
-  font-size: 1rem;
+  font-size: 1.5rem;
   letter-spacing: 5px;
+  @media (max-width: 585px) {
+    font-size: 1.2rem;
+  }
 `
 const Details = styled.div`
   display: flex;
@@ -42,16 +43,15 @@ const Details = styled.div`
   margin-left: 2rem;
 `
 const Name = styled.h1`
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 600;
+  @media (max-width: 585px) {
+    font-size: 1.8rem;
+  }
 `
 const RecImg = styled.img`
-  height: 200px;
+  width: 150px;
   object-fit: contain;
-  background-color: transparent;
-  -webkit-box-shadow: 0px 0px 35px 10px rgba(57, 94, 5, 1);
-  -moz-box-shadow: 0px 0px 35px 10px rgba(57, 94, 5, 1);
-  box-shadow: 0px 0px 35px 10px rgba(57, 94, 5, 1);
 `
 const Button = styled.button`
   border: none;
@@ -73,10 +73,9 @@ const Rectors = () => {
   return (
     <>
       <Container>
-        <Image src={RectorBg} />
         <DivWrapper>
           <Wrapper>
-            <RecImg src='https://github.com/furqanistic/ogs-client/blob/main/src/img/waqas.png?raw=true' />
+            <RecImg src='https://github.com/furqanistic/ogs-client/blob/main/src/img/img.png?raw=true' />
             <Details>
               <JobTitle>Rector</JobTitle>
               <Name>Prof. Waqas Zaheer</Name>

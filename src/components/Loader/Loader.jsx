@@ -33,7 +33,7 @@ const Loader = ({ msg }) => {
               stroke-dashoffset='402'
               stroke-dasharray='402.12 402.12'
               stroke-width='30'
-              stroke='hsl(132.0524017467249, 89.80392156862744%, 50%)'
+              stroke='#1450d2'
               r='64'
               class='pencil__body1'
             ></circle>
@@ -42,7 +42,7 @@ const Loader = ({ msg }) => {
               stroke-dashoffset='465'
               stroke-dasharray='464.96 464.96'
               stroke-width='10'
-              stroke='hsl(140, 92.3076923076923%, 40.78431372549019%)'
+              stroke='hsl(241.1111111111111, 91.52542372881356%, 46.27450980392157%)'
               r='74'
               class='pencil__body2'
             ></circle>
@@ -51,25 +51,19 @@ const Loader = ({ msg }) => {
               stroke-dashoffset='339'
               stroke-dasharray='339.29 339.29'
               stroke-width='10'
-              stroke='hsl(127.05882352941177, 93.7007874015748%, 24.901960784313726%)'
+              stroke='#0e1097'
               r='54'
               class='pencil__body3'
             ></circle>
           </g>
           <g transform='rotate(-90) translate(49,0)' class='pencil__eraser'>
             <g class='pencil__eraser-skew'>
-              <rect
-                height='30'
-                width='30'
-                ry='5'
-                rx='5'
-                fill='hsl(140.14598540145985, 89.54248366013073%, 70%)'
-              ></rect>
+              <rect height='30' width='30' ry='5' rx='5' fill='#0051ff'></rect>
               <rect
                 clip-path='url(#pencil-eraser)'
                 height='30'
                 width='5'
-                fill='hsl(129.1304347826087, 90.19607843137257%, 60%)'
+                fill='#0b2255'
               ></rect>
               <rect height='20' width='30' fill='hsl(223,10%,90%)'></rect>
               <rect height='20' width='15' fill='hsl(223,10%,70%)'></rect>

@@ -47,7 +47,7 @@ const ParaHeading = styled.h1`
   width: 50vw;
   height: 50vh;
   background-color: white;
-  color: #024002;
+  color: #0b0a45;
 
   writing-mode: vertical-rl;
   display: flex;
@@ -65,7 +65,7 @@ const ParaHeadingTwo = styled.h1`
   width: 50vw;
   height: 50vh;
   background-color: white;
-  color: #024002;
+  color: #0b0a45;
 
   writing-mode: vertical-rl;
   display: flex;
@@ -94,7 +94,7 @@ const Para = styled.p`
 const Info = styled.div`
   display: flex;
   width: 100vw;
-  background-color: #024002;
+  background-color: #0b0a45;
 
   color: white;
 `

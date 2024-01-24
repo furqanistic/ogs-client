@@ -28,6 +28,8 @@ const Image = styled.div`
   background-position: center;
 
   @media only screen and (max-width: 510px) {
+    background-attachment: initial;
+
     height: 40vh;
   }
   @media only screen and (max-width: 410px) {

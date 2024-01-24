@@ -98,11 +98,11 @@ const Nav = styled.div`
 `
 
 const Logo = styled.a`
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   color: #ffffff;
   text-decoration: none;
   font-weight: 800;
-  font-size: 2rem;
+  font-size: 1.8rem;
   display: flex;
   justify-content: center;
   align-items: center;

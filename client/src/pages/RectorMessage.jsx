@@ -1,7 +1,14 @@
 import React from 'react'
+import Hero from '../components/Hero/Hero'
+import Navbar from '../components/Navbar'
 
 const RectorMessage = () => {
-  return <div>RectorMessage</div>
+  return (
+    <>
+      <Navbar />
+      <Hero />
+    </>
+  )
 }
 
 export default RectorMessage

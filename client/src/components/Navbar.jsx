@@ -7,12 +7,12 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <>
-      <LogoBox>
+      {/* <LogoBox>
         <LogoLeft>
           <LogoIcon src='https://github.com/furqanistic/ogs-client/blob/main/client/src/img/logo.png?raw=true' />
         </LogoLeft>
         <LogoRight>b</LogoRight>
-      </LogoBox>
+      </LogoBox> */}
       <Container isOpen={isOpen}>
         <Nav>
           <Link to='/' style={{ textDecoration: 'none' }}>
@@ -128,9 +128,10 @@ const Nav = styled.div`
   /* background: #013701; */
   background-color: #0b0a45;
   position: absolute;
-  top: 130px;
+  top: 0;
   left: 0;
   right: 0;
+  z-index: 999;
 `
 
 const Logo = styled.a`

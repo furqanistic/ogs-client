@@ -1,9 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import RectorBg from '../img/libra.png'
-import RectorOne from '../img/rec1.jpg'
-import RectorTwo from '../img/rec2.jpg'
+
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -54,8 +52,7 @@ const RecImg = styled.img`
   width: 150px;
   object-fit: contain;
 `
-const Button = styled.p`
-  transition: all 0.5s ease-in-out;
+const Button = styled.a`
   color: #ffffff;
   cursor: pointer;
   font-size: 0.7rem;
@@ -72,7 +69,7 @@ const Rectors = () => {
             <Details>
               <JobTitle>Rector</JobTitle>
               <Name>Prof. Waqas Zaheer</Name>
-              <Link to='/rector-message' style={{ textDecoration: 'none' }}>
+              <Link to='rector-message' style={{ textDecoration: 'none' }}>
                 <Button>Read More</Button>
               </Link>
             </Details>

@@ -86,6 +86,7 @@ const LogoIcon = styled.img`
   width: 100px;
   background-position: center;
   background-size: cover;
+  filter: drop-shadow(0 0 0.75rem white);
   /* background-color: red; */
 `
 

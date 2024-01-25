@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import EndCredit from '../EndCredit'
 
 export const Box = styled.div`
   padding: 40px 30px;
@@ -60,49 +61,52 @@ export const Heading = styled.p`
 
 const Footer = () => {
   return (
-    <Box>
-      <Container>
-        <Row>
-          <Column>
-            <Heading>About Us</Heading>
-            <FooterLink href='#'>Aim</FooterLink>
-            <FooterLink href='#'>Vision</FooterLink>
-            <FooterLink href='#'>Why Us?</FooterLink>
-          </Column>
-          <Column>
-            <Heading>Services</Heading>
-            <FooterLink href='#'>Jobs</FooterLink>
-            <FooterLink href='#'>Admissions</FooterLink>
-            <FooterLink href='#'>Teaching</FooterLink>
-          </Column>
-          <Column>
-            <Heading>Contact Us</Heading>
-            <FooterLink href='tel:+923077879988'>0307 787 9988</FooterLink>
-            <FooterLink href='tel:+923355854455'>0335 585 4455</FooterLink>
-            <FooterLink href='#'>Sargodha, Pakistan</FooterLink>
-            <FooterLink href='#'>help@orionedu.net</FooterLink>
-          </Column>
-          <Column>
-            <Heading>Social Media</Heading>
-            <FooterLink href='#'>
-              <i className='fab fa-facebook-f'>
-                <span style={{ marginLeft: '10px' }}>Facebook</span>
-              </i>
-            </FooterLink>
-            <FooterLink href='#'>
-              <i className='fab fa-instagram'>
-                <span style={{ marginLeft: '10px' }}>Instagram</span>
-              </i>
-            </FooterLink>
-            <FooterLink href='#'>
-              <i className='fab fa-twitter'>
-                <span style={{ marginLeft: '10px' }}>Twitter</span>
-              </i>
-            </FooterLink>
-          </Column>
-        </Row>
-      </Container>
-    </Box>
+    <>
+      <Box>
+        <Container>
+          <Row>
+            <Column>
+              <Heading>About Us</Heading>
+              <FooterLink href='#'>Aim</FooterLink>
+              <FooterLink href='#'>Vision</FooterLink>
+              <FooterLink href='#'>Why Us?</FooterLink>
+            </Column>
+            <Column>
+              <Heading>Services</Heading>
+              <FooterLink href='#'>Jobs</FooterLink>
+              <FooterLink href='#'>Admissions</FooterLink>
+              <FooterLink href='#'>Teaching</FooterLink>
+            </Column>
+            <Column>
+              <Heading>Contact Us</Heading>
+              <FooterLink href='tel:+923077879988'>0307 787 9988</FooterLink>
+              <FooterLink href='tel:+923355854455'>0335 585 4455</FooterLink>
+              <FooterLink href='#'>Sargodha, Pakistan</FooterLink>
+              <FooterLink href='#'>help@orionedu.net</FooterLink>
+            </Column>
+            <Column>
+              <Heading>Social Media</Heading>
+              <FooterLink href='#'>
+                <i className='fab fa-facebook-f'>
+                  <span style={{ marginLeft: '10px' }}>Facebook</span>
+                </i>
+              </FooterLink>
+              <FooterLink href='#'>
+                <i className='fab fa-instagram'>
+                  <span style={{ marginLeft: '10px' }}>Instagram</span>
+                </i>
+              </FooterLink>
+              <FooterLink href='#'>
+                <i className='fab fa-twitter'>
+                  <span style={{ marginLeft: '10px' }}>Twitter</span>
+                </i>
+              </FooterLink>
+            </Column>
+          </Row>
+        </Container>
+      </Box>
+      <EndCredit />
+    </>
   )
 }
 export default Footer

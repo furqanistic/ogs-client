@@ -75,7 +75,8 @@ const Rectors = () => {
       <Container>
         <DivWrapper>
           <Wrapper>
-            <RecImg src='https://github.com/furqanistic/ogs-client/blob/main/src/img/img.png?raw=true' />
+            <RecImg src='https://github.com/furqanistic/ogs-client/blob/main/client/src/img/img.png?raw=true' />
+
             <Details>
               <JobTitle>Rector</JobTitle>
               <Name>Prof. Waqas Zaheer</Name>

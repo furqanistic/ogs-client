@@ -1,12 +1,14 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
 import AdmissionForm from '../components/Admissions/AdmissionForm'
+import Footer from '../components/Footer'
+import Navbar from '../components/Navbar'
 
 const Admissions = () => {
   return (
     <>
       <Navbar />
       <AdmissionForm />
+      <Footer />
     </>
   )
 }

@@ -137,9 +137,8 @@ const Desc = styled.p`
   top: 150px;
   text-align: center;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 3px;
-  background-color: #0e005564;
   animation: ${fadeIn} 1s ease-in-out; /* Apply the fadeIn animation */
   border-radius: 9px;
   border: 1px solid white;

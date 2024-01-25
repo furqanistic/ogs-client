@@ -1,7 +1,7 @@
 export const sliderItems = [
   {
     id: 1,
-    img: 'https://github.com/furqanistic/ogs-client/blob/main/src/img/sc-whitee.jpg?raw=true',
+    img: 'https://github.com/furqanistic/ogs-client/blob/main/client/src/img/sc-whitee.jpg?raw=true',
 
     title: 'WE ARE DETERMINED TO ACHIEVE THE HIGHEST STANDARDS',
     desc: 'The Orion School',

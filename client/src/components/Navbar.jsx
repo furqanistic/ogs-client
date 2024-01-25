@@ -11,7 +11,7 @@ const Navbar = () => {
           <Link to='/' style={{ textDecoration: 'none' }}>
             <Logo>
               The Orion School
-              {/* <LogoImg src='https://github.com/furqanistic/ogs-client/blob/main/src/img/logo.png?raw=true' /> */}
+              {/* <LogoImg src='https://github.com/furqanistic/ogs-client/blob/main/client/src/img/logo.png?raw=true' /> */}
             </Logo>
           </Link>
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import RectorBg from '../img/libra.png'
 import RectorOne from '../img/rec1.jpg'
@@ -53,21 +54,12 @@ const RecImg = styled.img`
   width: 150px;
   object-fit: contain;
 `
-const Button = styled.button`
-  border: none;
+const Button = styled.p`
   transition: all 0.5s ease-in-out;
-
-  outline: none;
-  margin-top: 1rem;
-  color: #008000;
+  color: #ffffff;
   cursor: pointer;
-  width: 6rem;
-  height: 2.2rem;
-
-  &:hover {
-    color: white;
-    background-color: green;
-  }
+  font-size: 0.7rem;
+  text-decoration: underline;
 `
 const Rectors = () => {
   return (
@@ -80,7 +72,9 @@ const Rectors = () => {
             <Details>
               <JobTitle>Rector</JobTitle>
               <Name>Prof. Waqas Zaheer</Name>
-              {/* <Button>Read More</Button> */}
+              <Link to='/rector-message' style={{ textDecoration: 'none' }}>
+                <Button>Read More</Button>
+              </Link>
             </Details>
           </Wrapper>
         </DivWrapper>

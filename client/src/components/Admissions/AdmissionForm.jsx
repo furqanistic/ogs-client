@@ -142,9 +142,9 @@ const FieldsHeading = styled.p`
   font-size: 1.2rem;
   text-align: center;
   font-weight: 500;
-  text-decoration: underline;
   background-color: white;
-  color: #014a01;
+  text-transform: uppercase;
+  color: #01074a;
   padding: 0.5rem;
   @media (max-width: 900px) {
     font-size: 1rem;

@@ -48,13 +48,17 @@ const LoadShow = styled.div`
   align-items: center;
   margin-top: 3rem;
 `
+const Text = styled.p`
+  font-size: 1rem;
+  color: red;
+`
 const Jobs = () => {
   const [show, setShow] = useState(true)
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShow(false)
-    }, 1000)
+    }, 2000)
 
     return () => {
       clearTimeout(timeoutId)
@@ -71,23 +75,24 @@ const Jobs = () => {
       </Container>
       {show && (
         <LoadShow>
-          <Loader msg='Job form is loading, please wait...' />
+          <Text>
+            Scroll down and click on accept cookies below, if form is not
+            loading...
+          </Text>
         </LoadShow>
       )}
       <Navbar />
 
-      {!show && (
-        <iframe
-          src='https://docs.google.com/forms/d/e/1FAIpQLSfWVf0lm3Cmftt797sZ_bAOSccJ44GbjhAwS_F4Mek6JcE3Xw/viewform?embedded=true'
-          width='100%'
-          height='1400'
-          frameborder='0'
-          marginheight='0'
-          marginwidth='0'
-        >
-          Loading…
-        </iframe>
-      )}
+      <iframe
+        src='https://docs.google.com/forms/d/e/1FAIpQLSfWVf0lm3Cmftt797sZ_bAOSccJ44GbjhAwS_F4Mek6JcE3Xw/viewform?embedded=true'
+        width='100%'
+        height='1400'
+        frameborder='0'
+        marginheight='0'
+        marginwidth='0'
+      >
+        Loading…
+      </iframe>
     </>
   )
 }

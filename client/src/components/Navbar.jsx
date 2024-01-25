@@ -1,11 +1,18 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import News from './News'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <>
+      <LogoBox>
+        <LogoLeft>
+          <LogoIcon src='https://github.com/furqanistic/ogs-client/blob/main/client/src/img/logo.png?raw=true' />
+        </LogoLeft>
+        <LogoRight>b</LogoRight>
+      </LogoBox>
       <Container isOpen={isOpen}>
         <Nav>
           <Link to='/' style={{ textDecoration: 'none' }}>
@@ -58,6 +65,30 @@ const Container = styled.div`
   height: ${({ isOpen }) => (isOpen ? '380px' : '60px')};
   transition: height 0.3s ease-in;
 `
+const LogoBox = styled.div`
+  max-height: 130px;
+  width: 100%;
+  flex: 4;
+  display: flex;
+  background-color: #0b0a45;
+`
+const LogoLeft = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const LogoRight = styled.div`
+  flex: 3;
+`
+const LogoIcon = styled.img`
+  object-fit: contain;
+  width: 100px;
+  background-position: center;
+  background-size: cover;
+  /* background-color: red; */
+`
+
 const Menu = styled.div`
   display: flex;
   justify-content: space-between;
@@ -96,7 +127,7 @@ const Nav = styled.div`
   /* background: #013701; */
   background-color: #0b0a45;
   position: absolute;
-  top: 0;
+  top: 130px;
   left: 0;
   right: 0;
 `

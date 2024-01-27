@@ -6,8 +6,8 @@ import styled from 'styled-components'
 // import { useQuery } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 // import BookingDataCard from '../../components/Booking/BookingDataCard'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+// import { ToastContainer } from 'react-toastify'
+// import 'react-toastify/dist/ReactToastify.css'
 import { axiosInstance } from '../../config.js'
 import DisplayCard from '../DisplayCard'
 const Container = styled.div`
@@ -281,7 +281,7 @@ const AdmissionForm = () => {
           <Desc>The Orion School</Desc>
         </Details>
       </Container>
-      <ToastContainer />
+      {/* <ToastContainer />   */}
       <Wrap id='booking-form-wrap'>
         <Heading>Orion Admission Form</Heading>
         <FieldsHeading>Student's Information : </FieldsHeading>

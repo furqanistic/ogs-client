@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 import express from 'express'
 import mongoose from 'mongoose'
 // import authRoute from './routes/auth.js'
-import admissionRoute from './routes/auth.js'
+import admissionRoute from './routes/admission.js'
 
 const app = express()
 dotenv.config()

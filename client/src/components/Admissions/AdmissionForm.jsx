@@ -8,8 +8,8 @@ import { useNavigate } from 'react-router-dom'
 // import BookingDataCard from '../../components/Booking/BookingDataCard'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { axiosInstance } from '../../config.js'
 import DisplayCard from '../DisplayCard'
-
 const Container = styled.div`
   display: flex;
   position: relative;
@@ -222,22 +222,55 @@ const CardBase = styled.div`
   z-index: 999; /* Ensure it's above other content */
 `
 const AdmissionForm = () => {
-  const [host, setHost] = useState('')
-  const [functionType, setFunctionType] = useState('')
-  const [dateOfBirth, setDateOfBirth] = useState('')
-  const [fatherName, setFatherName] = useState('')
-  const [fatherCNIC, setFatherCNIC] = useState('')
-  const [fatherCellNo, setFatherCellNo] = useState('')
-  const [fatherEmail, setFatherEmail] = useState('')
-  const [fatherOccupation, setFatherOccupation] = useState('')
-  const [motherName, setMotherName] = useState('')
-  const [motherOccupation, setMotherOccupation] = useState('')
-  const [motherCellNo, setMotherCellNo] = useState('')
-  const [address, setAddress] = useState('')
-  const [medicalProblems, setMedicalProblems] = useState('')
+  // all the states here
   const [showCard, setShowCard] = useState(false)
-
+  // admission form states...
+  const [name, setName] = useState('')
+  const [prevSchool, setPrevSchool] = useState('')
+  const [dob, setDob] = useState('')
+  const [fname, setFname] = useState('')
+  const [fcnic, setFcnic] = useState('')
+  const [fcell, setFcell] = useState('')
+  const [femail, setFemail] = useState('')
+  const [foccupation, setFoccupation] = useState('')
+  const [mname, setMname] = useState('')
+  const [moccupation, setMoccupation] = useState('')
+  const [mcell, setMcell] = useState('')
+  const [address, setAddress] = useState('')
+  const [others, setOthers] = useState('')
+  // other initals here
   const navigate = useNavigate()
+  // all the functions here
+
+  const handleSubmit = async (e) => {
+    console.log('test')
+    setShowCard(true)
+    e.preventDefault()
+    try {
+      const response = await axiosInstance.post('/booking/create-booking', {
+        name,
+        prevSchool,
+        dob,
+        fname,
+        fcnic,
+        fcell,
+        femail,
+        foccupation,
+        mname,
+        moccupation,
+        mcell,
+        address,
+        others,
+      })
+      if (response.status === 200) {
+        alert('Booking created successfully!')
+      } else {
+        alert('Failed to create booking. Please try again.')
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <>
@@ -258,8 +291,8 @@ const AdmissionForm = () => {
             <FormInput
               placeholder='Enter Student Name...'
               type='text'
-              value={host}
-              onChange={(e) => setHost(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </InputSet>
           <InputSet>
@@ -267,8 +300,8 @@ const AdmissionForm = () => {
             <FormInput
               placeholder='Previous School (if any)...'
               type='text'
-              value={functionType}
-              onChange={(e) => setFunctionType(e.target.value)}
+              value={prevSchool}
+              onChange={(e) => setPrevSchool(e.target.value)}
             />
           </InputSet>
         </InputWrap>
@@ -278,8 +311,8 @@ const AdmissionForm = () => {
             <FormInput
               placeholder='Date of Birth...'
               type='date'
-              value={dateOfBirth}
-              onChange={(e) => setDateOfBirth(e.target.value)}
+              value={dob}
+              onChange={(e) => setDob(e.target.value)}
             />
           </InputSet>
         </InputWrap>
@@ -291,8 +324,8 @@ const AdmissionForm = () => {
             <FormInput
               placeholder='Enter Name ...'
               type='text'
-              value={fatherName}
-              onChange={(e) => setFatherName(e.target.value)}
+              value={fname}
+              onChange={(e) => setFname(e.target.value)}
             />
           </InputSet>
           <InputSet>
@@ -300,8 +333,8 @@ const AdmissionForm = () => {
             <FormInput
               placeholder='Enter CNIC..'
               type='text'
-              value={fatherCNIC}
-              onChange={(e) => setFatherCNIC(e.target.value)}
+              value={fcnic}
+              onChange={(e) => setFcnic(e.target.value)}
             />
           </InputSet>
         </InputWrap>
@@ -311,8 +344,8 @@ const AdmissionForm = () => {
             <FormInput
               placeholder='Phone Number...'
               type='text'
-              value={fatherCellNo}
-              onChange={(e) => setFatherCellNo(e.target.value)}
+              value={fcell}
+              onChange={(e) => setFcell(e.target.value)}
             />
           </InputSet>
           <InputSet>
@@ -320,8 +353,8 @@ const AdmissionForm = () => {
             <FormInput
               placeholder='Enter Email (if any)...'
               type='text'
-              value={fatherEmail}
-              onChange={(e) => setFatherEmail(e.target.value)}
+              value={femail}
+              onChange={(e) => setFemail(e.target.value)}
             />
           </InputSet>
         </InputWrap>
@@ -331,8 +364,8 @@ const AdmissionForm = () => {
             <FormInput
               placeholder='Enter Occupation...'
               type='text'
-              value={fatherOccupation}
-              onChange={(e) => setFatherOccupation(e.target.value)}
+              value={foccupation}
+              onChange={(e) => setFoccupation(e.target.value)}
             />
           </InputSet>
         </InputWrap>
@@ -343,8 +376,8 @@ const AdmissionForm = () => {
             <FormInput
               placeholder='Enter Number...'
               type='text'
-              value={motherName}
-              onChange={(e) => setMotherName(e.target.value)}
+              value={mname}
+              onChange={(e) => setMname(e.target.value)}
             />
           </InputSet>
           <InputSet>
@@ -352,8 +385,8 @@ const AdmissionForm = () => {
             <FormInput
               placeholder='Enter Occupation...'
               type='text'
-              value={motherOccupation}
-              onChange={(e) => setMotherOccupation(e.target.value)}
+              value={moccupation}
+              onChange={(e) => setMoccupation(e.target.value)}
             />
           </InputSet>
         </InputWrap>
@@ -363,8 +396,8 @@ const AdmissionForm = () => {
             <FormInput
               placeholder='Phone Number...'
               type='text'
-              value={motherCellNo}
-              onChange={(e) => setMotherCellNo(e.target.value)}
+              value={mcell}
+              onChange={(e) => setMcell(e.target.value)}
             />
           </InputSet>
         </InputWrap>
@@ -389,14 +422,14 @@ const AdmissionForm = () => {
             <FormTextField
               placeholder='Write here...'
               type='text'
-              value={medicalProblems}
-              onChange={(e) => setMedicalProblems(e.target.value)}
+              value={others}
+              onChange={(e) => setOthers(e.target.value)}
             />
           </InputSet>
         </InputWrap>
         <SubSet>
           <SubmitBtn>
-            <span onClick={() => setShowCard(true)}>Submit</span>
+            <span onClick={() => handleSubmit}>Submit</span>
           </SubmitBtn>
         </SubSet>
         {showCard && (

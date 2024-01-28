@@ -7,11 +7,15 @@ const Hero = () => {
     <>
       <section className='container'>
         <div className='content'>
-          <h1 className='title'>Greetings, I'm Waqas</h1>
+          <h1 className='title'>
+            Greetings, I'm<br></br>
+            Waqas Zaheer
+          </h1>
           <p className='description'>
-            Dear Students, Parents, and Educators ! It is with immense joy and
-            pride that I extend a warm welcome to each of you to The Orion
-            School. As the RECTOR, I am honored to lead this institution into a
+            Dear Students, Parents, and Educators !<br></br>
+            <br></br> It is with immense joy and pride that I extend a warm
+            welcome to each of you to The Orion School. <br></br>
+            <br></br>As the RECTOR, I am honored to lead this institution into a
             realm of boundless possibilities. The Orion School stands as a
             beacon of excellence, committed to fostering not just academic
             achievement but also the holistic development of every individual
@@ -21,17 +25,15 @@ const Hero = () => {
             Our dedicated team of educators is passionately devoted to
             cultivating an environment where curiosity, creativity, and critical
             thinking thrive. Here, we aim to nurture not just bright minds but
-            also compassionate hearts and resilient spirits. At The Orion
-            School, we believe in the power of collaboration, innovation, and a
-            deep-rooted commitment to lifelong learning. Together, let us embark
-            on a journey where dreams are nurtured, talents are honed, and
-            aspirations are realized.I invite you all to be an integral part of
-            this exciting chapter in education, where we shall strive to make a
-            positive impact
-            <br></br>
-            <br></br>
-            on the world through knowledge, integrity, and empathy.Welcome
-            aboard, and let us chart a path to success and fulfillment together.
+            also compassionate hearts and resilient spirits. <br></br>
+            <br></br>At The Orion School, we believe in the power of
+            collaboration, innovation, and a deep-rooted commitment to lifelong
+            learning. Together, let us embark on a journey where dreams are
+            nurtured, talents are honed, and aspirations are realized.I invite
+            you all to be an integral part of this exciting chapter in
+            education, where we shall strive to make a positive impact on the
+            world through knowledge, integrity, and empathy.Welcome aboard, and
+            let us chart a path to success and fulfillment together.
             <br></br>
             <br></br>
             Warm regards <br></br>

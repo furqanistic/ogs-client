@@ -1,13 +1,12 @@
-import { Delete } from '@mui/icons-material'
+import { Delete, Error } from '@mui/icons-material'
+import { useFormik } from 'formik'
 import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 // import { useQuery } from 'react-query'
 import { useNavigate } from 'react-router-dom'
-// import BookingDataCard from '../../components/Booking/BookingDataCard'
-// import { ToastContainer } from 'react-toastify'
-// import 'react-toastify/dist/ReactToastify.css'
+import { admissionSchema } from '../../Schemas/index.js'
 import { axiosInstance } from '../../config.js'
 import DisplayCard from '../DisplayCard'
 const Container = styled.div`
@@ -118,11 +117,48 @@ const FormInput = styled.input`
     font-size: 12px;
   }
 `
+const FormInputTwo = styled.input`
+  width: 50%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+  &:focus {
+    border: 1px solid #fff;
+    border-radius: 10px;
+    padding-left: 10px;
+  }
+  @media (max-width: 900px) {
+    font-size: 12px;
+    width: 100%;
+  }
+`
 const InputSet = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin-left: 20px;
+  @media (max-width: 900px) {
+    width: 95%;
+    margin-left: 5px;
+  }
+`
+const ErrorWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+`
+const InputSetTwo = styled.div`
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  margin-left: 20px;
+  width: 100%;
   @media (max-width: 900px) {
     width: 95%;
     margin-left: 5px;
@@ -156,6 +192,29 @@ const SubSet = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 1.5rem;
+`
+
+const SelectCat = styled.select`
+  width: 50%;
+  border-radius: 4px;
+  border: 1px solid #ffffff;
+  color: white;
+  background-color: rgba(255, 255, 255, 0);
+  outline: none;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  @media (max-width: 900px) {
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.9rem;
+  }
+`
+const SelectOpt = styled.option`
+  /* width: 50%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 const SubmitBtn = styled.button`
   outline: none;
@@ -221,56 +280,87 @@ const CardBase = styled.div`
   align-items: center;
   z-index: 999; /* Ensure it's above other content */
 `
+const ErrMsg = styled.p`
+  font-size: 0.8rem;
+  color: #ff3b3b;
+  padding: 0.5rem;
+  text-align: start;
+  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 const AdmissionForm = () => {
   // all the states here
   const [showCard, setShowCard] = useState(false)
   // admission form states...
-  const [name, setName] = useState('')
-  const [prevSchool, setPrevSchool] = useState('')
-  const [dob, setDob] = useState('')
-  const [fname, setFname] = useState('')
-  const [fcnic, setFcnic] = useState('')
-  const [fcell, setFcell] = useState('')
-  const [femail, setFemail] = useState('')
-  const [foccupation, setFoccupation] = useState('')
-  const [mname, setMname] = useState('')
-  const [moccupation, setMoccupation] = useState('')
-  const [mcell, setMcell] = useState('')
-  const [address, setAddress] = useState('')
-  const [others, setOthers] = useState('')
+
   // other initals here
   const navigate = useNavigate()
-  // all the functions here
+  const GradeOptions = [
+    'Choose',
+    'PG',
+    'Nursery',
+    'KG',
+    'Grade 1',
+    'Grade 2',
+    'Grade 3',
+    'Grade 4',
+    'Grade 5',
+    'Grade 6',
+    'Grade 7',
+  ]
 
-  const handleSubmit = async (e) => {
-    console.log('test')
+  // all the functions here
+  const handleTest = () => {
+    console.log('eheh')
     setShowCard(true)
+  }
+  const handleAdmissions = async (e) => {
     e.preventDefault()
     try {
-      const response = await axiosInstance.post('/booking/create-booking', {
-        name,
-        prevSchool,
-        dob,
-        fname,
-        fcnic,
-        fcell,
-        femail,
-        foccupation,
-        mname,
-        moccupation,
-        mcell,
-        address,
-        others,
+      await axiosInstance.post('upload/project', {
+        name: values.name,
+        prevSchool: values.prevSchool,
+        dob: values.dob,
+        grade: values.grade,
+        fname: values.fname,
+        fcnic: values.fcnic,
+        fcell: values.fcell,
+        femail: values.femail,
+        foccupation: values.foccupation,
+        mname: values.mname,
+        moccupation: values.moccupation,
+        mcell: values.mcell,
+        address: values.address,
+        others: values.others,
       })
-      if (response.status === 200) {
-        alert('Booking created successfully!')
-      } else {
-        alert('Failed to create booking. Please try again.')
-      }
     } catch (err) {
       console.log(err)
     }
   }
+  // handling forms data
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: {
+        name: '',
+        prevSchool: '',
+        dob: '',
+        grade: '',
+        fname: '',
+        fcnic: '',
+        fcell: '',
+        femail: '',
+        foccupation: '',
+        mname: '',
+        moccupation: '',
+        mcell: '',
+        address: '',
+        others: '',
+      },
+      validationSchema: admissionSchema,
+      handleAdmissions,
+    })
 
   return (
     <>
@@ -286,150 +376,269 @@ const AdmissionForm = () => {
         <Heading>Orion Admission Form</Heading>
         <FieldsHeading>Student's Information : </FieldsHeading>
         <InputWrap>
-          <InputSet>
-            <FormText>Student's Name: </FormText>
-            <FormInput
-              placeholder='Enter Student Name...'
-              type='text'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </InputSet>
-          <InputSet>
-            <FormText>Previous School:</FormText>
-            <FormInput
-              placeholder='Previous School (if any)...'
-              type='text'
-              value={prevSchool}
-              onChange={(e) => setPrevSchool(e.target.value)}
-            />
-          </InputSet>
+          <ErrorWrap>
+            <InputSet>
+              <FormText>Student's Name: </FormText>
+              <FormInput
+                placeholder='Enter Student Name...'
+                type='text'
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                id='name'
+              />
+            </InputSet>
+            {errors.name && touched.name && (
+              <ErrMsg>
+                <Error style={{ marginRight: '5px' }} /> {errors.name}
+              </ErrMsg>
+            )}
+          </ErrorWrap>
+          <ErrorWrap>
+            <InputSet>
+              <FormText>Previous School:</FormText>
+              <FormInput
+                placeholder='Previous School (if any)...'
+                type='text'
+                value={values.prevSchool}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                id='prevSchool'
+              />
+            </InputSet>
+          </ErrorWrap>
         </InputWrap>
         <InputWrap>
-          <InputSet>
-            <FormText>Date of Birth: </FormText>
-            <FormInput
-              placeholder='Date of Birth...'
-              type='date'
-              value={dob}
-              onChange={(e) => setDob(e.target.value)}
-            />
-          </InputSet>
+          <ErrorWrap>
+            <InputSetTwo>
+              <FormText>Class: </FormText>
+              <SelectCat
+                name='grade'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                id='grade'
+                value={values.grade}
+              >
+                {GradeOptions.map((category) => (
+                  <SelectOpt key={category} value={category}>
+                    {category}
+                  </SelectOpt>
+                ))}
+              </SelectCat>
+            </InputSetTwo>
+            {errors.grade && touched.grade && (
+              <ErrMsg>
+                <Error style={{ marginRight: '5px' }} /> {errors.grade}
+              </ErrMsg>
+            )}
+          </ErrorWrap>
+          <ErrorWrap>
+            <InputSetTwo>
+              <FormText>Date of Birth: </FormText>
+              <FormInputTwo
+                placeholder='Date of Birth...'
+                type='date'
+                value={values.dob}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                id='dob'
+              />
+            </InputSetTwo>
+            {errors.dob && touched.dob && (
+              <ErrMsg>
+                <Error style={{ marginRight: '5px' }} /> {errors.dob}
+              </ErrMsg>
+            )}
+          </ErrorWrap>
         </InputWrap>
-
         <FieldsHeading>Father's Information</FieldsHeading>
         <InputWrap>
-          <InputSet>
-            <FormText> Name:</FormText>
-            <FormInput
-              placeholder='Enter Name ...'
-              type='text'
-              value={fname}
-              onChange={(e) => setFname(e.target.value)}
-            />
-          </InputSet>
-          <InputSet>
-            <FormText> CNIC:</FormText>
-            <FormInput
-              placeholder='Enter CNIC..'
-              type='text'
-              value={fcnic}
-              onChange={(e) => setFcnic(e.target.value)}
-            />
-          </InputSet>
+          <ErrorWrap>
+            <InputSet>
+              <FormText> Name:</FormText>
+              <FormInput
+                placeholder='Enter Name ...'
+                type='text'
+                value={values.fname}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                id='fname'
+              />
+            </InputSet>
+            {errors.fname && touched.fname && (
+              <ErrMsg>
+                <Error style={{ marginRight: '5px' }} /> {errors.fname}
+              </ErrMsg>
+            )}
+          </ErrorWrap>
+          <ErrorWrap>
+            <InputSet>
+              <FormText> CNIC:</FormText>
+              <FormInput
+                placeholder='Enter CNIC..'
+                type='text'
+                value={values.fcnic}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                id='fcnic'
+              />
+            </InputSet>
+            {errors.fcnic && touched.fcnic && (
+              <ErrMsg>
+                <Error style={{ marginRight: '5px' }} /> {errors.fcnic}
+              </ErrMsg>
+            )}
+          </ErrorWrap>
         </InputWrap>
         <InputWrap>
-          <InputSet>
-            <FormText> Cell No: </FormText>
-            <FormInput
-              placeholder='Phone Number...'
-              type='text'
-              value={fcell}
-              onChange={(e) => setFcell(e.target.value)}
-            />
-          </InputSet>
-          <InputSet>
-            <FormText>Email:</FormText>
-            <FormInput
-              placeholder='Enter Email (if any)...'
-              type='text'
-              value={femail}
-              onChange={(e) => setFemail(e.target.value)}
-            />
-          </InputSet>
+          <ErrorWrap>
+            <InputSet>
+              <FormText> Cell No: </FormText>
+              <FormInput
+                placeholder='Phone Number...'
+                type='text'
+                value={values.fcell}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                id='fcell'
+              />
+            </InputSet>
+            {errors.fcell && touched.fcell && (
+              <ErrMsg>
+                <Error style={{ marginRight: '5px' }} /> {errors.fcell}
+              </ErrMsg>
+            )}
+          </ErrorWrap>
+          <ErrorWrap>
+            <InputSet>
+              <FormText>Email:</FormText>
+              <FormInput
+                placeholder='Enter Email (if any)...'
+                type='text'
+                value={values.femail}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                id='femail'
+              />
+            </InputSet>
+            {errors.femail && touched.femail && (
+              <ErrMsg>
+                <Error style={{ marginRight: '5px' }} /> {errors.femail}
+              </ErrMsg>
+            )}
+          </ErrorWrap>
         </InputWrap>
         <InputWrap>
-          <InputSet>
-            <FormText>Occupation: </FormText>
-            <FormInput
-              placeholder='Enter Occupation...'
-              type='text'
-              value={foccupation}
-              onChange={(e) => setFoccupation(e.target.value)}
-            />
-          </InputSet>
+          <ErrorWrap>
+            <InputSet>
+              <FormText>Occupation: </FormText>
+              <FormInput
+                placeholder='Enter Occupation...'
+                type='text'
+                value={values.foccupation}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                id='foccupation'
+              />
+            </InputSet>
+          </ErrorWrap>
         </InputWrap>
         <FieldsHeading>Mother's Information : </FieldsHeading>
         <InputWrap>
-          <InputSet>
-            <FormText> Name:</FormText>
-            <FormInput
-              placeholder='Enter Number...'
-              type='text'
-              value={mname}
-              onChange={(e) => setMname(e.target.value)}
-            />
-          </InputSet>
-          <InputSet>
-            <FormText> Occupation:</FormText>
-            <FormInput
-              placeholder='Enter Occupation...'
-              type='text'
-              value={moccupation}
-              onChange={(e) => setMoccupation(e.target.value)}
-            />
-          </InputSet>
+          <ErrorWrap>
+            <InputSet>
+              <FormText> Name:</FormText>
+              <FormInput
+                placeholder='Enter Number...'
+                type='text'
+                value={values.mname}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                id='mname'
+              />
+            </InputSet>
+            {errors.mname && touched.mname && (
+              <ErrMsg>
+                <Error style={{ marginRight: '5px' }} /> {errors.mname}
+              </ErrMsg>
+            )}
+          </ErrorWrap>
+          <ErrorWrap>
+            <InputSet>
+              <FormText> Occupation:</FormText>
+              <FormInput
+                placeholder='Enter Occupation...'
+                type='text'
+                value={values.moccupation}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                id='moccupation'
+              />
+            </InputSet>
+          </ErrorWrap>
         </InputWrap>
         <InputWrap>
-          <InputSet>
-            <FormText> Cell No: </FormText>
-            <FormInput
-              placeholder='Phone Number...'
-              type='text'
-              value={mcell}
-              onChange={(e) => setMcell(e.target.value)}
-            />
-          </InputSet>
+          <ErrorWrap>
+            <InputSet>
+              <FormText> Cell No: </FormText>
+              <FormInput
+                placeholder='Phone Number...'
+                type='text'
+                value={values.mcell}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                id='mcell'
+              />
+            </InputSet>
+            {errors.mcell && touched.mcell && (
+              <ErrMsg>
+                <Error style={{ marginRight: '5px' }} /> {errors.mcell}
+              </ErrMsg>
+            )}
+          </ErrorWrap>
         </InputWrap>
         <FieldsHeading>Other Information : </FieldsHeading>
         <InputWrap>
-          <InputSet>
-            <FormText>Address</FormText>
-            <FormInput
-              placeholder='Enter Home Address...'
-              type='text'
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            />
-          </InputSet>
+          <ErrorWrap>
+            <InputSet>
+              <FormText>Address</FormText>
+              <FormInput
+                placeholder='Enter Home Address...'
+                type='text'
+                value={values.address}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                id='address'
+              />
+            </InputSet>
+            {errors.address && touched.address && (
+              <ErrMsg>
+                <Error style={{ marginRight: '5px' }} /> {errors.address}
+              </ErrMsg>
+            )}
+          </ErrorWrap>
         </InputWrap>
         <InputWrap>
-          <InputSet>
-            <FormText>
-              Please specify if you have any medical problem (s) or physical
-              handicap :
-            </FormText>
-            <FormTextField
-              placeholder='Write here...'
-              type='text'
-              value={others}
-              onChange={(e) => setOthers(e.target.value)}
-            />
-          </InputSet>
+          <ErrorWrap>
+            <InputSet>
+              <FormText>
+                Please specify if you have any medical problem (s) or physical
+                handicap :
+              </FormText>
+              <FormTextField
+                placeholder='Write here...'
+                type='text'
+                value={values.others}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                id='others'
+              />
+            </InputSet>
+          </ErrorWrap>
         </InputWrap>
         <SubSet>
           <SubmitBtn>
-            <span onClick={() => handleSubmit}>Submit</span>
+            <span onClick={handleTest}>Submit</span>
           </SubmitBtn>
         </SubSet>
         {showCard && (

@@ -8,6 +8,9 @@ const AdmissionSchema = new mongoose.Schema(
     prevSchool: {
       type: String,
     },
+    grade: {
+      type: String,
+    },
     dob: {
       type: Date,
     },

@@ -104,7 +104,7 @@
     align-items: center;
   }
   .title {
-    font-size: 42px;
+    font-size: 54px;
     margin-top: 20px;
   }
   .description {
@@ -115,12 +115,12 @@
 }
 @media screen and (max-width: 570px) {
   .title {
-    font-size: 28px;
+    font-size: 42px;
   }
 }
 @media screen and (max-width: 400px) {
   .title {
-    font-size: 24px;
+    font-size: 32px;
   }
   .description {
     font-size: 12px;

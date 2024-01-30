@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 
 const fadeIn = keyframes`
@@ -56,8 +57,8 @@ const LoginCardWrap = styled.div`
   border-radius: 10px;
   animation: ${slideIn} 0.5s ease-in-out, ${fadeIn} 1s ease; /* added fadeIn here */
   @media (max-width: 400px) {
-    width: 350px;
-    padding: 20px;
+    width: 320px;
+    padding: 25px;
   }
 `
 
@@ -85,6 +86,8 @@ const Input = styled.input`
   border-bottom: 1px solid #fff;
   outline: none;
   background: transparent;
+  border-radius: 0;
+  -webkit-appearance: none;
 
   &:focus ~ label,
   &:valid ~ label {
@@ -117,6 +120,7 @@ const SubmitButton = styled.a`
   margin-top: 40px;
   letter-spacing: 3px;
   background-color: #0e19bf;
+  cursor: pointer;
 
   &:hover {
     background: #fff;
@@ -194,7 +198,15 @@ const Wrap = styled.div`
   position: relative;
   background-position: center;
 `
+const Message = styled.p`
+  color: #ff1c1c;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 300;
+  font-style: italic;
+`
 export default function LoginCard({ title }) {
+  const [setError, showSetError] = useState(false)
   return (
     <Wrap>
       <LoginCardWrap>
@@ -208,7 +220,10 @@ export default function LoginCard({ title }) {
             <Input required type='password' />
             <Label>Password</Label>
           </UserBox>
-          <SubmitButton href='#'>
+          {setError && (
+            <Message>Oops! Wrong password. Verify and retry...</Message>
+          )}
+          <SubmitButton onClick={() => showSetError(true)}>
             <span></span>
             <span></span>
             <span></span>

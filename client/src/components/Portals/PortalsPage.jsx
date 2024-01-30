@@ -1,7 +1,8 @@
 import { Diversity3, Face6, Wc } from '@mui/icons-material'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import Loader from '../Loader/Loader'
+
 const Container = styled.div`
   display: flex;
   position: relative;
@@ -107,30 +108,36 @@ const PortalsPage = () => {
         </Details>
       </Container>
       <Slider>
-        <Item>
-          <ItemWrap>
-            <IconSet>
-              <Face6 style={{ fontSize: '12rem' }} />
-            </IconSet>
-            <IconText>Student Portal</IconText>
-          </ItemWrap>
-        </Item>
-        <Item bg='#160d8f'>
-          <ItemWrap>
-            <IconSet>
-              <Wc style={{ fontSize: '12rem' }} />
-            </IconSet>
-            <IconText>Faculty Portal</IconText>
-          </ItemWrap>
-        </Item>
-        <Item bg='#0446a3'>
-          <ItemWrap>
-            <IconSet>
-              <Diversity3 style={{ fontSize: '12rem' }} />
-            </IconSet>
-            <IconText>Management Portal</IconText>
-          </ItemWrap>
-        </Item>
+        <Link to='/student/login'>
+          <Item>
+            <ItemWrap>
+              <IconSet>
+                <Face6 style={{ fontSize: '12rem' }} />
+              </IconSet>
+              <IconText>Student Portal</IconText>
+            </ItemWrap>
+          </Item>
+        </Link>
+        <Link to='/faculty/login'>
+          <Item bg='#160d8f'>
+            <ItemWrap>
+              <IconSet>
+                <Wc style={{ fontSize: '12rem' }} />
+              </IconSet>
+              <IconText>Faculty Portal</IconText>
+            </ItemWrap>
+          </Item>
+        </Link>
+        <Link to='/management/login'>
+          <Item bg='#0446a3'>
+            <ItemWrap>
+              <IconSet>
+                <Diversity3 style={{ fontSize: '12rem' }} />
+              </IconSet>
+              <IconText>Management Portal</IconText>
+            </ItemWrap>
+          </Item>
+        </Link>
       </Slider>
     </>
   )

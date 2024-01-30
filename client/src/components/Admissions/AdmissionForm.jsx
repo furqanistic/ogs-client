@@ -4,6 +4,7 @@ import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import Loader from '../Loader/Loader.jsx'
 // import { useQuery } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import { admissionSchema } from '../../Schemas/index.js'
@@ -293,6 +294,7 @@ const ErrMsg = styled.p`
 const AdmissionForm = () => {
   // all the states here
   const [showCard, setShowCard] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   // admission form states...
 
   // other initals here
@@ -312,14 +314,12 @@ const AdmissionForm = () => {
   ]
 
   // all the functions here
-  const handleTest = () => {
-    console.log('eheh')
-    setShowCard(true)
-  }
+
   const handleAdmissions = async (e) => {
     e.preventDefault()
     try {
-      await axiosInstance.post('upload/project', {
+      setIsLoading(true)
+      await axiosInstance.post('admission/submit/', {
         name: values.name,
         prevSchool: values.prevSchool,
         dob: values.dob,
@@ -335,8 +335,11 @@ const AdmissionForm = () => {
         address: values.address,
         others: values.others,
       })
+      setShowCard(true)
     } catch (err) {
       console.log(err)
+    } finally {
+      setIsLoading(false)
     }
   }
   // handling forms data
@@ -372,281 +375,288 @@ const AdmissionForm = () => {
         </Details>
       </Container>
       {/* <ToastContainer />   */}
-      <Wrap id='booking-form-wrap'>
-        <Heading>Orion Admission Form</Heading>
-        <FieldsHeading>Student's Information : </FieldsHeading>
-        <InputWrap>
-          <ErrorWrap>
-            <InputSet>
-              <FormText>Student's Name: </FormText>
-              <FormInput
-                placeholder='Enter Student Name...'
-                type='text'
-                value={values.name}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id='name'
-              />
-            </InputSet>
-            {errors.name && touched.name && (
-              <ErrMsg>
-                <Error style={{ marginRight: '5px' }} /> {errors.name}
-              </ErrMsg>
-            )}
-          </ErrorWrap>
-          <ErrorWrap>
-            <InputSet>
-              <FormText>Previous School:</FormText>
-              <FormInput
-                placeholder='Previous School (if any)...'
-                type='text'
-                value={values.prevSchool}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id='prevSchool'
-              />
-            </InputSet>
-          </ErrorWrap>
-        </InputWrap>
-        <InputWrap>
-          <ErrorWrap>
-            <InputSetTwo>
-              <FormText>Class: </FormText>
-              <SelectCat
-                name='grade'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id='grade'
-                value={values.grade}
-              >
-                {GradeOptions.map((category) => (
-                  <SelectOpt key={category} value={category}>
-                    {category}
-                  </SelectOpt>
-                ))}
-              </SelectCat>
-            </InputSetTwo>
-            {errors.grade && touched.grade && (
-              <ErrMsg>
-                <Error style={{ marginRight: '5px' }} /> {errors.grade}
-              </ErrMsg>
-            )}
-          </ErrorWrap>
-          <ErrorWrap>
-            <InputSetTwo>
-              <FormText>Date of Birth: </FormText>
-              <FormInputTwo
-                placeholder='Date of Birth...'
-                type='date'
-                value={values.dob}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id='dob'
-              />
-            </InputSetTwo>
-            {errors.dob && touched.dob && (
-              <ErrMsg>
-                <Error style={{ marginRight: '5px' }} /> {errors.dob}
-              </ErrMsg>
-            )}
-          </ErrorWrap>
-        </InputWrap>
-        <FieldsHeading>Father's Information</FieldsHeading>
-        <InputWrap>
-          <ErrorWrap>
-            <InputSet>
-              <FormText> Name:</FormText>
-              <FormInput
-                placeholder='Enter Name ...'
-                type='text'
-                value={values.fname}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id='fname'
-              />
-            </InputSet>
-            {errors.fname && touched.fname && (
-              <ErrMsg>
-                <Error style={{ marginRight: '5px' }} /> {errors.fname}
-              </ErrMsg>
-            )}
-          </ErrorWrap>
-          <ErrorWrap>
-            <InputSet>
-              <FormText> CNIC:</FormText>
-              <FormInput
-                placeholder='Enter CNIC..'
-                type='text'
-                value={values.fcnic}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id='fcnic'
-              />
-            </InputSet>
-            {errors.fcnic && touched.fcnic && (
-              <ErrMsg>
-                <Error style={{ marginRight: '5px' }} /> {errors.fcnic}
-              </ErrMsg>
-            )}
-          </ErrorWrap>
-        </InputWrap>
-        <InputWrap>
-          <ErrorWrap>
-            <InputSet>
-              <FormText> Cell No: </FormText>
-              <FormInput
-                placeholder='Phone Number...'
-                type='text'
-                value={values.fcell}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id='fcell'
-              />
-            </InputSet>
-            {errors.fcell && touched.fcell && (
-              <ErrMsg>
-                <Error style={{ marginRight: '5px' }} /> {errors.fcell}
-              </ErrMsg>
-            )}
-          </ErrorWrap>
-          <ErrorWrap>
-            <InputSet>
-              <FormText>Email:</FormText>
-              <FormInput
-                placeholder='Enter Email (if any)...'
-                type='text'
-                value={values.femail}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id='femail'
-              />
-            </InputSet>
-            {errors.femail && touched.femail && (
-              <ErrMsg>
-                <Error style={{ marginRight: '5px' }} /> {errors.femail}
-              </ErrMsg>
-            )}
-          </ErrorWrap>
-        </InputWrap>
-        <InputWrap>
-          <ErrorWrap>
-            <InputSet>
-              <FormText>Occupation: </FormText>
-              <FormInput
-                placeholder='Enter Occupation...'
-                type='text'
-                value={values.foccupation}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id='foccupation'
-              />
-            </InputSet>
-          </ErrorWrap>
-        </InputWrap>
-        <FieldsHeading>Mother's Information : </FieldsHeading>
-        <InputWrap>
-          <ErrorWrap>
-            <InputSet>
-              <FormText> Name:</FormText>
-              <FormInput
-                placeholder='Enter Number...'
-                type='text'
-                value={values.mname}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id='mname'
-              />
-            </InputSet>
-            {errors.mname && touched.mname && (
-              <ErrMsg>
-                <Error style={{ marginRight: '5px' }} /> {errors.mname}
-              </ErrMsg>
-            )}
-          </ErrorWrap>
-          <ErrorWrap>
-            <InputSet>
-              <FormText> Occupation:</FormText>
-              <FormInput
-                placeholder='Enter Occupation...'
-                type='text'
-                value={values.moccupation}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id='moccupation'
-              />
-            </InputSet>
-          </ErrorWrap>
-        </InputWrap>
-        <InputWrap>
-          <ErrorWrap>
-            <InputSet>
-              <FormText> Cell No: </FormText>
-              <FormInput
-                placeholder='Phone Number...'
-                type='text'
-                value={values.mcell}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id='mcell'
-              />
-            </InputSet>
-            {errors.mcell && touched.mcell && (
-              <ErrMsg>
-                <Error style={{ marginRight: '5px' }} /> {errors.mcell}
-              </ErrMsg>
-            )}
-          </ErrorWrap>
-        </InputWrap>
-        <FieldsHeading>Other Information : </FieldsHeading>
-        <InputWrap>
-          <ErrorWrap>
-            <InputSet>
-              <FormText>Address</FormText>
-              <FormInput
-                placeholder='Enter Home Address...'
-                type='text'
-                value={values.address}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id='address'
-              />
-            </InputSet>
-            {errors.address && touched.address && (
-              <ErrMsg>
-                <Error style={{ marginRight: '5px' }} /> {errors.address}
-              </ErrMsg>
-            )}
-          </ErrorWrap>
-        </InputWrap>
-        <InputWrap>
-          <ErrorWrap>
-            <InputSet>
-              <FormText>
-                Please specify if you have any medical problem (s) or physical
-                handicap :
-              </FormText>
-              <FormTextField
-                placeholder='Write here...'
-                type='text'
-                value={values.others}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id='others'
-              />
-            </InputSet>
-          </ErrorWrap>
-        </InputWrap>
-        <SubSet>
-          <SubmitBtn>
-            <span onClick={handleTest}>Submit</span>
-          </SubmitBtn>
-        </SubSet>
-        {showCard && (
-          <CardBase>
-            <DisplayCard />
-          </CardBase>
-        )}
-      </Wrap>
+      <form onSubmit={handleSubmit}>
+        <Wrap id='booking-form-wrap'>
+          <Heading>Orion Admission Form</Heading>
+          <FieldsHeading>Student's Information : </FieldsHeading>
+          <InputWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText>Student's Name: </FormText>
+                <FormInput
+                  placeholder='Enter Student Name...'
+                  type='text'
+                  value={values.name}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id='name'
+                />
+              </InputSet>
+              {errors.name && touched.name && (
+                <ErrMsg>
+                  <Error style={{ marginRight: '5px' }} /> {errors.name}
+                </ErrMsg>
+              )}
+            </ErrorWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText>Previous School:</FormText>
+                <FormInput
+                  placeholder='Previous School (if any)...'
+                  type='text'
+                  value={values.prevSchool}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id='prevSchool'
+                />
+              </InputSet>
+            </ErrorWrap>
+          </InputWrap>
+          <InputWrap>
+            <ErrorWrap>
+              <InputSetTwo>
+                <FormText>Class: </FormText>
+                <SelectCat
+                  name='grade'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id='grade'
+                  value={values.grade}
+                >
+                  {GradeOptions.map((category) => (
+                    <SelectOpt key={category} value={category}>
+                      {category}
+                    </SelectOpt>
+                  ))}
+                </SelectCat>
+              </InputSetTwo>
+              {errors.grade && touched.grade && (
+                <ErrMsg>
+                  <Error style={{ marginRight: '5px' }} /> {errors.grade}
+                </ErrMsg>
+              )}
+            </ErrorWrap>
+            <ErrorWrap>
+              <InputSetTwo>
+                <FormText>Date of Birth: </FormText>
+                <FormInputTwo
+                  placeholder='Date of Birth...'
+                  type='date'
+                  value={values.dob}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id='dob'
+                />
+              </InputSetTwo>
+              {errors.dob && touched.dob && (
+                <ErrMsg>
+                  <Error style={{ marginRight: '5px' }} /> {errors.dob}
+                </ErrMsg>
+              )}
+            </ErrorWrap>
+          </InputWrap>
+          <FieldsHeading>Father's Information</FieldsHeading>
+          <InputWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText> Name:</FormText>
+                <FormInput
+                  placeholder='Enter Name ...'
+                  type='text'
+                  value={values.fname}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id='fname'
+                />
+              </InputSet>
+              {errors.fname && touched.fname && (
+                <ErrMsg>
+                  <Error style={{ marginRight: '5px' }} /> {errors.fname}
+                </ErrMsg>
+              )}
+            </ErrorWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText> CNIC:</FormText>
+                <FormInput
+                  placeholder='Enter CNIC..'
+                  type='text'
+                  value={values.fcnic}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id='fcnic'
+                />
+              </InputSet>
+              {errors.fcnic && touched.fcnic && (
+                <ErrMsg>
+                  <Error style={{ marginRight: '5px' }} /> {errors.fcnic}
+                </ErrMsg>
+              )}
+            </ErrorWrap>
+          </InputWrap>
+          <InputWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText> Cell No: </FormText>
+                <FormInput
+                  placeholder='Phone Number...'
+                  type='text'
+                  value={values.fcell}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id='fcell'
+                />
+              </InputSet>
+              {errors.fcell && touched.fcell && (
+                <ErrMsg>
+                  <Error style={{ marginRight: '5px' }} /> {errors.fcell}
+                </ErrMsg>
+              )}
+            </ErrorWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText>Email:</FormText>
+                <FormInput
+                  placeholder='Enter Email (if any)...'
+                  type='text'
+                  value={values.femail}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id='femail'
+                />
+              </InputSet>
+              {errors.femail && touched.femail && (
+                <ErrMsg>
+                  <Error style={{ marginRight: '5px' }} /> {errors.femail}
+                </ErrMsg>
+              )}
+            </ErrorWrap>
+          </InputWrap>
+          <InputWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText>Occupation: </FormText>
+                <FormInput
+                  placeholder='Enter Occupation...'
+                  type='text'
+                  value={values.foccupation}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id='foccupation'
+                />
+              </InputSet>
+            </ErrorWrap>
+          </InputWrap>
+          <FieldsHeading>Mother's Information : </FieldsHeading>
+          <InputWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText> Name:</FormText>
+                <FormInput
+                  placeholder='Enter Number...'
+                  type='text'
+                  value={values.mname}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id='mname'
+                />
+              </InputSet>
+              {errors.mname && touched.mname && (
+                <ErrMsg>
+                  <Error style={{ marginRight: '5px' }} /> {errors.mname}
+                </ErrMsg>
+              )}
+            </ErrorWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText> Occupation:</FormText>
+                <FormInput
+                  placeholder='Enter Occupation...'
+                  type='text'
+                  value={values.moccupation}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id='moccupation'
+                />
+              </InputSet>
+            </ErrorWrap>
+          </InputWrap>
+          <InputWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText> Cell No: </FormText>
+                <FormInput
+                  placeholder='Phone Number...'
+                  type='text'
+                  value={values.mcell}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id='mcell'
+                />
+              </InputSet>
+              {errors.mcell && touched.mcell && (
+                <ErrMsg>
+                  <Error style={{ marginRight: '5px' }} /> {errors.mcell}
+                </ErrMsg>
+              )}
+            </ErrorWrap>
+          </InputWrap>
+          <FieldsHeading>Other Information : </FieldsHeading>
+          <InputWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText>Address</FormText>
+                <FormInput
+                  placeholder='Enter Home Address...'
+                  type='text'
+                  value={values.address}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id='address'
+                />
+              </InputSet>
+              {errors.address && touched.address && (
+                <ErrMsg>
+                  <Error style={{ marginRight: '5px' }} /> {errors.address}
+                </ErrMsg>
+              )}
+            </ErrorWrap>
+          </InputWrap>
+          <InputWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText>
+                  Please specify if you have any medical problem (s) or physical
+                  handicap :
+                </FormText>
+                <FormTextField
+                  placeholder='Write here...'
+                  type='text'
+                  value={values.others}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id='others'
+                />
+              </InputSet>
+            </ErrorWrap>
+          </InputWrap>
+          <SubSet>
+            <SubmitBtn>
+              <span onClick={handleAdmissions}>Submit</span>
+            </SubmitBtn>
+          </SubSet>
+          {showCard && (
+            <CardBase>
+              <DisplayCard />
+            </CardBase>
+          )}
+          {isLoading && (
+            <CardBase>
+              <Loader />
+            </CardBase>
+          )}
+        </Wrap>
+      </form>
     </>
   )
 }

@@ -13,10 +13,14 @@ export const admissionSchema = yup.object().shape({
   fcnic: yup
     .string()
     .matches(cnicRegex, 'Please follow this CNIC format : 12345-1213112-7'),
-  fcell: yup.string().max(11, 'Mobile number must not exceed 11 digits'),
+  fcell: yup
+    .string()
+    .length(11, 'Mobile number must be exactly 11 digits e.g 03123456789'),
   femail: yup.string().email('Please follow this format : name@example.com'),
   foccupation: yup.string(),
   moccupation: yup.string(),
-  mcell: yup.string().max(11, 'Mobile number must not exceed 11 digits'),
+  mcell: yup
+    .string()
+    .length(11, 'Mobile number must be exactly 11 digits e.g 03123456789'),
   others: yup.string(),
 })

@@ -1,6 +1,9 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
-
+import { axiosInstance } from '../../config'
+import { loginStart, loginSuccess } from '../../redux/userSlice'
 const fadeIn = keyframes`
   0% {
     opacity: 0;
@@ -189,7 +192,7 @@ const SignUpLink = styled.a`
   }
 `
 const Wrap = styled.div`
-  height: calc(100vh - 50px);
+  height: 100vh;
   object-fit: cover;
   background-color: #0b0a45;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%231d2acc' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%232c23aa' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%230062f2' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%230051ca' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23007ee4' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%230068bd' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%230091b1' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23007691' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%2300a070' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23008158' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%2316aa34' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%230f8822' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
@@ -205,25 +208,55 @@ const Message = styled.p`
   font-weight: 300;
   font-style: italic;
 `
-export default function LoginCard({ title }) {
+export default function LoginCard() {
   const [setError, showSetError] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  // functions will be here
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    dispatch(loginStart())
+    try {
+      const res = await axiosInstance.post('/auth/signin', {
+        email,
+        password,
+      })
+      dispatch(loginSuccess(res.data))
+      navigate('/dashboard')
+    } catch (err) {
+      console.log(err)
+      showSetError(err)
+    }
+  }
   return (
     <Wrap>
       <LoginCardWrap>
-        <Title>{title}</Title>
+        <Title>Faculty Portal</Title>
         <form>
           <UserBox>
-            <Input required type='text' />
+            <Input
+              required
+              type='text'
+              onChange={(e) => setEmail(e.target.value.toLowerCase())}
+              autoComplete='off'
+            />
             <Label>Email</Label>
           </UserBox>
           <UserBox>
-            <Input required type='password' />
+            <Input
+              required
+              type='password'
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete='off'
+            />
             <Label>Password</Label>
           </UserBox>
           {setError && (
             <Message>Oops! Wrong password. Verify and retry...</Message>
           )}
-          <SubmitButton onClick={() => showSetError(true)}>
+          <SubmitButton type='submit' value='Login' onClick={handleLogin}>
             <span></span>
             <span></span>
             <span></span>

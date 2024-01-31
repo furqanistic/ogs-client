@@ -3,8 +3,8 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import express from 'express'
 import mongoose from 'mongoose'
-// import authRoute from './routes/auth.js'
 import admissionRoute from './routes/admission.js'
+import authRoute from './routes/auth.js'
 
 const app = express()
 dotenv.config()
@@ -17,7 +17,7 @@ app.use(
   })
 )
 mongoose.set('strictQuery', true)
-// app.use('/api/auth/', authRoute)
+app.use('/api/auth/', authRoute)
 app.use('/api/admission/', admissionRoute)
 
 const connect = () => {

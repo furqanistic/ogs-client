@@ -12,8 +12,7 @@ const Students = () => {
   return (
     <Layout>
       <Size>
-        <Topbar title='Student' />
-
+        <Topbar title='Students' />
         <StudentMain />
       </Size>
     </Layout>

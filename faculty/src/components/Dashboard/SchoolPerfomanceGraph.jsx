@@ -35,8 +35,8 @@ const SchoolPerformanceGraph = ({ data }) => {
       >
         <defs>
           <linearGradient id='performanceGradient' x1='0' y1='0' x2='0' y2='1'>
-            <stop offset='5%' stopColor='#66BB6A' stopOpacity={0.8} />
-            <stop offset='95%' stopColor='#42A5F5' stopOpacity={0.2} />
+            <stop offset='5%' stopColor='#0cff18' stopOpacity={0.8} />
+            <stop offset='95%' stopColor='#008cff' stopOpacity={0.2} />
           </linearGradient>
         </defs>
         <CartesianGrid strokeDasharray='3 3' />

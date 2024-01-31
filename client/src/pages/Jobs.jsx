@@ -50,7 +50,9 @@ const LoadShow = styled.div`
 `
 const Text = styled.p`
   font-size: 1rem;
-  color: red;
+  color: #ffffff;
+  background-color: red;
+  padding: 0.5rem 1rem;
 `
 const Jobs = () => {
   const [show, setShow] = useState(true)

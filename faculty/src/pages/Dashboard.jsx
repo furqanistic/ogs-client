@@ -16,7 +16,7 @@ const Dashboard = () => {
       <Size>
         <DashInfoBar />
         <DashSchoolPerfomance />
-        <DashCalander />
+        {/* <DashCalander /> */}
       </Size>
     </Layout>
   )

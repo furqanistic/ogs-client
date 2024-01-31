@@ -8,9 +8,11 @@ import {
   Person,
 } from '@mui/icons-material'
 import React, { useEffect, useMemo, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Logo from '../../img/logo.png'
+import { logout } from '../../redux/userSlice'
 
 const Bar = styled.div`
   color: #3aa933;
@@ -80,11 +82,17 @@ const Linker = styled(Link)`
 const Sidebar = () => {
   const location = useLocation()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [selectedItem, setSelectedItem] = useState()
 
   const items = useMemo(
     () => [
-      { name: 'Dashboard', icon: <Dashboard />, key: 'Dashboard', path: '/' },
+      {
+        name: 'Dashboard',
+        icon: <Dashboard />,
+        key: 'Dashboard',
+        path: '/dashboard',
+      },
       { name: 'Students', icon: <Face6 />, key: 'Students', path: '/students' },
       {
         name: 'Teachers',
@@ -111,18 +119,18 @@ const Sidebar = () => {
 
   let filteredItems = items
 
-  // useEffect(() => {
-  //   const currentKey = items.find(
-  //     (item) => item.path === location.pathname
-  //   )?.key
-  //   if (currentKey) {
-  //     setSelectedItem(currentKey)
-  //   }
-  // }, [location.pathname, items])
+  useEffect(() => {
+    const currentKey = items.find(
+      (item) => item.path === location.pathname
+    )?.key
+    if (currentKey) {
+      setSelectedItem(currentKey)
+    }
+  }, [location.pathname, items])
 
   const handleClick = () => {
-    // dispatch(logout())
-    // navigate('/login')
+    dispatch(logout())
+    navigate('/')
     console.log('hwhw')
   }
 
@@ -153,7 +161,6 @@ const Sidebar = () => {
             </Linker>
           ))}
           <Item
-            onClick={handleClick}
             style={{
               color: '#3aa933',
               border: '1px solid #3aa933',
@@ -163,7 +170,7 @@ const Sidebar = () => {
             <ItemIcon>
               <ExitToApp />
             </ItemIcon>
-            <ItemName>Logout</ItemName>
+            <ItemName onClick={handleClick}>Logout</ItemName>
           </Item>
         </ItemsWrapper>
       </Bar>

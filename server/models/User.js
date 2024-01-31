@@ -2,7 +2,11 @@ import mongoose from 'mongoose'
 
 const UserSchema = new mongoose.Schema(
   {
-    name: {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
       type: String,
       required: true,
     },
@@ -13,15 +17,18 @@ const UserSchema = new mongoose.Schema(
     },
     password: {
       type: String,
+      required: true,
+    },
+    role: {
+      type: String,
+      enum: ['Admin', 'Teacher', 'Management', 'Student'],
+      required: true,
     },
     notifications: {
       type: [String],
     },
-    isAdmin: {
-      type: Boolean,
-      default: false,
-    },
   },
   { timestamps: true }
 )
+
 export default mongoose.model('User', UserSchema)

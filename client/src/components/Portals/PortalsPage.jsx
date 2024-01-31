@@ -108,7 +108,10 @@ const PortalsPage = () => {
         </Details>
       </Container>
       <Slider>
-        <Link to='/student-portal/login' style={{ textDecoration: 'none' }}>
+        <Link
+          to='//faculty.theorionschool.net'
+          style={{ textDecoration: 'none' }}
+        >
           <Item>
             <ItemWrap>
               <IconSet>
@@ -118,7 +121,10 @@ const PortalsPage = () => {
             </ItemWrap>
           </Item>
         </Link>
-        <Link to='/faculty-portal/login' style={{ textDecoration: 'none' }}>
+        <Link
+          to='//faculty.theorionschool.net'
+          style={{ textDecoration: 'none' }}
+        >
           <Item bg='#160d8f'>
             <ItemWrap>
               <IconSet>
@@ -128,7 +134,10 @@ const PortalsPage = () => {
             </ItemWrap>
           </Item>
         </Link>
-        <Link to='/management-portal/login' style={{ textDecoration: 'none' }}>
+        <Link
+          to='//faculty.theorionschool.net'
+          style={{ textDecoration: 'none' }}
+        >
           <Item bg='#0446a3'>
             <ItemWrap>
               <IconSet>

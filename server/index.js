@@ -10,12 +10,7 @@ const app = express()
 dotenv.config()
 app.use(cookieParser())
 app.use(express.json())
-app.use(
-  cors({
-    origin: '*',
-    credentials: true,
-  })
-)
+app.use(cors())
 mongoose.set('strictQuery', true)
 app.use('/api/auth/', authRoute)
 app.use('/api/admission/', admissionRoute)

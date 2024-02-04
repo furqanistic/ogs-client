@@ -8,6 +8,7 @@ import Finance from './pages/Finance'
 import Login from './pages/Login'
 import Students from './pages/Students'
 import Teachers from './pages/Teacher'
+import AddTeacher from './pages/Teacher/AddTeacher'
 import User from './pages/User'
 const App = () => {
   return (
@@ -18,7 +19,10 @@ const App = () => {
           <Route path='dashboard' element={<Dashboard />} />
           <Route path='students' element={<Students />} />
           <Route path='users' element={<User />} />
-          <Route path='teachers' element={<Teachers />} />
+          <Route path='/teachers'>
+            <Route index element={<Teachers />} />
+            <Route path='add' element={<AddTeacher />} />
+          </Route>
           <Route path='events' element={<Event />} />
           <Route path='finances' element={<Finance />} />
           <Route path='chats' element={<Chat />} />

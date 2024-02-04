@@ -1,6 +1,7 @@
 // Import necessary dependencies from MUI
-import { Add, Email, LocalPhone, Search } from '@mui/icons-material'
+import { Add, Email, LocalPhone, MoreHoriz, Search } from '@mui/icons-material'
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { TeachersInfo } from '../../data.js'
 
@@ -46,7 +47,7 @@ const Btn = styled.button`
 `
 
 const CardSection = styled.section`
-  padding: 2rem 1rem;
+  padding: 2rem 0.5rem;
   display: flex;
   flex-wrap: wrap;
 `
@@ -89,6 +90,12 @@ const CardInfo = styled.div`
   justify-content: center;
   margin-top: 1rem;
 `
+const LoaderWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 150px);
+`
 
 const TeacherMain = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -118,10 +125,12 @@ const TeacherMain = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </BarWrap>
-        <Btn>
-          <Add />
-          New Teacher
-        </Btn>
+        <Link to='/teachers/add' style={{ textDecoration: 'none' }}>
+          <Btn>
+            <Add />
+            New Teacher
+          </Btn>
+        </Link>
       </Bar>
       <CardSection>
         {filteredTeachers.map((teacher, index) => (
@@ -145,6 +154,18 @@ const TeacherMain = () => {
                 onClick={() => handleCall(teacher.cell)}
               />
               <Email
+                style={{
+                  backgroundColor: '#3aa933',
+                  borderRadius: '50%',
+                  padding: '0.3rem',
+                  fontSize: '1.7rem',
+                  marginRight: '0.5rem',
+
+                  cursor: 'pointer',
+                }}
+                onClick={() => handleEmail(teacher.gmail)}
+              />
+              <MoreHoriz
                 style={{
                   backgroundColor: '#3aa933',
                   borderRadius: '50%',

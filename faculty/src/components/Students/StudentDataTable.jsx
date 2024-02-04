@@ -7,7 +7,7 @@ import { useQuery } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import * as XLSX from 'xlsx'
-
+import Loader from '../../Loader/Loader'
 import { axiosInstance } from '../../config'
 
 // styling of tables
@@ -28,6 +28,12 @@ const GreenBtn = styled.button`
   justify-content: center;
   align-items: center;
   font-weight: 500;
+`
+const LoaderWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 150px);
 `
 // tables code
 const columns = [
@@ -58,7 +64,11 @@ export default function StudentDataTable({ bookingDate }) {
   })
 
   if (status === 'loading') {
-    return <p>loading...</p>
+    return (
+      <LoaderWrap>
+        <Loader msg='Loading Admissions...' />
+      </LoaderWrap>
+    )
   }
 
   let counter = 1

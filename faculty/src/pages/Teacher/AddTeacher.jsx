@@ -238,7 +238,7 @@ const AddTeacher = () => {
     e.preventDefault()
     try {
       setIsLoading(true)
-      await axiosInstance.post('admission/submit/', {
+      await axiosInstance.post('teacher/submit/', {
         fname: values.fname,
         lname: values.lname,
         cell: values.cell,
@@ -274,10 +274,10 @@ const AddTeacher = () => {
     })
   return (
     <Layout>
-      <Topbar title='Teacher - Add New' />
+      <Topbar title='Teachers' />
       <form onSubmit={handleSubmit}>
         <Wrap id='booking-form-wrap'>
-          <FieldsHeading>Teachers Information : </FieldsHeading>
+          <FieldsHeading>Teachers Form</FieldsHeading>
           <InputWrap>
             <ErrorWrap>
               <InputSet>
@@ -323,10 +323,10 @@ const AddTeacher = () => {
               <InputSetTwo>
                 <FormText>Gender: </FormText>
                 <SelectCat
-                  name='grade'
+                  name='gender'
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  id='grade'
+                  id='gender'
                   value={values.gender}
                 >
                   {GenderOptions.map((category) => (

@@ -21,7 +21,7 @@ const Loader = ({ msg }) => {
           stroke-dashoffset='439.82'
           stroke-dasharray='439.82 439.82'
           stroke-width='2'
-          stroke='currentColor'
+          stroke='white'
           fill='none'
           r='70'
           class='pencil__stroke'

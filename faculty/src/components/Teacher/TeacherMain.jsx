@@ -1,9 +1,11 @@
 // Import necessary dependencies from MUI
 import { Add, Email, LocalPhone, MoreHoriz, Search } from '@mui/icons-material'
 import React, { useState } from 'react'
+import { useQuery } from 'react-query'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { TeachersInfo } from '../../data.js'
+import Loader from '../../Loader/Loader.jsx'
+import { axiosInstance } from '../../config.js'
 
 const Wrap = styled.div`
   color: white;
@@ -29,13 +31,15 @@ const SearchBox = styled.input`
   font-size: 1rem;
   border: none;
   outline: none;
+  width: 100%;
 `
 
 const Btn = styled.button`
   font-size: 1rem;
   background-color: #3aa933;
   border: none;
-  color: white;
+  color: #ffffff;
+  outline: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,6 +66,7 @@ const Card = styled.div`
   flex-direction: column;
   border-radius: 20px;
   margin: 1rem 2rem;
+  padding: 0.5rem;
 `
 
 const CardName = styled.p`
@@ -69,6 +74,7 @@ const CardName = styled.p`
   color: #010133;
   font-weight: 700;
   margin: 1rem 0;
+  text-transform: capitalize;
 `
 
 const CardDep = styled.p`
@@ -97,13 +103,47 @@ const LoaderWrap = styled.div`
   height: calc(100vh - 150px);
 `
 
+const getCardImgUrl = (gender) => {
+  const baseUrlMale =
+    'https://static.vecteezy.com/system/resources/previews/024/183/502/original/male-avatar-portrait-of-a-young-man-with-a-beard-illustration-of-male-character-in-modern-color-style-vector.jpg'
+  const baseUrlFemale =
+    'https://static.vecteezy.com/system/resources/previews/002/002/257/non_2x/beautiful-woman-avatar-character-icon-free-vector.jpg'
+
+  // Convert gender to lowercase for case-insensitive comparison
+  const lowercaseGender = gender.toLowerCase()
+
+  if (lowercaseGender === 'male') {
+    return baseUrlMale
+  } else if (lowercaseGender === 'female') {
+    return baseUrlFemale
+  } else {
+    // Default URL or handle other cases if needed
+    return baseUrlMale
+  }
+}
+
 const TeacherMain = () => {
   const [searchTerm, setSearchTerm] = useState('')
 
-  const filteredTeachers = TeachersInfo.filter(
+  // get query for all teachers
+  const { data, status } = useQuery('all-teachers', async () => {
+    const res = await axiosInstance.get(`/teacher`)
+    return res.data
+  })
+
+  if (status === 'loading') {
+    return (
+      <LoaderWrap>
+        <Loader msg='Loading Teachers Data...' />
+      </LoaderWrap>
+    )
+  }
+
+  const filteredTeachers = data.filter(
     (teacher) =>
       teacher.fname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      teacher.lname.toLowerCase().includes(searchTerm.toLowerCase())
+      teacher.lname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      teacher.department.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   const handleCall = (phoneNumber) => {
@@ -120,7 +160,7 @@ const TeacherMain = () => {
         <BarWrap>
           <Search style={{ margin: '0.3rem' }} />
           <SearchBox
-            placeholder='Search here...'
+            placeholder='Search Name/Department...'
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -128,7 +168,7 @@ const TeacherMain = () => {
         <Link to='/teachers/add' style={{ textDecoration: 'none' }}>
           <Btn>
             <Add />
-            New Teacher
+            Add Teacher
           </Btn>
         </Link>
       </Bar>
@@ -136,12 +176,12 @@ const TeacherMain = () => {
         {filteredTeachers.map((teacher, index) => (
           <Card key={index}>
             <CardImg
-              src={teacher.profileimg}
+              src={getCardImgUrl(teacher.gender)}
               alt={`${teacher.fname} ${teacher.lname}`}
             />
             <CardName>{`${teacher.fname} ${teacher.lname}`}</CardName>
             <CardDep>{teacher.department}</CardDep>
-            <CardInfo>
+            <CardInfo title={`${teacher.cell}`}>
               <LocalPhone
                 style={{
                   backgroundColor: '#3aa933',
@@ -160,21 +200,21 @@ const TeacherMain = () => {
                   padding: '0.3rem',
                   fontSize: '1.7rem',
                   marginRight: '0.5rem',
-
                   cursor: 'pointer',
                 }}
                 onClick={() => handleEmail(teacher.gmail)}
               />
-              <MoreHoriz
-                style={{
-                  backgroundColor: '#3aa933',
-                  borderRadius: '50%',
-                  padding: '0.3rem',
-                  fontSize: '1.7rem',
-                  cursor: 'pointer',
-                }}
-                onClick={() => handleEmail(teacher.teachingEmail)}
-              />
+              <Link to={`view/${teacher._id}`} style={{ color: 'white' }}>
+                <MoreHoriz
+                  style={{
+                    backgroundColor: '#3aa933',
+                    borderRadius: '50%',
+                    padding: '0.3rem',
+                    fontSize: '1.7rem',
+                    cursor: 'pointer',
+                  }}
+                />
+              </Link>
             </CardInfo>
           </Card>
         ))}

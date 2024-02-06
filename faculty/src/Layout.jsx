@@ -17,14 +17,34 @@ const Right = styled.div`
 const Left = styled.div`
   width: 15em;
 `
+const Footer = styled.div`
+  font-size: 0.8rem;
+  background-color: #043301;
+  color: white;
+  text-align: center;
+  padding: 0.2rem;
+`
+const Links = styled.a`
+  color: #3aa933;
+  text-decoration: none;
+`
 const Layout = ({ children }) => {
   return (
-    <Back>
-      <Left>
-        <Sidebar />
-      </Left>
-      <Right>{children}</Right>
-    </Back>
+    <>
+      <Back>
+        <Left>
+          <Sidebar />
+        </Left>
+        <Right>{children}</Right>
+      </Back>
+      <Footer>
+        {' '}
+        Copyrights © All Rights Reserved 2024 - Proudly created by{' '}
+        <Links href='https://www.furqan.cc' alt='_blank'>
+          FURQAN
+        </Links>
+      </Footer>
+    </>
   )
 }
 

@@ -12,7 +12,7 @@ const Bar = styled.div`
 
 const Title = styled.p`
   font-size: 2.5rem;
-  font-weight: 700;
+  font-weight: 300;
   letter-spacing: 2px;
   color: #3aa933;
   text-transform: uppercase;

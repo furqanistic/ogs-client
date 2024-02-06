@@ -12,7 +12,7 @@ const Teacher = () => {
   return (
     <Layout>
       <Size>
-        <Topbar title='Teacher' />
+        <Topbar title='Teachers' />
         <TeacherMain />
       </Size>
     </Layout>

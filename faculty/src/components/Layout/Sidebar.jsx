@@ -65,7 +65,7 @@ const Item = styled.div`
 
 const ItemName = styled.p`
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 300;
 `
 
 const ItemIcon = styled.span`

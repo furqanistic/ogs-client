@@ -31,8 +31,6 @@ const Box = styled.div`
   }
 `
 const NewsBox = styled.div`
-  border: 1px solid #1a25c6a8;
-  background-color: #060275;
   height: 500px;
   width: 40vw;
   padding: 0.5rem;
@@ -43,13 +41,14 @@ const NewsBox = styled.div`
 `
 const NewsOne = styled.div`
   margin: 0.4rem;
-  border-radius: 10px;
-  /* border: 2px solid white; */
-  padding: 0.5rem;
+  border-radius: 20px;
+  /* border: 0.8px dashed white; */
+  padding: 0.8rem;
   font-size: 0.8rem;
-  background-color: #202ae2cb;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #0b0a45;
   margin: 1rem;
+  font-weight: 300;
   transition: all 0.5s ease-in-out;
 `
 const Heading = styled.h1`
@@ -61,7 +60,6 @@ const Heading = styled.h1`
   justify-content: center;
   align-items: center;
   color: #ffffff;
-  background-color: #2420ee;
 `
 const Parent = styled.div`
   padding: 1rem;
@@ -125,11 +123,11 @@ const Gallery = () => {
         <Left>
           <Wrapper>
             <Box>
-              <Heading>⬇️ Updates ⬇️</Heading>
+              <Heading>What's New ? </Heading>
             </Box>
             <NewsBox>
               <NewsOne>
-                ● We are currently seeking passionate and dedicated educators to
+                We are currently seeking passionate and dedicated educators to
                 join our team. If you're enthusiastic about shaping young minds
                 and fostering a love for learning, we invite you to explore
                 teaching positions at our institution.Join us in creating a
@@ -137,14 +135,14 @@ const Gallery = () => {
                 commitment to excellence in teaching.
               </NewsOne>
               <NewsOne>
-                ● Orion is excited to announce open management positions within
+                Orion is excited to announce open management positions within
                 our institution. If you're a dynamic and motivated individual
                 with a passion for education and a drive to make a positive
                 impact, we encourage you to explore management roles at our
                 school.
               </NewsOne>
               <NewsOne>
-                ● Safety is our priority, and we're looking for dedicated
+                Safety is our priority, and we're looking for dedicated
                 individuals to join our security team at Orion. If you are
                 committed to ensuring a secure and welcoming environment for our
                 students, staff, and visitors, we encourage you to explore the
@@ -152,7 +150,7 @@ const Gallery = () => {
                 commitment to safety and security.
               </NewsOne>
               <NewsOne>
-                ● We're thrilled to announce that admissions for the upcoming
+                We're thrilled to announce that admissions for the upcoming
                 academic year at Orion will be opening soon. We're dedicated to
                 providing a high-quality education and welcoming new students
                 who are eager to embark on a journey of learning, growth, and

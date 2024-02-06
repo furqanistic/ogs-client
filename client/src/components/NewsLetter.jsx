@@ -70,7 +70,7 @@ const Input = styled.input`
   outline: none;
   width: 500px;
   margin: 0.5rem;
-  border-radius: 30px;
+  border-radius: 10px;
   color: #130669;
   background-color: #f3f3f3;
   ::placeholder {

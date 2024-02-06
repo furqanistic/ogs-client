@@ -96,6 +96,7 @@ const IconSet = styled.div`
 `
 const IconText = styled.p`
   font-size: 1.3rem;
+  font-weight: 300;
 `
 const PortalsPage = () => {
   return (

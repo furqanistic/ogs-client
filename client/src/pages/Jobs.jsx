@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar'
 
 const Container = styled.div`
   display: flex;
-  margin-top: 80px;
+  margin-top: 60px;
 `
 const Image = styled.div`
   width: 100%;

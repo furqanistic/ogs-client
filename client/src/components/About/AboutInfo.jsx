@@ -80,7 +80,7 @@ const Para = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 400;
+  font-weight: 200;
   padding: 1rem;
   text-align: center;
   @media (max-width: 800px) {

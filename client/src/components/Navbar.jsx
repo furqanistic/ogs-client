@@ -62,32 +62,8 @@ const Navbar = () => {
 export default Navbar
 
 const Container = styled.div`
-  height: ${({ isOpen }) => (isOpen ? '380px' : '60px')};
+  height: ${({ isOpen }) => (isOpen ? '350px' : '60px')};
   transition: height 0.3s ease-in;
-`
-const LogoBox = styled.div`
-  max-height: 130px;
-  width: 100%;
-  flex: 4;
-  display: flex;
-  background-color: #0b0a45;
-`
-const LogoLeft = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-const LogoRight = styled.div`
-  flex: 3;
-`
-const LogoIcon = styled.img`
-  object-fit: contain;
-  width: 100px;
-  background-position: center;
-  background-size: cover;
-  filter: drop-shadow(0 0 0.75rem white);
-  /* background-color: red; */
 `
 
 const Menu = styled.div`
@@ -112,7 +88,7 @@ const MenuLink = styled.a`
   color: #f8f8f8;
   transition: all 0.3s ease-in;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 300;
   &:hover {
     background-color: white;
     color: #0b0a45;

@@ -9,6 +9,7 @@ const End = styled.div`
   text-align: center;
   color: white;
   font-size: 0.9rem;
+  font-weight: 300;
   @media (max-width: 570px) {
     font-size: 0.7rem;
   }

@@ -1,10 +1,10 @@
 import {
-  AccountBalance,
   Chat,
   CoPresent,
   Dashboard,
   ExitToApp,
   Face6,
+  GppGood,
   Person,
 } from '@mui/icons-material'
 import React, { useEffect, useMemo, useState } from 'react'
@@ -101,10 +101,10 @@ const Sidebar = () => {
         path: '/teachers',
       },
       {
-        name: 'Finance',
-        icon: <AccountBalance />,
-        key: 'Finance',
-        path: '/finances',
+        name: 'Publish',
+        icon: <GppGood />,
+        key: 'publish',
+        path: '/publish',
       },
       { name: 'Users', icon: <Person />, key: 'Users', path: '/users' },
       {

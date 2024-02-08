@@ -5,24 +5,19 @@ import Activity from './pages/Activity'
 import Chat from './pages/Chat'
 import Dashboard from './pages/Dashboard'
 import Event from './pages/Event'
-import Finance from './pages/Finance'
 import Login from './pages/Login'
+import Publish from './pages/Publish'
 import Students from './pages/Students'
+import StudentAdmissions from './pages/Students/StudentAdmissions'
+import ViewStudent from './pages/Students/ViewStudent'
 import Teachers from './pages/Teacher'
 import AddTeacher from './pages/Teacher/AddTeacher'
+import EditTeacher from './pages/Teacher/EditTeacher'
 import ViewTeacher from './pages/Teacher/ViewTeacher'
 import User from './pages/User'
 
 const App = () => {
   const { currentUser } = useSelector((state) => state.user)
-
-  const PrivateRoute = ({ element: Element, path }) => {
-    return currentUser ? (
-      <Route path={path} element={<Element />} />
-    ) : (
-      <Navigate to='/faculty-portal/login' />
-    )
-  }
 
   return (
     <BrowserRouter>
@@ -39,15 +34,20 @@ const App = () => {
         {currentUser && (
           <>
             <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/students' element={<Students />} />
+            <Route path='/students'>
+              <Route index element={<Students />} />
+              <Route path='all-admissions' element={<StudentAdmissions />} />
+              <Route path='all-admissions/view/:id' element={<ViewStudent />} />
+            </Route>
             <Route path='/users' element={<User />} />
             <Route path='/teachers'>
               <Route index element={<Teachers />} />
               <Route path='add' element={<AddTeacher />} />
               <Route path='view/:id' element={<ViewTeacher />} />
+              <Route path='edit/:id' element={<EditTeacher />} />
             </Route>
             <Route path='/events' element={<Event />} />
-            <Route path='/finances' element={<Finance />} />
+            <Route path='/publish' element={<Publish />} />
             <Route path='/chats' element={<Chat />} />
             <Route path='/activity' element={<Activity />} />
           </>

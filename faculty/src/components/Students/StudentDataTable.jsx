@@ -75,6 +75,7 @@ export default function StudentDataTable({ bookingDate }) {
 
   const rows = data.map((item) => ({
     id: counter++,
+    _id: item._id,
     name: item.name,
     fname: item.fname,
     dob: formatDate(item.dob),
@@ -129,7 +130,7 @@ export default function StudentDataTable({ bookingDate }) {
         rows={rows}
         columns={columns}
         pageSize={5}
-        onRowClick={(param) => navigate(`/view/${param.row._id}`)}
+        onRowClick={(param) => navigate(`view/${param.row._id}`)}
         style={{
           borderRadius: '10px',
           fontSize: '0.9rem',

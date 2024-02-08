@@ -162,7 +162,7 @@ const DisplayCard = ({ info }) => {
         <Content>
           <Title> Form Submitted, Cheers!</Title>
           <Message>
-            Account created for {info.fname}! 🎉<br></br>
+            Account is created/updated! 🎉<br></br>
             <br></br>Welcome to Orion! Start exploring and enjoy your journey
             with us!
           </Message>

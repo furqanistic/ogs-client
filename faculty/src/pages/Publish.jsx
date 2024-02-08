@@ -20,11 +20,11 @@ const Wrap = styled.div`
   height: 80vh;
   width: 100%;
 `
-const Finance = () => {
+const Publish = () => {
   return (
     <Layout>
       <Size>
-        <Topbar title='Finance' />
+        <Topbar title='Publish' />
         <Wrap>
           <Notice>You are not allowed to access this page 😓</Notice>
         </Wrap>
@@ -33,4 +33,4 @@ const Finance = () => {
   )
 }
 
-export default Finance
+export default Publish

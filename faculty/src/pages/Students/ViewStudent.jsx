@@ -149,18 +149,23 @@ const CardBase = styled.div`
   z-index: 999; /* Ensure it's above other content */
 `
 
-const ViewTeacher = () => {
+const ViewStudent = () => {
   // all the states here
   const params = useParams()
   const [isLoading, setIsLoading] = useState(true)
+  const [name, setName] = useState('')
+  const [prevSchool, setPrevSchool] = useState('')
+  const [dob, setDob] = useState('')
+  const [grade, setGrade] = useState('')
   const [fname, setFname] = useState('')
-  const [lname, setLname] = useState('')
-  const [gender, setGender] = useState('')
-  const [cell, setCell] = useState('')
-  const [scEmail, setEmail] = useState('')
-  const [gmail, setGmail] = useState('')
+  const [fcnic, setFcninc] = useState('')
+  const [femail, setFemail] = useState('')
+  const [fcell, setFcell] = useState('')
+  const [foccupation, setFoccupation] = useState('')
+  const [mname, setMname] = useState('')
+  const [moccupation, setMoccupation] = useState('')
+  const [mcell, setMcell] = useState('')
   const [address, setAddress] = useState('')
-  const [department, setDepartment] = useState('')
   const [others, setOthers] = useState('')
   const navigate = useNavigate()
 
@@ -168,25 +173,38 @@ const ViewTeacher = () => {
     e.preventDefault()
     navigate(-1)
   }
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString)
+    const day = date.getDate().toString().padStart(2, '0')
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const year = date.getFullYear()
+    return `${day}-${month}-${year}`
+  }
   // get request data
   const { data, status } = useQuery(
     'specific-teacher',
     async () => {
-      // setIsLoading(true)
-      const res = await axiosInstance.get(`/teacher/${params.id}`)
+      const res = await axiosInstance.get(`/admission/${params.id}`)
       return res.data
     },
     {
       onSuccess: (data) => {
+        setName(data.name || '')
+        setPrevSchool(data.prevSchool || '')
+        setDob(data.dob || '')
+        setGrade(data.grade || '')
         setFname(data.fname || '')
-        setLname(data.lname || '')
-        setGender(data.gender || '')
-        setCell(data.cell || '')
-        setEmail(data.scEmail || '')
-        setGmail(data.gmail || '')
+        setFcninc(data.fcnic || '')
+        setFemail(data.femail || '')
+        setFcell(data.fcell || '')
+        setFoccupation(data.foccupation || '')
+        setMname(data.mname || '')
+        setMoccupation(data.moccupation || '')
+        setMoccupation(data.moccupation || '')
+        setMcell(data.mcell || '')
         setAddress(data.address || '')
-        setDepartment(data.department || '')
-        setOthers(data.others || '')
+        setOthers(data.fname || '')
         setIsLoading(false)
       },
     }
@@ -195,8 +213,8 @@ const ViewTeacher = () => {
   const handleDelete = async (e) => {
     e.preventDefault()
     try {
-      await axiosInstance.delete(`/teacher/${params.id}`)
-      navigate('/teachers')
+      await axiosInstance.delete(`/admission/${params.id}`)
+      navigate('/students/all-admissions')
     } catch (err) {
       console.log(err)
     }
@@ -207,11 +225,43 @@ const ViewTeacher = () => {
       <Topbar title='Teachers' />
       <form>
         <Wrap id='booking-form-wrap'>
-          <FieldsHeading>View Teachers Information : </FieldsHeading>
+          <FieldsHeading>View Student Information : </FieldsHeading>
           <InputWrap>
             <ErrorWrap>
               <InputSet>
-                <FormText>First Name: </FormText>
+                <FormText>Student's Name: </FormText>
+                <FormContent>{name}</FormContent>
+              </InputSet>
+            </ErrorWrap>
+          </InputWrap>
+          <InputWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText>Previous School:: </FormText>
+                <FormContent>{prevSchool}</FormContent>
+              </InputSet>
+            </ErrorWrap>
+          </InputWrap>
+          <InputWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText>Class: </FormText>
+                <FormContent>{grade}</FormContent>
+              </InputSet>
+            </ErrorWrap>
+          </InputWrap>
+          <InputWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText>DOB: </FormText>
+                <FormContent>{formatDate(dob)}</FormContent>
+              </InputSet>
+            </ErrorWrap>
+          </InputWrap>
+          <InputWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText>Father's Name: </FormText>
                 <FormContent>{fname}</FormContent>
               </InputSet>
             </ErrorWrap>
@@ -219,40 +269,56 @@ const ViewTeacher = () => {
           <InputWrap>
             <ErrorWrap>
               <InputSet>
-                <FormText>Last Name: </FormText>
-                <FormContent>{lname}</FormContent>
+                <FormText>Father's CNIC: </FormText>
+                <FormContent>{fcnic}</FormContent>
               </InputSet>
             </ErrorWrap>
           </InputWrap>
           <InputWrap>
             <ErrorWrap>
               <InputSet>
-                <FormText>Gender: </FormText>
-                <FormContent>{gender}</FormContent>
+                <FormText>Father's Cell#: </FormText>
+                <FormContent>{fcell}</FormContent>
               </InputSet>
             </ErrorWrap>
           </InputWrap>
           <InputWrap>
             <ErrorWrap>
               <InputSet>
-                <FormText>Cell#: </FormText>
-                <FormContent>{cell}</FormContent>
+                <FormText>Father's Email: </FormText>
+                <FormContent>{femail}</FormContent>
               </InputSet>
             </ErrorWrap>
           </InputWrap>
           <InputWrap>
             <ErrorWrap>
               <InputSet>
-                <FormText>School-mail: </FormText>
-                <FormContent>{scEmail}</FormContent>
+                <FormText>Father's Occupation: </FormText>
+                <FormContent>{foccupation}</FormContent>
               </InputSet>
             </ErrorWrap>
           </InputWrap>
           <InputWrap>
             <ErrorWrap>
               <InputSet>
-                <FormText>E-mail: </FormText>
-                <FormContent>{gmail}</FormContent>
+                <FormText>Mother's Name: </FormText>
+                <FormContent>{mname}</FormContent>
+              </InputSet>
+            </ErrorWrap>
+          </InputWrap>
+          <InputWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText>Mother's Occupation: </FormText>
+                <FormContent>{moccupation}</FormContent>
+              </InputSet>
+            </ErrorWrap>
+          </InputWrap>
+          <InputWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText>Mother's Cell#: </FormText>
+                <FormContent>{mcell}</FormContent>
               </InputSet>
             </ErrorWrap>
           </InputWrap>
@@ -261,14 +327,6 @@ const ViewTeacher = () => {
               <InputSet>
                 <FormText>Address: </FormText>
                 <FormContent>{address}</FormContent>
-              </InputSet>
-            </ErrorWrap>
-          </InputWrap>
-          <InputWrap>
-            <ErrorWrap>
-              <InputSet>
-                <FormText>Department: </FormText>
-                <FormContent>{department}</FormContent>
               </InputSet>
             </ErrorWrap>
           </InputWrap>
@@ -300,7 +358,7 @@ const ViewTeacher = () => {
 
           {isLoading && (
             <CardBase>
-              <Loader msg='Loading Teacher Profile Card...' />
+              <Loader msg='Loading Student Profile Card...' />
             </CardBase>
           )}
         </Wrap>
@@ -309,4 +367,4 @@ const ViewTeacher = () => {
   )
 }
 
-export default ViewTeacher
+export default ViewStudent

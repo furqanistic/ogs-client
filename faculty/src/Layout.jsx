@@ -25,7 +25,7 @@ const Footer = styled.div`
   padding: 0.2rem;
 `
 const Links = styled.a`
-  color: #3aa933;
+  color: #22ff00;
   text-decoration: none;
 `
 const Layout = ({ children }) => {

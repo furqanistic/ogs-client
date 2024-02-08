@@ -8,6 +8,7 @@ import Event from './pages/Event'
 import Login from './pages/Login'
 import Publish from './pages/Publish'
 import Students from './pages/Students'
+import EditStudent from './pages/Students/EditStudent'
 import StudentAdmissions from './pages/Students/StudentAdmissions'
 import ViewStudent from './pages/Students/ViewStudent'
 import Teachers from './pages/Teacher'
@@ -36,8 +37,11 @@ const App = () => {
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/students'>
               <Route index element={<Students />} />
-              <Route path='all-admissions' element={<StudentAdmissions />} />
-              <Route path='all-admissions/view/:id' element={<ViewStudent />} />
+              <Route path='all-admissions'>
+                <Route index element={<StudentAdmissions />} />
+                <Route path='view/:id' element={<ViewStudent />} />
+                <Route path='edit/:id' element={<EditStudent />} />
+              </Route>
             </Route>
             <Route path='/users' element={<User />} />
             <Route path='/teachers'>

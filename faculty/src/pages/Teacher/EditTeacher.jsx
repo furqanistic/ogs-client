@@ -184,16 +184,7 @@ const CardBase = styled.div`
   align-items: center;
   z-index: 999; /* Ensure it's above other content */
 `
-const ErrMsg = styled.p`
-  font-size: 0.8rem;
-  color: #ff3b3b;
-  padding: 0.5rem;
-  text-align: start;
-  margin-left: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
+
 const EditTeacher = () => {
   // all the states here
   const [showCard, setShowCard] = useState('')

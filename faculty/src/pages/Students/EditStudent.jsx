@@ -1,21 +1,20 @@
-import {
-  Delete,
-  Edit,
-  KeyboardBackspace,
-  Visibility,
-} from '@mui/icons-material'
+import { Error } from '@mui/icons-material'
+import { useFormik } from 'formik'
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import DisplayCard from '../../DisplayCard'
 import Layout from '../../Layout'
 import Loader from '../../Loader/Loader'
+import { TeachFormScehma } from '../../Schemas'
 import Topbar from '../../components/Layout/Topbar'
-import { axiosInstance } from '../../config.js'
+import { axiosInstance } from '../../config'
+
 const Wrap = styled.div`
   max-width: 1200px;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #133b92;
+  color: white;
   background-size: cover;
   margin: 4rem auto;
   border-radius: 5px;
@@ -54,20 +53,6 @@ const FormText = styled.span`
   }
 `
 
-const FormContent = styled.p`
-  width: 100%;
-  border: 1px solid #000000;
-  padding: 10px 0;
-  font-size: 16px;
-  min-height: 36px;
-  color: #000000;
-  outline: none;
-  font-weight: 300;
-  background: transparent;
-  padding: 0.5rem;
-  border-radius: 10px;
-`
-
 const InputSet = styled.div`
   display: flex;
   justify-content: space-around;
@@ -84,14 +69,36 @@ const ErrorWrap = styled.div`
   justify-content: center;
   width: 100%;
 `
+const InputSetTwo = styled.div`
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  margin-left: 20px;
+  padding: 1.5rem 0;
+  width: 98%;
+  @media (max-width: 900px) {
+    width: 95%;
+    margin-left: 5px;
+  }
+`
 
+const FormTextField = styled.textarea`
+  font-size: 1rem;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 4px;
+  outline: none;
+  resize: none;
+`
 const FieldsHeading = styled.p`
   font-size: 1.5rem;
-  text-align: center;
-  font-weight: 800;
+  text-align: start;
+  font-weight: 500;
   text-transform: uppercase;
+  text-decoration: underline;
   font-style: italic;
-  color: #000000;
+  color: #ffffff;
   padding: 0.5rem;
   @media (max-width: 900px) {
     font-size: 1rem;
@@ -103,9 +110,30 @@ const SubSet = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 1.5rem;
-  flex-wrap: wrap;
 `
 
+const SelectCat = styled.select`
+  width: 90%;
+  border-radius: 4px;
+  border: 1px solid #ffffff;
+  color: white;
+  background-color: rgba(255, 255, 255, 0);
+  outline: none;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  @media (max-width: 900px) {
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.9rem;
+  }
+`
+const SelectOpt = styled.option`
+  /* width: 50%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 const SubmitBtn = styled.button`
   outline: none;
   cursor: pointer;
@@ -115,26 +143,14 @@ const SubmitBtn = styled.button`
   font-family: inherit;
   font-size: inherit;
   position: relative;
-  justify-content: center;
-  align-items: center;
-  display: flex;
+  display: inline-block;
   letter-spacing: 0.05rem;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 17px;
-  border-radius: 300px;
-  color: white;
-  margin-left: 5px;
-  margin-top: 5px;
-  min-width: 150px;
-  &.green {
-    background-color: green;
-  }
-  &.blue {
-    background-color: blue;
-  }
-  &.red {
-    background-color: red;
-  }
+  border-radius: 500px;
+  overflow: hidden;
+  background: green;
+  color: #ffffff;
 `
 const CardBase = styled.div`
   position: fixed;
@@ -142,16 +158,37 @@ const CardBase = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 7, 35, 0.829); /* Adjust the opacity as needed */
+  background-color: rgba(0, 0, 0, 0.73); /* Adjust the opacity as needed */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 999; /* Ensure it's above other content */
 `
 
-const ViewStudent = () => {
+const FormInput = styled.input`
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+  border-radius: 0;
+  -webkit-appearance: none;
+  &:focus {
+    border: 1px solid #fff;
+    border-radius: 10px;
+    padding-left: 10px;
+  }
+  @media (max-width: 900px) {
+    font-size: 12px;
+  }
+`
+const EditStudent = () => {
   // all the states here
-  const params = useParams()
+  const [showCard, setShowCard] = useState('')
   const [isLoading, setIsLoading] = useState(true)
   const [name, setName] = useState('')
   const [prevSchool, setPrevSchool] = useState('')
@@ -167,24 +204,40 @@ const ViewStudent = () => {
   const [mcell, setMcell] = useState('')
   const [address, setAddress] = useState('')
   const [others, setOthers] = useState('')
+  const params = useParams()
   const navigate = useNavigate()
-
-  const goBack = (e) => {
-    e.preventDefault()
-    navigate(-1)
-  }
+  // all funcs
 
   const formatDate = (dateString) => {
     const date = new Date(dateString)
+    if (isNaN(date.getTime())) {
+      // If the date is not valid, return an empty string or handle it accordingly
+      return ''
+    }
     const day = date.getDate().toString().padStart(2, '0')
     const month = (date.getMonth() + 1).toString().padStart(2, '0')
     const year = date.getFullYear()
-    return `${day}-${month}-${year}`
+    return `${year}-${month}-${day}`
   }
-  // get request data
+
+  const GradeOptions = [
+    'Choose',
+    'PG',
+    'Nursery',
+    'KG',
+    'Grade 1',
+    'Grade 2',
+    'Grade 3',
+    'Grade 4',
+    'Grade 5',
+    'Grade 6',
+    'Grade 7',
+  ]
+
   const { data, status } = useQuery(
-    'specific-teacher',
+    'edit-admission',
     async () => {
+      // setIsLoading(true)
       const res = await axiosInstance.get(`/admission/${params.id}`)
       return res.data
     },
@@ -192,7 +245,7 @@ const ViewStudent = () => {
       onSuccess: (data) => {
         setName(data.name || '')
         setPrevSchool(data.prevSchool || '')
-        setDob(data.dob || '')
+        setDob(formatDate(data.dob) || '')
         setGrade(data.grade || '')
         setFname(data.fname || '')
         setFcninc(data.fcnic || '')
@@ -209,20 +262,40 @@ const ViewStudent = () => {
       },
     }
   )
+  // all the functions here
 
-  const handleDelete = async (e) => {
+  const handleStudent = async (e) => {
     e.preventDefault()
     try {
-      await axiosInstance.delete(`/admission/${params.id}`)
-      navigate('/students/all-admissions')
+      setIsLoading(true)
+      await axiosInstance.put(`admission/${params.id}`, {
+        name,
+        prevSchool,
+        dob,
+        grade,
+        fname,
+        fcnic,
+        fcell,
+        femail,
+        foccupation,
+        mname,
+        moccupation,
+        mcell,
+        address,
+        others,
+      })
+      setShowCard(true)
+      navigate(`/students/all-admissions/view/${params.id}`)
     } catch (err) {
       console.log(err)
+    } finally {
+      setIsLoading(false)
     }
   }
 
   return (
     <Layout>
-      <Topbar title='Teachers' />
+      <Topbar title='Student' />
       <form>
         <Wrap id='booking-form-wrap'>
           <FieldsHeading>View Student Information : </FieldsHeading>
@@ -230,7 +303,12 @@ const ViewStudent = () => {
             <ErrorWrap>
               <InputSet>
                 <FormText>Student's Name: </FormText>
-                <FormContent>{name}</FormContent>
+                <FormInput
+                  placeholder='Enter First Name...'
+                  type='text'
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </InputSet>
             </ErrorWrap>
           </InputWrap>
@@ -238,23 +316,38 @@ const ViewStudent = () => {
             <ErrorWrap>
               <InputSet>
                 <FormText>Previous School:: </FormText>
-                <FormContent>{prevSchool}</FormContent>
+                <FormInput
+                  placeholder='Enter Previous School...'
+                  type='text'
+                  value={prevSchool}
+                  onChange={(e) => setPrevSchool(e.target.value)}
+                />
               </InputSet>
             </ErrorWrap>
           </InputWrap>
-          <InputWrap>
-            <ErrorWrap>
-              <InputSet>
-                <FormText>Class: </FormText>
-                <FormContent>{grade}</FormContent>
-              </InputSet>
-            </ErrorWrap>
-          </InputWrap>
+          <InputSetTwo>
+            <FormText>Class: </FormText>
+            <SelectCat
+              name='grade'
+              onChange={(e) => setGrade(e.target.value)}
+              value={grade}
+            >
+              {GradeOptions.map((category) => (
+                <SelectOpt key={category} value={category}>
+                  {category}
+                </SelectOpt>
+              ))}
+            </SelectCat>
+          </InputSetTwo>
           <InputWrap>
             <ErrorWrap>
               <InputSet>
                 <FormText>DOB: </FormText>
-                <FormContent>{formatDate(dob)}</FormContent>
+                <FormInput
+                  type='date'
+                  value={formatDate(dob)}
+                  onChange={(e) => setDob(e.target.value)}
+                />
               </InputSet>
             </ErrorWrap>
           </InputWrap>
@@ -262,7 +355,12 @@ const ViewStudent = () => {
             <ErrorWrap>
               <InputSet>
                 <FormText>Father's Name: </FormText>
-                <FormContent>{fname}</FormContent>
+                <FormInput
+                  placeholder='Enter Father Name...'
+                  type='text'
+                  value={fname}
+                  onChange={(e) => setFname(e.target.value)}
+                />
               </InputSet>
             </ErrorWrap>
           </InputWrap>
@@ -270,7 +368,12 @@ const ViewStudent = () => {
             <ErrorWrap>
               <InputSet>
                 <FormText>Father's CNIC: </FormText>
-                <FormContent>{fcnic}</FormContent>
+                <FormInput
+                  placeholder='Enter CNIC ...'
+                  type='text'
+                  value={fcnic}
+                  onChange={(e) => setFcninc(e.target.value)}
+                />
               </InputSet>
             </ErrorWrap>
           </InputWrap>
@@ -278,7 +381,12 @@ const ViewStudent = () => {
             <ErrorWrap>
               <InputSet>
                 <FormText>Father's Cell#: </FormText>
-                <FormContent>{fcell}</FormContent>
+                <FormInput
+                  placeholder='Enter Cell#...'
+                  type='text'
+                  value={fcell}
+                  onChange={(e) => setFcell(e.target.value)}
+                />
               </InputSet>
             </ErrorWrap>
           </InputWrap>
@@ -286,7 +394,12 @@ const ViewStudent = () => {
             <ErrorWrap>
               <InputSet>
                 <FormText>Father's Email: </FormText>
-                <FormContent>{femail}</FormContent>
+                <FormInput
+                  placeholder='Enter Fathers Email...'
+                  type='text'
+                  value={femail}
+                  onChange={(e) => setFemail(e.target.value)}
+                />
               </InputSet>
             </ErrorWrap>
           </InputWrap>
@@ -294,7 +407,12 @@ const ViewStudent = () => {
             <ErrorWrap>
               <InputSet>
                 <FormText>Father's Occupation: </FormText>
-                <FormContent>{foccupation}</FormContent>
+                <FormInput
+                  placeholder='Enter Fathers occupation...'
+                  type='text'
+                  value={foccupation}
+                  onChange={(e) => setFoccupation(e.target.value)}
+                />
               </InputSet>
             </ErrorWrap>
           </InputWrap>
@@ -302,7 +420,12 @@ const ViewStudent = () => {
             <ErrorWrap>
               <InputSet>
                 <FormText>Mother's Name: </FormText>
-                <FormContent>{mname}</FormContent>
+                <FormInput
+                  placeholder='Enter Mothers Name...'
+                  type='text'
+                  value={mname}
+                  onChange={(e) => setMname(e.target.value)}
+                />
               </InputSet>
             </ErrorWrap>
           </InputWrap>
@@ -310,7 +433,12 @@ const ViewStudent = () => {
             <ErrorWrap>
               <InputSet>
                 <FormText>Mother's Occupation: </FormText>
-                <FormContent>{moccupation}</FormContent>
+                <FormInput
+                  placeholder='Enter Occupation...'
+                  type='text'
+                  value={moccupation}
+                  onChange={(e) => setMoccupation(e.target.value)}
+                />
               </InputSet>
             </ErrorWrap>
           </InputWrap>
@@ -318,7 +446,12 @@ const ViewStudent = () => {
             <ErrorWrap>
               <InputSet>
                 <FormText>Mother's Cell#: </FormText>
-                <FormContent>{mcell}</FormContent>
+                <FormInput
+                  placeholder='Enter Cell#..'
+                  type='text'
+                  value={mcell}
+                  onChange={(e) => setMcell(e.target.value)}
+                />
               </InputSet>
             </ErrorWrap>
           </InputWrap>
@@ -326,7 +459,12 @@ const ViewStudent = () => {
             <ErrorWrap>
               <InputSet>
                 <FormText>Address: </FormText>
-                <FormContent>{address}</FormContent>
+                <FormInput
+                  placeholder='Enter Address...'
+                  type='text'
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
               </InputSet>
             </ErrorWrap>
           </InputWrap>
@@ -335,24 +473,18 @@ const ViewStudent = () => {
             <ErrorWrap>
               <InputSet>
                 <FormText>Other Information / Notes :</FormText>
-                <FormContent>{others}</FormContent>
+                <FormInput
+                  placeholder='Other info...'
+                  type='text'
+                  value={others}
+                  onChange={(e) => setOthers(e.target.value)}
+                />
               </InputSet>
             </ErrorWrap>
           </InputWrap>
           <SubSet>
-            <SubmitBtn className='green' onClick={goBack}>
-              <KeyboardBackspace style={{ marginRight: '5px' }} />
-              Back
-            </SubmitBtn>
-            <Link to={`/students/all-admissions/edit/${params.id}`}>
-              <SubmitBtn className='blue'>
-                <Edit style={{ marginRight: '5px' }} />
-                Edit
-              </SubmitBtn>
-            </Link>
-            <SubmitBtn className='red' onClick={handleDelete}>
-              <Delete style={{ marginRight: '5px' }} />
-              Delete
+            <SubmitBtn>
+              <span onClick={handleStudent}>Update</span>
             </SubmitBtn>
           </SubSet>
 
@@ -367,4 +499,4 @@ const ViewStudent = () => {
   )
 }
 
-export default ViewStudent
+export default EditStudent

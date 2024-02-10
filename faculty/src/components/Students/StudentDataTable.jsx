@@ -40,10 +40,10 @@ const columns = [
   { field: 'id', headerName: 'ID', width: 50 },
   { field: 'name', headerName: 'Name', width: 120 },
   { field: 'fname', headerName: 'Father Name', width: 120 },
-  { field: 'dob', headerName: 'DOB', width: 130 },
-  { field: 'fcell', headerName: 'Cell#', width: 130 },
-  { field: 'fcnic', headerName: 'CNIC', width: 150 },
-  { field: 'address', headerName: 'Address', width: 320 },
+  { field: 'dob', headerName: 'DOB', width: 130, sortable: false },
+  { field: 'fcell', headerName: 'Cell#', width: 130, sortable: false },
+  { field: 'fcnic', headerName: 'CNIC', width: 150, sortable: false },
+  { field: 'address', headerName: 'Address', width: 320, sortable: false },
 ]
 
 const formatDate = (dateString) => {
@@ -131,6 +131,7 @@ export default function StudentDataTable({ bookingDate }) {
         columns={columns}
         pageSize={5}
         onRowClick={(param) => navigate(`view/${param.row._id}`)}
+        checkboxSelection
         style={{
           borderRadius: '10px',
           fontSize: '0.9rem',

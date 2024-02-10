@@ -1,9 +1,4 @@
-import {
-  Delete,
-  Edit,
-  KeyboardBackspace,
-  Visibility,
-} from '@mui/icons-material'
+import { Delete, Edit, KeyboardBackspace } from '@mui/icons-material'
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 import { Link, useNavigate, useParams } from 'react-router-dom'

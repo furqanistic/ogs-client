@@ -9,6 +9,7 @@ import Login from './pages/Login'
 import Publish from './pages/Publish'
 import Students from './pages/Students'
 import EditStudent from './pages/Students/EditStudent'
+import FeeSlip from './pages/Students/FeeSlip'
 import StudentAdmissions from './pages/Students/StudentAdmissions'
 import ViewStudent from './pages/Students/ViewStudent'
 import Teachers from './pages/Teacher'
@@ -54,6 +55,7 @@ const App = () => {
             <Route path='/publish' element={<Publish />} />
             <Route path='/chats' element={<Chat />} />
             <Route path='/activity' element={<Activity />} />
+            <Route path='/fee-slip' element={<FeeSlip />} />
           </>
         )}
 

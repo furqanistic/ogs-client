@@ -83,3 +83,30 @@ export const deleteAdmissionById = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' })
   }
 }
+
+// Delete multiple admission forms by IDs
+export const deleteAdmissionsByIds = async (req, res) => {
+  try {
+    const admissionIds = req.body.ids
+
+    // Validate if admissionIds is an array and not empty
+    if (!Array.isArray(admissionIds) || admissionIds.length === 0) {
+      return res.status(400).json({ message: 'Invalid admission IDs provided' })
+    }
+
+    const deletedAdmissions = await Admission.deleteMany({
+      _id: { $in: admissionIds },
+    })
+
+    // Check if any admission forms were deleted
+    if (deletedAdmissions.deletedCount === 0) {
+      return res.status(404).json({ message: 'Admissions not found' })
+    }
+
+    // Admission forms deleted successfully, and sending a status code 200 with a message
+    res.status(200).json({ message: 'Admissions deleted successfully' })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+}

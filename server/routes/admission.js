@@ -2,6 +2,7 @@
 import express from 'express'
 import {
   deleteAdmissionById,
+  deleteAdmissionsByIds,
   getAdmissionById,
   getAllAdmissions,
   submitAdmissionForm,
@@ -24,5 +25,8 @@ router.put('/:id', updateAdmissionById)
 
 // Delete a specific admission form by ID
 router.delete('/:id', deleteAdmissionById)
+
+// New route to delete multiple admission forms by IDs
+router.post('/delete', deleteAdmissionsByIds)
 
 export default router

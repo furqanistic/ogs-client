@@ -1,12 +1,15 @@
 // FeeSlipComponent.js
+import { CloudDownload } from '@mui/icons-material'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import React, { useRef } from 'react'
 import Barcode from 'react-barcode'
 import styled from 'styled-components'
+
 const Row = styled.div`
   position: relative;
   height: 700px;
+
   &:after {
     content: '';
     display: table;
@@ -103,12 +106,22 @@ const HorizontalRule = styled.hr`
 `
 
 const DownloadButton = styled.button`
-  background-color: #4caf50;
+  background-color: #026806;
   color: white;
   padding: 10px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+`
+const Btn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
 `
 const FeeSlip = () => {
   const savePdfRef = useRef(null)
@@ -162,338 +175,347 @@ const FeeSlip = () => {
   }
 
   return (
-    <Row id='booking-form-wrap'>
-      <Column>
-        <JustifyBetween>
-          <TextBox>Invoice # INV/2024</TextBox>
-          {/* <TextBox>Student Copy</TextBox> */}
-        </JustifyBetween>
-        <FlexContainer>
-          <FlexColumn>
-            <span>Due Date:</span>
-            <span>01/01/2025</span>
-          </FlexColumn>
-          <FlexColumn>
-            <span>Account: 75-HBL</span>
-            <span>The Orion School</span>
-          </FlexColumn>
-        </FlexContainer>
-        <FlexContainer>
-          <Barcode value='ABC123' height={50} />
-        </FlexContainer>
-        <Table>
-          <thead>
-            <TableRow>
-              <TableHeader scope='col left' colSpan='2'>
-                Description
-              </TableHeader>
-              <TableHeader scope='col right'>Amount</TableHeader>
-            </TableRow>
-          </thead>
-          <tbody>
-            <TableRow>
-              <TableCell data-label='Account' colSpan='2'>
-                Electricity-319315001
-                <br />
-                Consumption
-              </TableCell>
-              <TableCell data-label='Amount'>500.0</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell data-label='Account' colSpan='2'>
-                Electricity-319315001
-                <br />
-                Consumption
-              </TableCell>
-              <TableCell data-label='Amount'>500.0</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell data-label='Account' colSpan='2'>
-                Electricity-319315001
-                <br />
-                Consumption
-              </TableCell>
-              <TableCell data-label='Amount'>500.0</TableCell>
-            </TableRow>
-          </tbody>
-        </Table>
-        <HorizontalRule />
-        <JustifyBetween>
-          <TextBox>Payable by due date</TextBox>
-          <span>Rs. 14,530</span>
-        </JustifyBetween>
-        <HorizontalRule />
+    <>
+      <Row id='booking-form-wrap'>
+        <Column>
+          <JustifyBetween>
+            <TextBox>Invoice # INV/2024</TextBox>
+            {/* <TextBox>Student Copy</TextBox> */}
+          </JustifyBetween>
+          <FlexContainer>
+            <FlexColumn>
+              <span>Due Date:</span>
+              <span>01/01/2025</span>
+            </FlexColumn>
+            <FlexColumn>
+              <span>Account: 75-HBL</span>
+              <span>The Orion School</span>
+            </FlexColumn>
+          </FlexContainer>
+          <FlexContainer>
+            <Barcode value='ABC123' height={50} />
+          </FlexContainer>
+          <Table>
+            <thead>
+              <TableRow>
+                <TableHeader scope='col left' colSpan='2'>
+                  Description
+                </TableHeader>
+                <TableHeader scope='col right'>Amount</TableHeader>
+              </TableRow>
+            </thead>
+            <tbody>
+              <TableRow>
+                <TableCell data-label='Account' colSpan='2'>
+                  Electricity-319315001
+                  <br />
+                  Consumption
+                </TableCell>
+                <TableCell data-label='Amount'>500.0</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell data-label='Account' colSpan='2'>
+                  Electricity-319315001
+                  <br />
+                  Consumption
+                </TableCell>
+                <TableCell data-label='Amount'>500.0</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell data-label='Account' colSpan='2'>
+                  Electricity-319315001
+                  <br />
+                  Consumption
+                </TableCell>
+                <TableCell data-label='Amount'>500.0</TableCell>
+              </TableRow>
+            </tbody>
+          </Table>
+          <HorizontalRule />
+          <JustifyBetween>
+            <TextBox>Payable by due date</TextBox>
+            <span>Rs. 14,530</span>
+          </JustifyBetween>
+          <HorizontalRule />
 
-        <JustifyBetween>
-          <TextBox>Payable by due date</TextBox>
-          <span>Rs. 14,530</span>
-        </JustifyBetween>
-        <HorizontalRule />
-        <FlexColumn>
-          <span>For Bank Use Only</span>
-          <span>Received Payment Rs.</span>
-        </FlexColumn>
-        <br />
-        <FloatRight>
-          <span>Signature and Stamp</span>
-          <span>Bank Officer</span>
-        </FloatRight>
-        <br />
-        <br />
-        <DateWrap>
-          <span>Date:</span>
-          <span>_____________________</span>
-        </DateWrap>
-      </Column>
-      <Column>
-        <JustifyBetween>
-          <TextBox>Invoice # INV/2024</TextBox>
-          {/* <TextBox>Student Copy</TextBox> */}
-        </JustifyBetween>
-        <FlexContainer>
+          <JustifyBetween>
+            <TextBox>Payable by due date</TextBox>
+            <span>Rs. 14,530</span>
+          </JustifyBetween>
+          <HorizontalRule />
           <FlexColumn>
-            <span>Due Date:</span>
-            <span>01/01/2025</span>
+            <span>For Bank Use Only</span>
+            <span>Received Payment Rs.</span>
           </FlexColumn>
-          <FlexColumn>
-            <span>Account: 75-HBL</span>
-            <span>The Orion School</span>
-          </FlexColumn>
-        </FlexContainer>
-        <FlexContainer>
-          <Barcode value='ABC123' height={50} />
-        </FlexContainer>
-        <Table>
-          <thead>
-            <TableRow>
-              <TableHeader scope='col left' colSpan='2'>
-                Description
-              </TableHeader>
-              <TableHeader scope='col right'>Amount</TableHeader>
-            </TableRow>
-          </thead>
-          <tbody>
-            <TableRow>
-              <TableCell data-label='Account' colSpan='2'>
-                Electricity-319315001
-                <br />
-                Consumption
-              </TableCell>
-              <TableCell data-label='Amount'>500.0</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell data-label='Account' colSpan='2'>
-                Electricity-319315001
-                <br />
-                Consumption
-              </TableCell>
-              <TableCell data-label='Amount'>500.0</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell data-label='Account' colSpan='2'>
-                Electricity-319315001
-                <br />
-                Consumption
-              </TableCell>
-              <TableCell data-label='Amount'>500.0</TableCell>
-            </TableRow>
-          </tbody>
-        </Table>
-        <HorizontalRule />
-        <JustifyBetween>
-          <TextBox>Payable by due date</TextBox>
-          <span>Rs. 14,530</span>
-        </JustifyBetween>
-        <HorizontalRule />
+          <br />
+          <FloatRight>
+            <span>Signature and Stamp</span>
+            <span>Bank Officer</span>
+          </FloatRight>
+          <br />
+          <br />
+          <DateWrap>
+            <span>Date:</span>
+            <span>_____________________</span>
+          </DateWrap>
+        </Column>
+        <Column>
+          <JustifyBetween>
+            <TextBox>Invoice # INV/2024</TextBox>
+            {/* <TextBox>Student Copy</TextBox> */}
+          </JustifyBetween>
+          <FlexContainer>
+            <FlexColumn>
+              <span>Due Date:</span>
+              <span>01/01/2025</span>
+            </FlexColumn>
+            <FlexColumn>
+              <span>Account: 75-HBL</span>
+              <span>The Orion School</span>
+            </FlexColumn>
+          </FlexContainer>
+          <FlexContainer>
+            <Barcode value='ABC123' height={50} />
+          </FlexContainer>
+          <Table>
+            <thead>
+              <TableRow>
+                <TableHeader scope='col left' colSpan='2'>
+                  Description
+                </TableHeader>
+                <TableHeader scope='col right'>Amount</TableHeader>
+              </TableRow>
+            </thead>
+            <tbody>
+              <TableRow>
+                <TableCell data-label='Account' colSpan='2'>
+                  Electricity-319315001
+                  <br />
+                  Consumption
+                </TableCell>
+                <TableCell data-label='Amount'>500.0</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell data-label='Account' colSpan='2'>
+                  Electricity-319315001
+                  <br />
+                  Consumption
+                </TableCell>
+                <TableCell data-label='Amount'>500.0</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell data-label='Account' colSpan='2'>
+                  Electricity-319315001
+                  <br />
+                  Consumption
+                </TableCell>
+                <TableCell data-label='Amount'>500.0</TableCell>
+              </TableRow>
+            </tbody>
+          </Table>
+          <HorizontalRule />
+          <JustifyBetween>
+            <TextBox>Payable by due date</TextBox>
+            <span>Rs. 14,530</span>
+          </JustifyBetween>
+          <HorizontalRule />
 
-        <JustifyBetween>
-          <TextBox>Payable by due date</TextBox>
-          <span>Rs. 14,530</span>
-        </JustifyBetween>
-        <HorizontalRule />
-        <FlexColumn>
-          <span>For Bank Use Only</span>
-          <span>Received Payment Rs.</span>
-        </FlexColumn>
-        <br />
-        <FloatRight>
-          <span>Signature and Stamp</span>
-          <span>Bank Officer</span>
-        </FloatRight>
-        <br />
-        <br />
-        <DateWrap>
-          <span>Date:</span>
-          <span>_____________________</span>
-        </DateWrap>
-      </Column>
-      <Column>
-        <JustifyBetween>
-          <TextBox>Invoice # INV/2024</TextBox>
-          {/* <TextBox>Student Copy</TextBox> */}
-        </JustifyBetween>
-        <FlexContainer>
+          <JustifyBetween>
+            <TextBox>Payable by due date</TextBox>
+            <span>Rs. 14,530</span>
+          </JustifyBetween>
+          <HorizontalRule />
           <FlexColumn>
-            <span>Due Date:</span>
-            <span>01/01/2025</span>
+            <span>For Bank Use Only</span>
+            <span>Received Payment Rs.</span>
           </FlexColumn>
-          <FlexColumn>
-            <span>Account: 75-HBL</span>
-            <span>The Orion School</span>
-          </FlexColumn>
-        </FlexContainer>
-        <FlexContainer>
-          <Barcode value='ABC123' height={50} />
-        </FlexContainer>
-        <Table>
-          <thead>
-            <TableRow>
-              <TableHeader scope='col left' colSpan='2'>
-                Description
-              </TableHeader>
-              <TableHeader scope='col right'>Amount</TableHeader>
-            </TableRow>
-          </thead>
-          <tbody>
-            <TableRow>
-              <TableCell data-label='Account' colSpan='2'>
-                Electricity-319315001
-                <br />
-                Consumption
-              </TableCell>
-              <TableCell data-label='Amount'>500.0</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell data-label='Account' colSpan='2'>
-                Electricity-319315001
-                <br />
-                Consumption
-              </TableCell>
-              <TableCell data-label='Amount'>500.0</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell data-label='Account' colSpan='2'>
-                Electricity-319315001
-                <br />
-                Consumption
-              </TableCell>
-              <TableCell data-label='Amount'>500.0</TableCell>
-            </TableRow>
-          </tbody>
-        </Table>
-        <HorizontalRule />
-        <JustifyBetween>
-          <TextBox>Payable by due date</TextBox>
-          <span>Rs. 14,530</span>
-        </JustifyBetween>
-        <HorizontalRule />
+          <br />
+          <FloatRight>
+            <span>Signature and Stamp</span>
+            <span>Bank Officer</span>
+          </FloatRight>
+          <br />
+          <br />
+          <DateWrap>
+            <span>Date:</span>
+            <span>_____________________</span>
+          </DateWrap>
+        </Column>
+        <Column>
+          <JustifyBetween>
+            <TextBox>Invoice # INV/2024</TextBox>
+            {/* <TextBox>Student Copy</TextBox> */}
+          </JustifyBetween>
+          <FlexContainer>
+            <FlexColumn>
+              <span>Due Date:</span>
+              <span>01/01/2025</span>
+            </FlexColumn>
+            <FlexColumn>
+              <span>Account: 75-HBL</span>
+              <span>The Orion School</span>
+            </FlexColumn>
+          </FlexContainer>
+          <FlexContainer>
+            <Barcode value='ABC123' height={50} />
+          </FlexContainer>
+          <Table>
+            <thead>
+              <TableRow>
+                <TableHeader scope='col left' colSpan='2'>
+                  Description
+                </TableHeader>
+                <TableHeader scope='col right'>Amount</TableHeader>
+              </TableRow>
+            </thead>
+            <tbody>
+              <TableRow>
+                <TableCell data-label='Account' colSpan='2'>
+                  Electricity-319315001
+                  <br />
+                  Consumption
+                </TableCell>
+                <TableCell data-label='Amount'>500.0</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell data-label='Account' colSpan='2'>
+                  Electricity-319315001
+                  <br />
+                  Consumption
+                </TableCell>
+                <TableCell data-label='Amount'>500.0</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell data-label='Account' colSpan='2'>
+                  Electricity-319315001
+                  <br />
+                  Consumption
+                </TableCell>
+                <TableCell data-label='Amount'>500.0</TableCell>
+              </TableRow>
+            </tbody>
+          </Table>
+          <HorizontalRule />
+          <JustifyBetween>
+            <TextBox>Payable by due date</TextBox>
+            <span>Rs. 14,530</span>
+          </JustifyBetween>
+          <HorizontalRule />
 
-        <JustifyBetween>
-          <TextBox>Payable by due date</TextBox>
-          <span>Rs. 14,530</span>
-        </JustifyBetween>
-        <HorizontalRule />
-        <FlexColumn>
-          <span>For Bank Use Only</span>
-          <span>Received Payment Rs.</span>
-        </FlexColumn>
-        <br />
-        <FloatRight>
-          <span>Signature and Stamp</span>
-          <span>Bank Officer</span>
-        </FloatRight>
-        <br />
-        <br />
-        <DateWrap>
-          <span>Date:</span>
-          <span>_____________________</span>
-        </DateWrap>
-      </Column>
-      <Column>
-        <JustifyBetween>
-          <TextBox>Invoice # INV/2024</TextBox>
-          {/* <TextBox>Student Copy</TextBox> */}
-        </JustifyBetween>
-        <FlexContainer>
+          <JustifyBetween>
+            <TextBox>Payable by due date</TextBox>
+            <span>Rs. 14,530</span>
+          </JustifyBetween>
+          <HorizontalRule />
           <FlexColumn>
-            <span>Due Date:</span>
-            <span>01/01/2025</span>
+            <span>For Bank Use Only</span>
+            <span>Received Payment Rs.</span>
           </FlexColumn>
+          <br />
+          <FloatRight>
+            <span>Signature and Stamp</span>
+            <span>Bank Officer</span>
+          </FloatRight>
+          <br />
+          <br />
+          <DateWrap>
+            <span>Date:</span>
+            <span>_____________________</span>
+          </DateWrap>
+        </Column>
+        <Column>
+          <JustifyBetween>
+            <TextBox>Invoice # INV/2024</TextBox>
+            {/* <TextBox>Student Copy</TextBox> */}
+          </JustifyBetween>
+          <FlexContainer>
+            <FlexColumn>
+              <span>Due Date:</span>
+              <span>01/01/2025</span>
+            </FlexColumn>
+            <FlexColumn>
+              <span>Account: 75-HBL</span>
+              <span>The Orion School</span>
+            </FlexColumn>
+          </FlexContainer>
+          <FlexContainer>
+            <Barcode value='ABC123' height={50} />
+          </FlexContainer>
+          <Table>
+            <thead>
+              <TableRow>
+                <TableHeader scope='col left' colSpan='2'>
+                  Description
+                </TableHeader>
+                <TableHeader scope='col right'>Amount</TableHeader>
+              </TableRow>
+            </thead>
+            <tbody>
+              <TableRow>
+                <TableCell data-label='Account' colSpan='2'>
+                  Electricity-319315001
+                  <br />
+                  Consumption
+                </TableCell>
+                <TableCell data-label='Amount'>500.0</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell data-label='Account' colSpan='2'>
+                  Electricity-319315001
+                  <br />
+                  Consumption
+                </TableCell>
+                <TableCell data-label='Amount'>500.0</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell data-label='Account' colSpan='2'>
+                  Electricity-319315001
+                  <br />
+                  Consumption
+                </TableCell>
+                <TableCell data-label='Amount'>500.0</TableCell>
+              </TableRow>
+            </tbody>
+          </Table>
+          <HorizontalRule />
+          <JustifyBetween>
+            <TextBox>Payable by due date</TextBox>
+            <span>Rs. 14,530</span>
+          </JustifyBetween>
+          <HorizontalRule />
+
+          <JustifyBetween>
+            <TextBox>Payable by due date</TextBox>
+            <span>Rs. 14,530</span>
+          </JustifyBetween>
+          <HorizontalRule />
           <FlexColumn>
-            <span>Account: 75-HBL</span>
-            <span>The Orion School</span>
+            <span>For Bank Use Only</span>
+            <span>Received Payment Rs.</span>
           </FlexColumn>
-        </FlexContainer>
-        <FlexContainer>
-          <Barcode value='ABC123' height={50} />
-        </FlexContainer>
-        <Table>
-          <thead>
-            <TableRow>
-              <TableHeader scope='col left' colSpan='2'>
-                Description
-              </TableHeader>
-              <TableHeader scope='col right'>Amount</TableHeader>
-            </TableRow>
-          </thead>
-          <tbody>
-            <TableRow>
-              <TableCell data-label='Account' colSpan='2'>
-                Electricity-319315001
-                <br />
-                Consumption
-              </TableCell>
-              <TableCell data-label='Amount'>500.0</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell data-label='Account' colSpan='2'>
-                Electricity-319315001
-                <br />
-                Consumption
-              </TableCell>
-              <TableCell data-label='Amount'>500.0</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell data-label='Account' colSpan='2'>
-                Electricity-319315001
-                <br />
-                Consumption
-              </TableCell>
-              <TableCell data-label='Amount'>500.0</TableCell>
-            </TableRow>
-          </tbody>
-        </Table>
-        <HorizontalRule />
-        <JustifyBetween>
-          <TextBox>Payable by due date</TextBox>
-          <span>Rs. 14,530</span>
-        </JustifyBetween>
-        <HorizontalRule />
-
-        <JustifyBetween>
-          <TextBox>Payable by due date</TextBox>
-          <span>Rs. 14,530</span>
-        </JustifyBetween>
-        <HorizontalRule />
-        <FlexColumn>
-          <span>For Bank Use Only</span>
-          <span>Received Payment Rs.</span>
-        </FlexColumn>
-        <br />
-        <FloatRight>
-          <span>Signature and Stamp</span>
-          <span>Bank Officer</span>
-        </FloatRight>
-        <br />
-        <br />
-        <DateWrap>
-          <span>Date:</span>
-          <span>_____________________</span>
-        </DateWrap>
-      </Column>
-
-      <DownloadButton onClick={generatePDF}>Download PDF</DownloadButton>
-    </Row>
+          <br />
+          <FloatRight>
+            <span>Signature and Stamp</span>
+            <span>Bank Officer</span>
+          </FloatRight>
+          <br />
+          <br />
+          <DateWrap>
+            <span>Date:</span>
+            <span>_____________________</span>
+          </DateWrap>
+        </Column>
+      </Row>
+      <Btn>
+        <DownloadButton>
+          <CloudDownload
+            onClick={generatePDF}
+            style={{ fontSize: '1.5rem', marginRight: '5px' }}
+          />
+          Print
+        </DownloadButton>
+      </Btn>
+    </>
   )
 }
 

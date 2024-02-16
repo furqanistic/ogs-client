@@ -35,45 +35,61 @@ const LoaderWrap = styled.div`
   align-items: center;
   height: calc(100vh - 150px);
 `
-const ActionBtn = styled.button`
-  background-color: #02c329;
-  color: #ffffff;
-  padding: 0.6rem;
-  outline: none;
-  border-radius: 10px;
-  border: 0;
+const Drop = styled.select`
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-left: 10px;
 `
-
-// Implement your action logic here
-const handleActionButtonClick = (event, id) => {
-  event.stopPropagation()
-  console.log(`Button clicked for row with ID: ${id}`)
-}
-
+const DropOption = styled.option`
+  background-color: white;
+  color: #010126;
+`
+const WrapBtn = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+const OptionsLabel = styled.span`
+  font-size: 1rem;
+  color: white;
+`
+const LabelWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 // tables code
 const columns = [
   { field: 'id', headerName: 'ID', width: 50 },
-  { field: 'name', headerName: 'Name', width: 120 },
-  { field: 'fname', headerName: 'Father Name', width: 120 },
+  { field: 'name', headerName: 'Name', width: 150 },
+  { field: 'fname', headerName: 'Father Name', width: 140 },
   { field: 'createdAt', headerName: 'Apply Date', width: 130 },
   { field: 'fcell', headerName: 'Cell#', width: 130, sortable: false },
-
-  { field: 'address', headerName: 'Address', width: 250, sortable: false },
   {
-    field: 'actions',
-    headerName: 'Actions',
+    field: 'status',
+    headerName: 'Status',
     sortable: false,
-    width: 80,
+    width: 120,
     renderCell: (params) => (
-      <ActionBtn
-        variant='contained'
-        color='primary'
-        onClick={(e) => handleActionButtonClick(e, params.row._id)}
+      <span
+        style={{
+          color: params.row.status === 'Waiting' ? 'red' : 'green',
+          backgroundColor:
+            params.row.status === 'Waiting' ? '#fd2f2f39' : '#06d0063b',
+          padding: '0.5rem',
+          borderRadius: '10px',
+        }}
       >
-        More
-      </ActionBtn>
+        {params.row.status}
+      </span>
     ),
   },
+  { field: 'address', headerName: 'Address', width: 320, sortable: false },
 ]
 
 const formatDate = (dateString) => {
@@ -85,9 +101,9 @@ const formatDate = (dateString) => {
 }
 
 export default function StudentDataTable({ bookingDate }) {
-  const [err, setErr] = useState('No Booking Found')
+  const [statusFilter, setStatusFilter] = useState('All') // Initial state for showing all students
   const navigate = useNavigate()
-  const [selectedRows, setSelectedRows] = useState([])
+
   const { data, status } = useQuery('all-admissions', async () => {
     const res = await axiosInstance.get(`/admission`)
     return res.data
@@ -103,15 +119,18 @@ export default function StudentDataTable({ bookingDate }) {
 
   let counter = 1
 
-  const rows = data.map((item) => ({
-    id: counter++,
-    _id: item._id,
-    name: item.name,
-    fname: item.fname,
-    fcell: item.fcell,
-    createdAt: formatDate(item.createdAt),
-    address: item.address,
-  }))
+  const rows = data
+    .filter((item) => statusFilter === 'All' || item.status === statusFilter)
+    .map((item) => ({
+      id: counter++,
+      _id: item._id,
+      name: item.name,
+      fname: item.fname,
+      createdAt: formatDate(item.createdAt),
+      fcell: item.fcell,
+      address: item.address,
+      status: item.status,
+    }))
 
   const handleExportToExcel = () => {
     // Map rows with the correct header names
@@ -119,14 +138,21 @@ export default function StudentDataTable({ bookingDate }) {
       ID: row.id,
       Name: row.name,
       Father: row.fname,
+      Apply: row.createdAt,
       Cell: row.fcell,
-      ApplyDate: row.createdAt,
       Address: row.address,
+      Status: row.status,
     }))
 
+    // Filter rows based on the current statusFilter
+    const filteredRows =
+      statusFilter === 'All'
+        ? mappedRows
+        : mappedRows.filter((row) => row.Status === statusFilter)
+
     // Create a worksheet with headers
-    const ws = XLSX.utils.json_to_sheet(mappedRows, {
-      header: Object.keys(mappedRows[0]),
+    const ws = XLSX.utils.json_to_sheet(filteredRows, {
+      header: Object.keys(filteredRows[0]),
     })
 
     const csv = XLSX.utils.sheet_to_csv(ws)
@@ -139,61 +165,41 @@ export default function StudentDataTable({ bookingDate }) {
     const a = document.createElement('a')
     const url = window.URL.createObjectURL(blob)
     a.href = url
-    a.download = `admissions_${currentDate}.csv`
+    a.download = `admissions_${statusFilter}_${currentDate}.csv` // Include statusFilter in the filename
     a.click()
     window.URL.revokeObjectURL(url)
   }
 
-  const handleDeleteSelected = async () => {
-    try {
-      if (selectedRows.length === 0) {
-        alert('Please select rows to delete.')
-        return
-      }
-
-      const admissionIds = selectedRows.map((row) => row._id)
-      await axiosInstance.post('/admission/delete', { ids: admissionIds })
-
-      // Refresh data after deletion
-      // You may want to use react-query's `refetch` or refetch the data in another way
-    } catch (error) {
-      console.error('Error deleting admissions:', error)
-      // Handle error appropriately, e.g., show an error message
-    }
+  const handleStatusChange = (event) => {
+    setStatusFilter(event.target.value)
   }
-
-  const handleSelectionChange = (newSelection) => {
-    setSelectedRows(newSelection.selectionModel.map((index) => rows[index]))
-  }
-
   return (
     <Wrap>
-      <GreenBtn
-        onClick={handleExportToExcel}
-        variant='outlined'
-        color='primary'
-      >
-        <Download style={{ marginRight: '5px' }} /> Save to Excel
-      </GreenBtn>
+      <WrapBtn>
+        <LabelWrap>
+          <OptionsLabel>Status:</OptionsLabel>
+          <Drop value={statusFilter} onChange={handleStatusChange}>
+            <DropOption value='All'>All</DropOption>
+            <DropOption value='Enrolled'>Enrolled</DropOption>
+            <DropOption value='Waiting'>Waiting</DropOption>
+          </Drop>
+        </LabelWrap>
+
+        <GreenBtn
+          onClick={handleExportToExcel}
+          variant='outlined'
+          color='primary'
+        >
+          <Download style={{ marginRight: '5px' }} /> Save to Excel
+        </GreenBtn>
+      </WrapBtn>
+
       <DataGrid
         id='data-grid'
         rows={rows}
         columns={columns}
         pageSize={5}
         onRowClick={(param) => navigate(`view/${param.row._id}`)}
-        onCellClick={(params) => {
-          // Check if the clicked element is a button
-          if (
-            params.field === 'actions' &&
-            params.e.target.tagName === 'BUTTON'
-          ) {
-            return // Do nothing if the clicked element is a button
-          }
-
-          // Trigger the navigation to the view page
-          navigate(`view/${params.row._id}`)
-        }}
-        checkboxSelection
         style={{
           borderRadius: '10px',
           fontSize: '0.9rem',

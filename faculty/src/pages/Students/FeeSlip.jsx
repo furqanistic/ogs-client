@@ -8,7 +8,7 @@ import styled from 'styled-components'
 
 const Row = styled.div`
   position: relative;
-  height: 700px;
+  height: 100%;
 
   &:after {
     content: '';
@@ -16,6 +16,7 @@ const Row = styled.div`
     clear: both;
   }
 `
+
 const Wrap = styled.div`
   display: flex;
 `
@@ -122,6 +123,9 @@ const Btn = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
+  @media print {
+    display: none;
+  }
 `
 const FeeSlip = () => {
   const savePdfRef = useRef(null)
@@ -129,6 +133,7 @@ const FeeSlip = () => {
   const deleteRef = useRef(null)
 
   const generatePDF = () => {
+    console.log('1')
     if (savePdfRef.current) {
       savePdfRef.current.style.display = 'none'
     }
@@ -140,7 +145,7 @@ const FeeSlip = () => {
     }
     const input = document.getElementById('booking-form-wrap')
 
-    input.style.width = '1380px' // Adjust this value based on the desired output
+    input.style.width = '1200px' // Adjust this value based on the desired output
     input.style.height = '700px' // Adjust this value based on the desired output
 
     html2canvas(input, {
@@ -193,7 +198,7 @@ const FeeSlip = () => {
             </FlexColumn>
           </FlexContainer>
           <FlexContainer>
-            <Barcode value='ABC123' height={50} />
+            <Barcode value='ABC123' height={50} className='barcode' />
           </FlexContainer>
           <Table>
             <thead>
@@ -506,12 +511,9 @@ const FeeSlip = () => {
           </DateWrap>
         </Column>
       </Row>
-      <Btn>
+      <Btn onClick={generatePDF}>
         <DownloadButton>
-          <CloudDownload
-            onClick={generatePDF}
-            style={{ fontSize: '1.5rem', marginRight: '5px' }}
-          />
+          <CloudDownload style={{ fontSize: '1.5rem', marginRight: '5px' }} />
           Print
         </DownloadButton>
       </Btn>

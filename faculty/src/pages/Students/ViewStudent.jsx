@@ -167,6 +167,7 @@ const ViewStudent = () => {
   const [mcell, setMcell] = useState('')
   const [address, setAddress] = useState('')
   const [others, setOthers] = useState('')
+  const [showstatus, setShowStatus] = useState('')
   const navigate = useNavigate()
 
   const goBack = (e) => {
@@ -205,6 +206,7 @@ const ViewStudent = () => {
         setMcell(data.mcell || '')
         setAddress(data.address || '')
         setOthers(data.fname || '')
+        setShowStatus(data.status || '')
         setIsLoading(false)
       },
     }
@@ -336,6 +338,14 @@ const ViewStudent = () => {
               <InputSet>
                 <FormText>Other Information / Notes :</FormText>
                 <FormContent>{others}</FormContent>
+              </InputSet>
+            </ErrorWrap>
+          </InputWrap>
+          <InputWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText>Status :</FormText>
+                <FormContent>{showstatus}</FormContent>
               </InputSet>
             </ErrorWrap>
           </InputWrap>

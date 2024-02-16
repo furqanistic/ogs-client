@@ -99,6 +99,9 @@ const IconText = styled.p`
   font-weight: 300;
 `
 const PortalsPage = () => {
+  const handleClick = () => {
+    window.location.replace('https://faculty.theorionschool.net')
+  }
   return (
     <>
       <Container>
@@ -109,45 +112,30 @@ const PortalsPage = () => {
         </Details>
       </Container>
       <Slider>
-        <Link
-          to='//faculty.theorionschool.net'
-          style={{ textDecoration: 'none' }}
-        >
-          <Item>
-            <ItemWrap>
-              <IconSet>
-                <Face6 style={{ fontSize: '12rem' }} />
-              </IconSet>
-              <IconText>Student Portal</IconText>
-            </ItemWrap>
-          </Item>
-        </Link>
-        <Link
-          to='//faculty.theorionschool.net'
-          style={{ textDecoration: 'none' }}
-        >
-          <Item bg='#160d8f'>
-            <ItemWrap>
-              <IconSet>
-                <Wc style={{ fontSize: '12rem' }} />
-              </IconSet>
-              <IconText>Faculty Portal</IconText>
-            </ItemWrap>
-          </Item>
-        </Link>
-        <Link
-          to='//faculty.theorionschool.net'
-          style={{ textDecoration: 'none' }}
-        >
-          <Item bg='#0446a3'>
-            <ItemWrap>
-              <IconSet>
-                <Diversity3 style={{ fontSize: '12rem' }} />
-              </IconSet>
-              <IconText>Management Portal</IconText>
-            </ItemWrap>
-          </Item>
-        </Link>
+        <Item>
+          <ItemWrap onClick={handleClick}>
+            <IconSet>
+              <Face6 style={{ fontSize: '12rem' }} />
+            </IconSet>
+            <IconText>Student Portal</IconText>
+          </ItemWrap>
+        </Item>
+        <Item bg='#160d8f'>
+          <ItemWrap onClick={handleClick}>
+            <IconSet>
+              <Wc style={{ fontSize: '12rem' }} />
+            </IconSet>
+            <IconText>Faculty Portal</IconText>
+          </ItemWrap>
+        </Item>
+        <Item bg='#0446a3'>
+          <ItemWrap onClick={handleClick}>
+            <IconSet>
+              <Diversity3 style={{ fontSize: '12rem' }} />
+            </IconSet>
+            <IconText>Management Portal</IconText>
+          </ItemWrap>
+        </Item>
       </Slider>
     </>
   )

@@ -204,6 +204,8 @@ const EditStudent = () => {
   const [mcell, setMcell] = useState('')
   const [address, setAddress] = useState('')
   const [others, setOthers] = useState('')
+  const [showstatus, setShowStatus] = useState('')
+
   const params = useParams()
   const navigate = useNavigate()
   // all funcs
@@ -233,6 +235,7 @@ const EditStudent = () => {
     'Grade 6',
     'Grade 7',
   ]
+  const statusOptions = ['Waiting', 'Enrolled']
 
   const { data, status } = useQuery(
     'edit-admission',
@@ -258,6 +261,7 @@ const EditStudent = () => {
         setMcell(data.mcell || '')
         setAddress(data.address || '')
         setOthers(data.fname || '')
+        setShowStatus(data.status || '')
         setIsLoading(false)
       },
     }
@@ -283,6 +287,7 @@ const EditStudent = () => {
         mcell,
         address,
         others,
+        status: showstatus,
       })
       setShowCard(true)
       navigate(`/students/all-admissions/view/${params.id}`)
@@ -482,6 +487,20 @@ const EditStudent = () => {
               </InputSet>
             </ErrorWrap>
           </InputWrap>
+          <InputSetTwo>
+            <FormText>Status: </FormText>
+            <SelectCat
+              name='showstatus'
+              onChange={(e) => setShowStatus(e.target.value)}
+              value={showstatus}
+            >
+              {statusOptions.map((category) => (
+                <SelectOpt key={category} value={category}>
+                  {category}
+                </SelectOpt>
+              ))}
+            </SelectCat>
+          </InputSetTwo>
           <SubSet>
             <SubmitBtn>
               <span onClick={handleStudent}>Update</span>

@@ -44,6 +44,10 @@ const AdmissionSchema = new mongoose.Schema(
     others: {
       type: String,
     },
+    status: {
+      type: String,
+      default: 'Waiting',
+    },
   },
   { timestamps: true }
 )

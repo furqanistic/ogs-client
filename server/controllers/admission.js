@@ -1,5 +1,5 @@
-// controllers/admissionController.js
 import Admission from '../models/Admission.js'
+import Student from '../models/Student.js'
 
 // Create a new admission form
 export const submitAdmissionForm = async (req, res) => {
@@ -105,6 +105,88 @@ export const deleteAdmissionsByIds = async (req, res) => {
 
     // Admission forms deleted successfully, and sending a status code 200 with a message
     res.status(200).json({ message: 'Admissions deleted successfully' })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+}
+
+// Get all admission forms with status "Enrolled"
+export const getEnrolledAdmissions = async (req, res) => {
+  try {
+    const enrolledAdmissions = await Admission.find({ status: 'Enrolled' })
+    res.status(200).json(enrolledAdmissions)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+}
+
+export const moveAdmissionToStudent = async (req, res) => {
+  try {
+    // Find the admission by ID
+    const admission = await Admission.findById(req.params.id)
+
+    if (!admission) {
+      return res.status(404).json({ message: 'Admission not found' })
+    }
+
+    // Extract values from admission
+    const {
+      name,
+      prevSchool,
+      grade,
+      dob,
+      fname,
+      fcnic,
+      fcell,
+      femail,
+      foccupation,
+      mname,
+      moccupation,
+      mcell,
+      address,
+      others,
+    } = admission
+
+    // Create a new student using extracted values
+    const student = new Student({
+      personalInfo: {
+        name,
+        prevSchool,
+        dateOfBirth: dob,
+        address,
+        contactInfo: {
+          email: femail,
+          phone: fcell,
+        },
+      },
+      guardianInfo: {
+        guardianName: fname,
+        guardianOccupation: foccupation,
+        guardianContact: {
+          phone: fcell,
+          email: femail,
+        },
+      },
+      classInfo: {
+        className: grade,
+      },
+    })
+
+    // Save the new student
+    await student.save()
+
+    // Update the admission status
+    admission.status = 'Enrolled'
+    await admission.save()
+
+    // Optionally, you may want to delete the admission from the Admission collection
+    // await Admission.findByIdAndDelete(req.params.id);
+
+    res
+      .status(200)
+      .json({ message: 'Admission moved to student successfully', student })
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Internal server error' })

@@ -1,13 +1,7 @@
 import mongoose from 'mongoose'
-import Result from './Result'
 
 const StudentSchema = new mongoose.Schema(
   {
-    admissionId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Admission',
-      required: true,
-    },
     attendance: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -42,10 +36,11 @@ const StudentSchema = new mongoose.Schema(
       // Add more class-related fields as needed
     },
     personalInfo: {
-      firstName: {
+      name: {
         type: String,
       },
-      lastName: {
+
+      prevSchool: {
         type: String,
       },
       dateOfBirth: {

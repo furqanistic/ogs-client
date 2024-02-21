@@ -128,7 +128,7 @@ const Students = () => {
                 }}
               />
             </CardIcon>
-            <CardName>Enrolled Students</CardName>
+            <CardName> Students</CardName>
           </Cards>
           <Cards>
             <CardIcon>

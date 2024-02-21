@@ -5,28 +5,33 @@ import {
   deleteAdmissionsByIds,
   getAdmissionById,
   getAllAdmissions,
+  getEnrolledAdmissions,
+  moveAdmissionToStudent,
   submitAdmissionForm,
   updateAdmissionById,
 } from '../controllers/admission.js'
 
 const router = express.Router()
 
+router.get('/', getAllAdmissions)
+// Get enrolled admission forms
+router.get('/enrolled', getEnrolledAdmissions)
+// Get a specific admission form by ID
+router.get('/:id', getAdmissionById)
+
 // Submit an admission form
 router.post('/submit', submitAdmissionForm)
 
-// Get all admission forms
-router.get('/', getAllAdmissions)
+// New route to delete multiple admission forms by IDs
+router.post('/delete', deleteAdmissionsByIds)
 
-// Get a specific admission form by ID
-router.get('/:id', getAdmissionById)
+// Route to move admission to student
+router.put('/move-to-student/:id', moveAdmissionToStudent)
 
 // Update a specific admission form by ID
 router.put('/:id', updateAdmissionById)
 
 // Delete a specific admission form by ID
 router.delete('/:id', deleteAdmissionById)
-
-// New route to delete multiple admission forms by IDs
-router.post('/delete', deleteAdmissionsByIds)
 
 export default router

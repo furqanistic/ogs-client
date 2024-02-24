@@ -1,7 +1,6 @@
 import { PhoneInTalk } from '@mui/icons-material'
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import School from '../img/front.jpg'
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -121,7 +120,7 @@ const ContactData = () => {
         <Image></Image>
         <Information>
           <Title>The Orion School</Title>
-          <CallLink href='tel:+923077879988'>
+          <CallLink href='tel:+923077879977'>
             <Button>
               Click here to speak with us{' '}
               <PhoneInTalk style={{ marginLeft: '8px' }} />

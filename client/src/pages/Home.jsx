@@ -10,6 +10,7 @@ import NewsLetter from '../components/NewsLetter'
 import Offer from '../components/Offer'
 import Rectors from '../components/Rectors'
 
+import PostsSlide from '../components/PostsSlide'
 import Slider from '../components/Slider'
 
 const Home = () => {
@@ -19,6 +20,7 @@ const Home = () => {
       <News />
       <Slider />
       <ContactData />
+      <PostsSlide />
       <Offer />
       <Gallery />
       <Rectors />

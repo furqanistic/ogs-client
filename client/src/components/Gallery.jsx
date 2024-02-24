@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 const Container = styled.div`
   width: 100%;
-  min-height: 500px;
+  /* min-height: 500px; */
+  height: 100%;
   background-color: #0b0a45;
-
   background-attachment: fixed;
   background-size: cover;
   display: flex;
@@ -41,15 +41,14 @@ const NewsBox = styled.div`
 `
 const NewsOne = styled.div`
   margin: 0.4rem;
-  border-radius: 20px;
-  /* border: 0.8px dashed white; */
-  padding: 0.8rem;
-  font-size: 0.8rem;
+  border-radius: 10px;
+  padding: 0.5rem;
+  font-size: 0.75rem;
   background-color: #ffffff;
   color: #0b0a45;
   margin: 1rem;
   font-weight: 300;
-  transition: all 0.5s ease-in-out;
+  /* border: 2px solid #ffffff; */
 `
 const Heading = styled.h1`
   font-size: 2rem;
@@ -61,50 +60,68 @@ const Heading = styled.h1`
   align-items: center;
   color: #ffffff;
 `
-const Parent = styled.div`
-  padding: 1rem;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
-`
+
 const Left = styled.div`
   flex: 0.8;
 `
 const Right = styled.div`
   flex: 1.2;
   height: 100%;
+  display: flex;
+  margin-top: 4rem;
+  justify-content: center;
+  align-items: center;
   @media only screen and (max-width: 700px) {
     display: none;
     visibility: hidden;
   }
 `
-const DivOne = styled.div`
-  grid-area: 1 / 1 / 5 / 3;
-  height: 100%;
-  width: 100%;
-`
-const DivTwo = styled.div`
-  grid-area: 1 / 3 / 3 / 5;
 
-  height: 270px;
+const GalleryWrapper = styled.article`
+  --size: 100px;
+  display: grid;
+  grid-template-columns: repeat(6, var(--size));
+  grid-auto-rows: var(--size);
+  margin-bottom: var(--size);
+  place-items: start center;
+  gap: 5px;
+
+  &:hover img:not(:hover),
+  &:focus img:not(:focus) {
+    filter: brightness(0.5) contrast(0.5);
+  }
+
+  & img {
+    object-fit: cover;
+    width: calc(var(--size) * 2);
+    height: calc(var(--size) * 2);
+    clip-path: path(
+      'M90,10 C100,0 100,0 110,10 190,90 190,90 190,90 200,100 200,100 190,110 190,110 110,190 110,190 100,200 100,200 90,190 90,190 10,110 10,110 0,100 0,100 10,90Z'
+    );
+    transition: clip-path 0.25s, filter 0.75s;
+    grid-column: auto / span 2;
+    border-radius: 5px;
+
+    &:nth-child(5n - 1) {
+      grid-column: 2 / span 2;
+    }
+
+    &:hover,
+    &:focus {
+      clip-path: path(
+        'M0,0 C0,0 200,0 200,0 200,0 200,100 200,100 200,100 200,200 200,200 200,200 100,200 100,200 100,200 100,200 0,200 0,200 0,100 0,100 0,100 0,100 0,100Z'
+      );
+      z-index: 1;
+      transition: clip-path 0.25s, filter 0.25s;
+    }
+
+    &:focus {
+      outline: 1px dashed black;
+      outline-offset: -5px;
+    }
+  }
 `
-const DivThree = styled.div`
-  grid-area: 3 / 3 / 5 / 5;
-`
-const DivFour = styled.div`
-  grid-area: 1 / 5 / 3 / 7;
-`
-const DivFive = styled.div`
-  grid-area: 3 / 5 / 5 / 7;
-  background-color: #c0c9ff;
-`
-const ImageGallery = styled.img`
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-`
+
 const Imp = styled.div`
   height: 3rem;
   background-color: #ffffff;
@@ -160,23 +177,40 @@ const Gallery = () => {
           </Wrapper>
         </Left>
         <Right>
-          <Parent>
-            <DivOne>
-              <ImageGallery src='https://images.pexels.com/photos/8466776/pexels-photo-8466776.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' />
-            </DivOne>
-            <DivTwo>
-              <ImageGallery src='https://images.pexels.com/photos/8613121/pexels-photo-8613121.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' />
-            </DivTwo>
-            <DivThree>
-              <ImageGallery src='https://images.pexels.com/photos/8535236/pexels-photo-8535236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' />
-            </DivThree>
-            <DivFour>
-              <ImageGallery src='https://images.pexels.com/photos/1089069/pexels-photo-1089069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' />
-            </DivFour>
-            <DivFive>
-              <ImageGallery src='https://images.pexels.com/photos/5274616/pexels-photo-5274616.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' />
-            </DivFive>
-          </Parent>
+          <GalleryWrapper>
+            <img
+              src='https://images.pexels.com/photos/8466776/pexels-photo-8466776.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+              alt='the orion school'
+            />
+            <img
+              src='https://images.pexels.com/photos/8613121/pexels-photo-8613121.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+              alt='the orion school'
+            />
+            <img
+              src='https://images.pexels.com/photos/8535236/pexels-photo-8535236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+              alt='the orion school'
+            />
+            <img
+              src='https://images.pexels.com/photos/1089069/pexels-photo-1089069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+              alt='the orion school'
+            />
+            <img
+              src='https://images.pexels.com/photos/8612995/pexels-photo-8612995.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+              alt='the orion school'
+            />
+            <img
+              src='https://images.pexels.com/photos/8535147/pexels-photo-8535147.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+              alt='the orion school'
+            />
+            <img
+              src='https://images.pexels.com/photos/8535193/pexels-photo-8535193.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+              alt='the orion school'
+            />
+            <img
+              src='https://images.pexels.com/photos/8612967/pexels-photo-8612967.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+              alt='the orion school'
+            />
+          </GalleryWrapper>
         </Right>
       </Container>
     </>

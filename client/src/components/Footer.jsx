@@ -79,8 +79,8 @@ const Footer = () => {
             </Column>
             <Column>
               <Heading>Contact Us</Heading>
-              <FooterLink href='tel:+923077879988'>0307 787 9988</FooterLink>
-              <FooterLink href='tel:+923355854455'>0335 585 4455</FooterLink>
+              <FooterLink href='tel:+923077879988'>0307 787 9977</FooterLink>
+              <FooterLink href='tel:+923355854455'>0331 330 9977</FooterLink>
               <FooterLink href='#'>Sargodha, Pakistan</FooterLink>
               <FooterLink href='#'>help@orionedu.net</FooterLink>
             </Column>

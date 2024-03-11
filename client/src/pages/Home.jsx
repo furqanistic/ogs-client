@@ -20,7 +20,7 @@ const Home = () => {
       <News />
       <Slider />
       <ContactData />
-      <PostsSlide />
+      {/* <PostsSlide /> */}
       <Offer />
       <Gallery />
       <Rectors />

@@ -33,7 +33,6 @@ const StudentSchema = new mongoose.Schema(
         type: String,
         // You might want to use a reference to the teacher schema if you have one.
       },
-      // Add more class-related fields as needed
     },
     personalInfo: {
       name: {

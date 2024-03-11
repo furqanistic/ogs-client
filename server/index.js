@@ -5,6 +5,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import admissionRoute from './routes/admission.js'
 import authRoute from './routes/auth.js'
+import studentRoute from './routes/student.js'
 import teacherRoute from './routes/teacher.js'
 
 const app = express()
@@ -16,6 +17,7 @@ mongoose.set('strictQuery', true)
 app.use('/api/auth/', authRoute)
 app.use('/api/admission/', admissionRoute)
 app.use('/api/teacher/', teacherRoute)
+app.use('/api/student/', studentRoute)
 
 const connect = () => {
   mongoose

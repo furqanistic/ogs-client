@@ -192,3 +192,41 @@ export const moveAdmissionToStudent = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' })
   }
 }
+
+// Delete all admissions with status "Enrolled"
+export const deleteEnrolledAdmissions = async (req, res) => {
+  try {
+    const deletedAdmissions = await Admission.deleteMany({ status: 'Enrolled' })
+
+    // Check if any admission forms were deleted
+    if (deletedAdmissions.deletedCount === 0) {
+      return res.status(404).json({ message: 'No enrolled admissions found' })
+    }
+
+    // Admissions deleted successfully, and sending a status code 200 with a message
+    res
+      .status(200)
+      .json({ message: 'Enrolled admissions deleted successfully' })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+}
+
+// Delete all admissions with status "Waiting"
+export const deleteWaitingAdmissions = async (req, res) => {
+  try {
+    const deletedAdmissions = await Admission.deleteMany({ status: 'Waiting' })
+
+    // Check if any admission forms were deleted
+    if (deletedAdmissions.deletedCount === 0) {
+      return res.status(404).json({ message: 'No waiting admissions found' })
+    }
+
+    // Admissions deleted successfully, and sending a status code 200 with a message
+    res.status(200).json({ message: 'Waiting admissions deleted successfully' })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+}

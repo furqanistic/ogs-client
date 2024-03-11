@@ -1,5 +1,55 @@
 import mongoose from 'mongoose'
 
+const MonthlyFeeDetailSchema = new mongoose.Schema({
+  month: {
+    type: String,
+    enum: [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ],
+    required: true,
+  },
+  amount: {
+    type: Number,
+    required: true,
+  },
+  status: {
+    type: String,
+    enum: ['Paid', 'Pending', 'Late'],
+    required: true,
+  },
+  paymentDate: Date,
+  paymentMethod: String,
+  transactionId: String,
+})
+
+const FineDetailSchema = new mongoose.Schema({
+  amount: {
+    type: Number,
+    required: true,
+  },
+  reason: {
+    type: String,
+    // Examples: 'Late Payment', 'Library Fine', etc.
+  },
+  status: {
+    type: String,
+    enum: ['Paid', 'Unpaid'],
+    required: true,
+  },
+  paymentDate: Date,
+})
+
 const FeeSchema = new mongoose.Schema(
   {
     studentId: {
@@ -7,44 +57,14 @@ const FeeSchema = new mongoose.Schema(
       ref: 'Student',
       required: true,
     },
-    amount: {
-      type: Number,
-      required: true,
-    },
-    paymentDate: {
-      type: Date,
-      required: true,
-    },
-    paymentMethod: {
-      type: String,
-      // You might use an enum or specific values based on payment methods (e.g., 'Cash', 'Credit Card', 'Bank Transfer').
-    },
-    transactionId: {
-      type: String,
-      // Identifier for the transaction, if applicable.
-    },
-    description: {
-      type: String,
-      // Additional information or notes about the fee payment.
-    },
-    semester: {
-      type: String,
-      // Indicate the semester for which the fee is applicable (e.g., 'Spring 2024').
-    },
     academicYear: {
       type: String,
-      // Indicate the academic year for which the fee is applicable (e.g., '2023-2024').
+      required: true,
+      // e.g., '2023-2024'
     },
-    feeType: {
-      type: String,
-      // Indicate the type of fee (e.g., 'Tuition Fee', 'Library Fee', 'Exam Fee').
-    },
-    status: {
-      type: String,
-      enum: ['Paid', 'Pending', 'Late'],
-      // Indicate the status of the fee payment.
-    },
-    // Add more fee-related fields as needed
+    monthlyFees: [MonthlyFeeDetailSchema],
+    fines: [FineDetailSchema],
+    // You can still include fields for semester, feeType, etc., if they provide value
   },
   { timestamps: true }
 )

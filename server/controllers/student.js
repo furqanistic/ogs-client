@@ -1,5 +1,6 @@
-import Student from '../models/Student'
-import User from '../models/User'
+import Fee from '../models/Fee.js'
+import Student from '../models/Student.js'
+import User from '../models/User.js'
 
 // Create a new student
 export const createStudent = async (req, res) => {
@@ -15,7 +16,6 @@ export const createStudent = async (req, res) => {
 
     // Save the student
     await newStudent.save()
-
     // Update user's studentInfo reference
     const user = await User.findById(req.user.id)
     user.studentInfo = newStudent._id
@@ -99,6 +99,77 @@ export const deleteStudentById = async (req, res) => {
     }
 
     res.status(200).json({ message: 'Student deleted successfully' })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+}
+
+// Create Fee details for a student
+export const createFeeDetailsForStudent = async (req, res) => {
+  try {
+    const { studentId, academicYear, monthlyFees, fines } = req.body
+
+    const newFeeDetails = new Fee({
+      studentId,
+      academicYear,
+      monthlyFees,
+      fines,
+    })
+
+    await newFeeDetails.save()
+
+    res.status(201).json({
+      message: 'Fee details added successfully',
+      feeDetails: newFeeDetails,
+    })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+}
+// Get Fee details by Student ID
+export const getFeeDetailsByStudentId = async (req, res) => {
+  try {
+    const { studentId, academicYear } = req.query // Assuming academicYear is optional
+
+    const query = { studentId }
+    if (academicYear) query.academicYear = academicYear
+
+    const feeDetails = await Fee.find(query)
+
+    if (!feeDetails.length) {
+      return res
+        .status(404)
+        .json({ message: 'No fee details found for the given student' })
+    }
+
+    res.status(200).json(feeDetails)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+}
+// Update Fee details for a student
+export const updateFeeDetailsById = async (req, res) => {
+  try {
+    const { feeDetailsId } = req.params // Assuming the feeDetailsId is passed as a URL parameter
+    const { monthlyFees, fines } = req.body
+
+    const updatedFeeDetails = await Fee.findByIdAndUpdate(
+      feeDetailsId,
+      { $set: { monthlyFees, fines } },
+      { new: true }
+    )
+
+    if (!updatedFeeDetails) {
+      return res.status(404).json({ message: 'Fee details not found' })
+    }
+
+    res.status(200).json({
+      message: 'Fee details updated successfully',
+      feeDetails: updatedFeeDetails,
+    })
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Internal server error' })

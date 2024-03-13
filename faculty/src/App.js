@@ -43,6 +43,7 @@ const App = () => {
                 <Route path='view/:id' element={<ViewStudent />} />
                 <Route path='edit/:id' element={<EditStudent />} />
               </Route>
+              <Route path='fee-challan/:id' element={<FeeSlip />} />
             </Route>
             <Route path='/users' element={<User />} />
             <Route path='/teachers'>
@@ -55,7 +56,6 @@ const App = () => {
             <Route path='/publish' element={<Publish />} />
             <Route path='/chats' element={<Chat />} />
             <Route path='/activity' element={<Activity />} />
-            <Route path='/fee-slip' element={<FeeSlip />} />
           </>
         )}
 

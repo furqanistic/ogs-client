@@ -2,14 +2,17 @@
 import { CloudDownload } from '@mui/icons-material'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Barcode from 'react-barcode'
+import { useQuery } from 'react-query'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
+import { axiosInstance } from '../../config'
 
 const Row = styled.div`
   position: relative;
   height: 100%;
-
+  min-width: 1200px;
   &:after {
     content: '';
     display: table;
@@ -22,8 +25,9 @@ const Wrap = styled.div`
 `
 const Column = styled.div`
   float: left;
-  width: 25%;
-  padding: 10px;
+  width: 31%;
+  padding: 10px 2rem;
+
   border-right: 1px dotted #000;
   height: 100%;
 `
@@ -128,12 +132,16 @@ const Btn = styled.div`
   }
 `
 const FeeSlip = () => {
+  const params = useParams()
+  const [gradeName, setGradeName] = useState('')
+  const [gradeSection, setGradeSection] = useState('')
+  const [studentName, setStudentName] = useState('')
+
   const savePdfRef = useRef(null)
   const editRef = useRef(null)
   const deleteRef = useRef(null)
 
   const generatePDF = () => {
-    console.log('1')
     if (savePdfRef.current) {
       savePdfRef.current.style.display = 'none'
     }
@@ -145,8 +153,8 @@ const FeeSlip = () => {
     }
     const input = document.getElementById('booking-form-wrap')
 
-    input.style.width = '1200px' // Adjust this value based on the desired output
-    input.style.height = '700px' // Adjust this value based on the desired output
+    // input.style.width = '1200px' // Adjust this value based on the desired output
+    // input.style.height = '700px' // Adjust this value based on the desired output
 
     html2canvas(input, {
       scale: 2,
@@ -155,7 +163,7 @@ const FeeSlip = () => {
     }).then((canvas) => {
       const imgData = canvas.toDataURL('image/jpeg', 1.0) // Use JPEG format with quality 1.0 (no compression)
 
-      const pdfWidth = 297 // A4 dimensions in mm
+      const pdfWidth = 320 // A4 dimensions in mm
       const pdfHeight = 187
 
       const imgWidth = pdfWidth
@@ -165,7 +173,7 @@ const FeeSlip = () => {
 
       pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight)
 
-      pdf.save('file.pdf')
+      pdf.save(`${studentName}.pdf`)
 
       if (savePdfRef.current) {
         savePdfRef.current.style.display = 'block'
@@ -179,22 +187,44 @@ const FeeSlip = () => {
     })
   }
 
+  const { data, status } = useQuery(
+    'specific-student',
+    async () => {
+      const res = await axiosInstance.get(`/student/${params.id}`)
+
+      return res.data
+    },
+    {
+      onSuccess: (data) => {
+        setGradeName(data.classInfo.className || '')
+        setGradeSection(data.classInfo.section || '')
+        setStudentName(data.personalInfo.name || '')
+        console.log(data)
+      },
+    }
+  )
   return (
     <>
       <Row id='booking-form-wrap'>
         <Column>
           <JustifyBetween>
             <TextBox>Invoice # INV/2024</TextBox>
-            {/* <TextBox>Student Copy</TextBox> */}
+            <TextBox>Bank Copy</TextBox>
           </JustifyBetween>
           <FlexContainer>
             <FlexColumn>
               <span>Due Date:</span>
               <span>01/01/2025</span>
+              <span>Name:</span>
+              <span>{studentName}</span>
             </FlexColumn>
             <FlexColumn>
               <span>Account: 75-HBL</span>
               <span>The Orion School</span>
+              <span>Class</span>
+              <span>
+                {gradeName} - {gradeSection}
+              </span>
             </FlexColumn>
           </FlexContainer>
           <FlexContainer>
@@ -267,16 +297,20 @@ const FeeSlip = () => {
         <Column>
           <JustifyBetween>
             <TextBox>Invoice # INV/2024</TextBox>
-            {/* <TextBox>Student Copy</TextBox> */}
+            <TextBox>Office Copy</TextBox>
           </JustifyBetween>
           <FlexContainer>
             <FlexColumn>
               <span>Due Date:</span>
               <span>01/01/2025</span>
+              <span>Name:</span>
+              <span>Furqan Afzal</span>
             </FlexColumn>
             <FlexColumn>
               <span>Account: 75-HBL</span>
               <span>The Orion School</span>
+              <span>Class</span>
+              <span>Nursery - A</span>
             </FlexColumn>
           </FlexContainer>
           <FlexContainer>
@@ -349,98 +383,20 @@ const FeeSlip = () => {
         <Column>
           <JustifyBetween>
             <TextBox>Invoice # INV/2024</TextBox>
-            {/* <TextBox>Student Copy</TextBox> */}
+            <TextBox>Student Copy</TextBox>
           </JustifyBetween>
           <FlexContainer>
             <FlexColumn>
               <span>Due Date:</span>
               <span>01/01/2025</span>
+              <span>Name:</span>
+              <span>Furqan Afzal</span>
             </FlexColumn>
             <FlexColumn>
               <span>Account: 75-HBL</span>
               <span>The Orion School</span>
-            </FlexColumn>
-          </FlexContainer>
-          <FlexContainer>
-            <Barcode value='ABC123' height={50} />
-          </FlexContainer>
-          <Table>
-            <thead>
-              <TableRow>
-                <TableHeader scope='col left' colSpan='2'>
-                  Description
-                </TableHeader>
-                <TableHeader scope='col right'>Amount</TableHeader>
-              </TableRow>
-            </thead>
-            <tbody>
-              <TableRow>
-                <TableCell data-label='Account' colSpan='2'>
-                  Electricity-319315001
-                  <br />
-                  Consumption
-                </TableCell>
-                <TableCell data-label='Amount'>500.0</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell data-label='Account' colSpan='2'>
-                  Electricity-319315001
-                  <br />
-                  Consumption
-                </TableCell>
-                <TableCell data-label='Amount'>500.0</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell data-label='Account' colSpan='2'>
-                  Electricity-319315001
-                  <br />
-                  Consumption
-                </TableCell>
-                <TableCell data-label='Amount'>500.0</TableCell>
-              </TableRow>
-            </tbody>
-          </Table>
-          <HorizontalRule />
-          <JustifyBetween>
-            <TextBox>Payable by due date</TextBox>
-            <span>Rs. 14,530</span>
-          </JustifyBetween>
-          <HorizontalRule />
-
-          <JustifyBetween>
-            <TextBox>Payable by due date</TextBox>
-            <span>Rs. 14,530</span>
-          </JustifyBetween>
-          <HorizontalRule />
-          <FlexColumn>
-            <span>For Bank Use Only</span>
-            <span>Received Payment Rs.</span>
-          </FlexColumn>
-          <br />
-          <FloatRight>
-            <span>Signature and Stamp</span>
-            <span>Bank Officer</span>
-          </FloatRight>
-          <br />
-          <br />
-          <DateWrap>
-            <span>Date:</span>
-            <span>_____________________</span>
-          </DateWrap>
-        </Column>
-        <Column>
-          <JustifyBetween>
-            <TextBox>Invoice # INV/2024</TextBox>
-            {/* <TextBox>Student Copy</TextBox> */}
-          </JustifyBetween>
-          <FlexContainer>
-            <FlexColumn>
-              <span>Due Date:</span>
-              <span>01/01/2025</span>
-            </FlexColumn>
-            <FlexColumn>
-              <span>Account: 75-HBL</span>
-              <span>The Orion School</span>
+              <span>Class</span>
+              <span>Nursery - A</span>
             </FlexColumn>
           </FlexContainer>
           <FlexContainer>

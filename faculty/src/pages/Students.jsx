@@ -130,17 +130,19 @@ const Students = () => {
             </CardIcon>
             <CardName> Students</CardName>
           </Cards>
-          <Cards>
-            <CardIcon>
-              <Payments
-                style={{
-                  fontSize: '10rem',
-                  color: 'white',
-                }}
-              />
-            </CardIcon>
-            <CardName>Fee Challans</CardName>
-          </Cards>
+          <Link to='fee-challan' style={{ textDecoration: 'none' }}>
+            <Cards>
+              <CardIcon>
+                <Payments
+                  style={{
+                    fontSize: '10rem',
+                    color: 'white',
+                  }}
+                />
+              </CardIcon>
+              <CardName>Fee Challans</CardName>
+            </Cards>
+          </Link>
           <Cards>
             <CardIcon>
               <Paid

@@ -162,8 +162,8 @@ const DisplayCard = () => {
         <Content>
           <Title>Admission Form Submitted</Title>
           <Message>
-            Thank you for submitting your admission form to Orion Grammar
-            School! 😊 <br></br>
+            Thank you for submitting your admission form to <br></br>THE ORION
+            SCHOOL ❤️😊 <br></br>
             <br></br>Your application is now under review. We will get back to
             you soon with further instructions.
           </Message>

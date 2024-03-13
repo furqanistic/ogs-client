@@ -18,7 +18,7 @@ router.post('/', verifyToken, createStudent)
 router.get('/', verifyToken, getAllStudents)
 
 // Get a single student by ID
-router.get('/:id', verifyToken, getStudentById)
+router.get('/:id', getStudentById)
 
 // Update a student by ID
 router.put('/:id', verifyToken, updateStudentById)

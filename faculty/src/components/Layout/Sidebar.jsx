@@ -40,6 +40,7 @@ const IconBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 200px;
 `
 
 const ItemsWrapper = styled.div`
@@ -138,7 +139,7 @@ const Sidebar = () => {
     <>
       <Bar>
         <IconBox>
-          <NameIcon src={Logo} />
+          <NameIcon src='https://faculty.theorionschool.net/static/media/logo.8155f0d62d1a1c7896ea.png' />
         </IconBox>
         <ItemsWrapper>
           {filteredItems.map((item) => (

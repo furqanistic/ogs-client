@@ -8,6 +8,10 @@ import DashSchoolPerfomance from '../components/Dashboard/DashSchoolPerfomance'
 const Size = styled.div`
   padding-left: 3rem;
   position: relative;
+  height: 100vh;
+  width: 100%;
+  background-color: #0b0a45;
+  /* background-color: #0b0a45; */
 `
 
 const Dashboard = () => {

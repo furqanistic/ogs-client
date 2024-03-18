@@ -224,7 +224,7 @@ const ViewStudent = () => {
 
   return (
     <Layout>
-      <Topbar title='Teachers' />
+      <Topbar title='Students' />
       <form>
         <Wrap id='booking-form-wrap'>
           <FieldsHeading>View Student Information : </FieldsHeading>

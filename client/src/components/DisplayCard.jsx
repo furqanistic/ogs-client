@@ -164,8 +164,8 @@ const DisplayCard = () => {
           <Message>
             Thank you for submitting your admission form to <br></br>THE ORION
             SCHOOL ❤️😊 <br></br>
-            <br></br>Your application is now under review. We will get back to
-            you soon with further instructions.
+            <br></br>You will soon be invited to the campus for further
+            proceedings.
           </Message>
         </Content>
         <Actions>

@@ -38,6 +38,9 @@ const CardNav = styled.div`
   background-size: cover;
   border: 1px solid #3aa933;
   border-radius: 30px;
+  @media (max-width: 820px) {
+    height: 8vh;
+  }
 `
 const CardSet = styled.div`
   display: flex;

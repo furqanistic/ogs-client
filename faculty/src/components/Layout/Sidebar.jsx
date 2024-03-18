@@ -139,7 +139,7 @@ const Sidebar = () => {
     <>
       <Bar>
         <IconBox>
-          <NameIcon src='https://faculty.theorionschool.net/static/media/logo.8155f0d62d1a1c7896ea.png' />
+          <NameIcon src='https://github.com/furqanistic/ogs-client/blob/website/faculty/src/img/logo-white.png?raw=true' />
         </IconBox>
         <ItemsWrapper>
           {filteredItems.map((item) => (

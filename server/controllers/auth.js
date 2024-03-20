@@ -31,7 +31,7 @@ export const signup = async (req, res, next) => {
   }
 }
 
-// Signin function (unchanged)
+// Signin function
 export const signin = async (req, res, next) => {
   const { email, password } = req.body
 
@@ -49,6 +49,7 @@ export const signin = async (req, res, next) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT)
     const { password: userPassword, ...others } = user._doc
 
+    // Set token as a session cookie
     res
       .cookie('access_token', token, {
         httpOnly: true,

@@ -91,7 +91,6 @@ const FormText = styled.span`
   font-size: 1.1rem;
   margin-right: 10px;
   font-weight: 500;
-  min-width: 170px;
   @media (max-width: 900px) {
     font-size: 0.8rem;
     min-width: 100px;
@@ -213,6 +212,15 @@ const SelectCat = styled.select`
     font-size: 0.9rem;
   }
 `
+const SelectCatTwo = styled(SelectCat)`
+  width: 40%;
+  @media (max-width: 1200px) {
+    width: 30%;
+  }
+  @media (max-width: 900px) {
+    width: 100%;
+  }
+`
 const SelectOpt = styled.option`
   /* width: 50%; */
   display: flex;
@@ -293,6 +301,15 @@ const ErrMsg = styled.p`
   justify-content: center;
   align-items: center;
 `
+const TextSnap = styled.span`
+  font-size: 0.6rem;
+  color: #ffffff;
+`
+const TextSet = styled.div`
+  display: flex;
+  align-items: center;
+  min-width: 170px;
+`
 const AdmissionForm = () => {
   // all the states here
   const [showCard, setShowCard] = useState(false)
@@ -314,6 +331,7 @@ const AdmissionForm = () => {
     'Grade 6',
     'Grade 7',
   ]
+  const workStatus = ['Choose', 'Working', 'House Hold']
 
   // all the functions here
 
@@ -331,8 +349,11 @@ const AdmissionForm = () => {
         fcell: values.fcell,
         femail: values.femail,
         foccupation: values.foccupation,
+        feducation: values.feducation,
         mname: values.mname,
         moccupation: values.moccupation,
+        meducation: values.meducation,
+        mIsWorking: values.mIsWorking,
         mcell: values.mcell,
         address: values.address,
         others: values.others,
@@ -357,8 +378,11 @@ const AdmissionForm = () => {
         fcell: '',
         femail: '',
         foccupation: '',
+        feducation: '',
         mname: '',
         moccupation: '',
+        mIsWorking: '',
+        meducation: '',
         mcell: '',
         address: '',
         others: '',
@@ -417,8 +441,8 @@ const AdmissionForm = () => {
           <InputWrap>
             <ErrorWrap>
               <InputSetTwo>
-                <FormText>Class: </FormText>
-                <SelectCat
+                <FormText>Admission Applying For (Class): </FormText>
+                <SelectCatTwo
                   name='grade'
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -426,11 +450,11 @@ const AdmissionForm = () => {
                   value={values.grade}
                 >
                   {GradeOptions.map((category) => (
-                    <SelectOpt key={category} value={category}>
+                    <SelectOpt key={category} value={category} style={{}}>
                       {category}
                     </SelectOpt>
                   ))}
-                </SelectCat>
+                </SelectCatTwo>
               </InputSetTwo>
               {errors.grade && touched.grade && (
                 <ErrMsg>
@@ -457,7 +481,7 @@ const AdmissionForm = () => {
               )}
             </ErrorWrap>
           </InputWrap>
-          <FieldsHeading>Father's Information</FieldsHeading>
+          <FieldsHeading>Father's Profile</FieldsHeading>
           <InputWrap>
             <ErrorWrap>
               <InputSet>
@@ -537,6 +561,22 @@ const AdmissionForm = () => {
           <InputWrap>
             <ErrorWrap>
               <InputSet>
+                <TextSet>
+                  <FormText>Education: </FormText>
+                  <TextSnap>(Optional)</TextSnap>
+                </TextSet>
+                <FormInput
+                  placeholder='Enter Education...'
+                  type='text'
+                  value={values.feducation}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id='feducation'
+                />
+              </InputSet>
+            </ErrorWrap>
+            <ErrorWrap>
+              <InputSet>
                 <FormText>Occupation: </FormText>
                 <FormInput
                   placeholder='Enter Occupation...'
@@ -549,7 +589,7 @@ const AdmissionForm = () => {
               </InputSet>
             </ErrorWrap>
           </InputWrap>
-          <FieldsHeading>Mother's Information : </FieldsHeading>
+          <FieldsHeading>Mother's Profile : </FieldsHeading>
           <InputWrap>
             <ErrorWrap>
               <InputSet>
@@ -571,21 +611,6 @@ const AdmissionForm = () => {
             </ErrorWrap>
             <ErrorWrap>
               <InputSet>
-                <FormText> Occupation:</FormText>
-                <FormInput
-                  placeholder='Enter Occupation...'
-                  type='text'
-                  value={values.moccupation}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  id='moccupation'
-                />
-              </InputSet>
-            </ErrorWrap>
-          </InputWrap>
-          <InputWrap>
-            <ErrorWrap>
-              <InputSet>
                 <FormText> Cell No: </FormText>
                 <FormInput
                   placeholder='Phone Number...'
@@ -596,9 +621,65 @@ const AdmissionForm = () => {
                   id='mcell'
                 />
               </InputSet>
+            </ErrorWrap>
+          </InputWrap>
+          <InputWrap>
+            <ErrorWrap>
+              <InputSet>
+                <TextSet>
+                  <FormText>Education: </FormText>
+                  <TextSnap>(Optional)</TextSnap>
+                </TextSet>
+                <FormInput
+                  placeholder='Enter Occupation...'
+                  type='text'
+                  value={values.meducation}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id='meducation'
+                />
+              </InputSet>
+            </ErrorWrap>
+            <ErrorWrap>
+              <InputSet>
+                <FormText> Occupation:</FormText>
+                <FormInput
+                  placeholder='Enter Occupation...'
+                  type='text'
+                  value={values.moccupation}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id='moccupation'
+                />
+              </InputSet>
               {errors.mcell && touched.mcell && (
                 <ErrMsg>
                   <Error style={{ marginRight: '5px' }} /> {errors.mcell}
+                </ErrMsg>
+              )}
+            </ErrorWrap>
+          </InputWrap>
+          <InputWrap>
+            <ErrorWrap>
+              <InputSetTwo style={{ marginBottom: '10px' }}>
+                <FormText> Status: </FormText>
+                <SelectCatTwo
+                  name='mIsWorking'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  id='mIsWorking'
+                  value={values.mIsWorking}
+                >
+                  {workStatus.map((category) => (
+                    <SelectOpt key={category} value={category} style={{}}>
+                      {category}
+                    </SelectOpt>
+                  ))}
+                </SelectCatTwo>
+              </InputSetTwo>
+              {errors.mIsWorking && touched.mIsWorking && (
+                <ErrMsg>
+                  <Error style={{ marginRight: '5px' }} /> {errors.mIsWorking}
                 </ErrMsg>
               )}
             </ErrorWrap>

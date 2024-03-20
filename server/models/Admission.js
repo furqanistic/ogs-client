@@ -29,13 +29,22 @@ const AdmissionSchema = new mongoose.Schema(
     foccupation: {
       type: String,
     },
+    feducation: {
+      type: String,
+    },
     mname: {
       type: String,
     },
     moccupation: {
       type: String,
     },
+    meducation: {
+      type: String,
+    },
     mcell: {
+      type: String,
+    },
+    mIsWorking: {
       type: String,
     },
     address: {

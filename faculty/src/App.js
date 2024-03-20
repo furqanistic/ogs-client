@@ -34,9 +34,9 @@ const App = () => {
         />
 
         {currentUser && (
-          <>
-            <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/students'>
+          <Route path='/'>
+            <Route path='dashboard' element={<Dashboard />} />
+            <Route path='students'>
               <Route index element={<Students />} />
               <Route path='all-admissions'>
                 <Route index element={<StudentAdmissions />} />
@@ -45,18 +45,18 @@ const App = () => {
               </Route>
               <Route path='fee-challan/:id' element={<FeeSlip />} />
             </Route>
-            <Route path='/users' element={<User />} />
-            <Route path='/teachers'>
+            <Route path='users' element={<User />} />
+            <Route path='teachers'>
               <Route index element={<Teachers />} />
               <Route path='add' element={<AddTeacher />} />
               <Route path='view/:id' element={<ViewTeacher />} />
               <Route path='edit/:id' element={<EditTeacher />} />
             </Route>
-            <Route path='/events' element={<Event />} />
-            <Route path='/publish' element={<Publish />} />
-            <Route path='/chats' element={<Chat />} />
-            <Route path='/activity' element={<Activity />} />
-          </>
+            <Route path='events' element={<Event />} />
+            <Route path='publish' element={<Publish />} />
+            <Route path='chats' element={<Chat />} />
+            <Route path='activity' element={<Activity />} />
+          </Route>
         )}
 
         {/* Redirect to dashboard if user is already logged in */}

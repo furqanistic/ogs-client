@@ -19,6 +19,7 @@ export const admissionSchema = yup.object().shape({
   femail: yup.string().email('Please follow this format : name@example.com'),
   foccupation: yup.string(),
   moccupation: yup.string(),
+  mIsWorking: yup.string().required('Please specify working status...'),
   mcell: yup
     .string()
     .length(11, 'Mobile number must be exactly 11 digits e.g 03123456789'),

@@ -47,6 +47,9 @@ const AdmissionSchema = new mongoose.Schema(
     mIsWorking: {
       type: String,
     },
+    mjob: {
+      type: String,
+    },
     address: {
       type: String,
     },

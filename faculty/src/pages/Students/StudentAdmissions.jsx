@@ -4,17 +4,11 @@ import Layout from '../../Layout'
 import Topbar from '../../components/Layout/Topbar'
 import StudentMain from '../../components/Students/StudentMain'
 
-const Size = styled.div`
-  padding-left: 3rem;
-  position: relative;
-`
 const StudentAdmissions = () => {
   return (
     <Layout>
-      <Size>
-        <Topbar title='Students' />
-        <StudentMain />
-      </Size>
+      <Topbar title='Students' />
+      <StudentMain />
     </Layout>
   )
 }

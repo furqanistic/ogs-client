@@ -1,5 +1,7 @@
+import { ArrowBack, BackHand } from '@mui/icons-material'
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Bar = styled.div`
@@ -16,6 +18,9 @@ const Title = styled.p`
   letter-spacing: 2px;
   color: #3aa933;
   text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const Left = styled.div`
@@ -59,11 +64,26 @@ const ProfileImg = styled.img`
 
 const Topbar = ({ title }) => {
   const { currentUser } = useSelector((state) => state.user)
+  const navigate = useNavigate()
 
   return (
     <Bar>
       <Left>
-        <Title>{title}</Title>
+        <Title>
+          <ArrowBack
+            onClick={() => navigate(-1)}
+            style={{
+              background: '#3aa933',
+              padding: '0.2rem',
+              fontSize: '2.3rem',
+              borderRadius: '50%',
+              marginRight: '20px',
+              color: 'white',
+              cursor: 'pointer',
+            }}
+          />
+          {title}
+        </Title>
       </Left>
       <Right>
         {currentUser ? (

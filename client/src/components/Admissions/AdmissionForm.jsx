@@ -332,6 +332,16 @@ const AdmissionForm = () => {
     'Grade 7',
   ]
   const workStatus = ['Choose', 'Working', 'House Hold']
+  const workField = [
+    'Choose',
+    'Education',
+    'Public Administration',
+    'Medical',
+    'Banking',
+    'Agriculture',
+    'Irrigation',
+    'Other',
+  ]
 
   // all the functions here
 
@@ -354,6 +364,7 @@ const AdmissionForm = () => {
         moccupation: values.moccupation,
         meducation: values.meducation,
         mIsWorking: values.mIsWorking,
+        mjob: values.mjob,
         mcell: values.mcell,
         address: values.address,
         others: values.others,
@@ -383,6 +394,7 @@ const AdmissionForm = () => {
         moccupation: '',
         mIsWorking: '',
         meducation: '',
+        mjob: '',
         mcell: '',
         address: '',
         others: '',
@@ -595,7 +607,7 @@ const AdmissionForm = () => {
               <InputSet>
                 <FormText> Name:</FormText>
                 <FormInput
-                  placeholder='Enter Number...'
+                  placeholder='Enter Name...'
                   type='text'
                   value={values.mname}
                   onChange={handleChange}
@@ -631,7 +643,7 @@ const AdmissionForm = () => {
                   <TextSnap>(Optional)</TextSnap>
                 </TextSet>
                 <FormInput
-                  placeholder='Enter Occupation...'
+                  placeholder='Enter Education...'
                   type='text'
                   value={values.meducation}
                   onChange={handleChange}
@@ -683,6 +695,26 @@ const AdmissionForm = () => {
                 </ErrMsg>
               )}
             </ErrorWrap>
+            {values.mIsWorking === 'Working' && (
+              <ErrorWrap>
+                <InputSetTwo>
+                  <FormText>Department</FormText>
+                  <SelectCatTwo
+                    name='mjob'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    id='mjob'
+                    value={values.mjob}
+                  >
+                    {workField.map((category) => (
+                      <SelectOpt key={category} value={category} style={{}}>
+                        {category}
+                      </SelectOpt>
+                    ))}
+                  </SelectCatTwo>
+                </InputSetTwo>
+              </ErrorWrap>
+            )}
           </InputWrap>
           <FieldsHeading>Other Information : </FieldsHeading>
           <InputWrap>

@@ -405,9 +405,9 @@ export default function StudentDataTable({ bookingDate }) {
                   <HistoryButton type='button' onClick={handleDeleteEnrolled}>
                     Delete Enrolled Students
                   </HistoryButton>
-                  <HistoryButton type='button' onClick={handleDeleteWaiting}>
+                  {/* <HistoryButton type='button' onClick={handleDeleteWaiting}>
                     Delete Waiting Students
-                  </HistoryButton>
+                  </HistoryButton> */}
                 </Actions>
               )}
               {isLoading && (

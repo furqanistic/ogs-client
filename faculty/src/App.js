@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Activity from './pages/Activity'
 import Chat from './pages/Chat'
+import Class from './pages/Class'
 import Dashboard from './pages/Dashboard'
 import Event from './pages/Event'
 import Login from './pages/Login'
@@ -10,6 +11,7 @@ import Publish from './pages/Publish'
 import Students from './pages/Students'
 import EditStudent from './pages/Students/EditStudent'
 import FeeSlip from './pages/Students/FeeSlip'
+import FeeSlipDetails from './pages/Students/FeeSlipDetails'
 import StudentAdmissions from './pages/Students/StudentAdmissions'
 import ViewStudent from './pages/Students/ViewStudent'
 import Teachers from './pages/Teacher'
@@ -43,9 +45,13 @@ const App = () => {
                 <Route path='view/:id' element={<ViewStudent />} />
                 <Route path='edit/:id' element={<EditStudent />} />
               </Route>
-              <Route path='fee-challan/:id' element={<FeeSlip />} />
+              <Route path='fee-challan'>
+                <Route index element={<FeeSlip />} />
+                <Route path=':id' element={<FeeSlipDetails />} />
+              </Route>
             </Route>
             <Route path='users' element={<User />} />
+            <Route path='class' element={<Class />} />
             <Route path='teachers'>
               <Route index element={<Teachers />} />
               <Route path='add' element={<AddTeacher />} />

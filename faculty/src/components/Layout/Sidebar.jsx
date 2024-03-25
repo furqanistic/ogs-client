@@ -6,6 +6,7 @@ import {
   Face6,
   GppGood,
   Person,
+  School,
 } from '@mui/icons-material'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -95,6 +96,7 @@ const Sidebar = () => {
         path: '/dashboard',
       },
       { name: 'Students', icon: <Face6 />, key: 'Students', path: '/students' },
+      { name: 'Class', icon: <School />, key: 'Class', path: '/class' },
       {
         name: 'Teachers',
         icon: <CoPresent />,
@@ -132,7 +134,6 @@ const Sidebar = () => {
   const handleClick = () => {
     dispatch(logout())
     navigate('/')
-    console.log('hwhw')
   }
 
   return (

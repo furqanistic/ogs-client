@@ -84,3 +84,18 @@ export const deleteTeacherById = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' })
   }
 }
+
+// get required data of teacher
+
+export const getAllTeachersOption = async (req, res) => {
+  try {
+    const teachers = await Teacher.find(
+      {},
+      { _id: 1, fname: 1, lname: 1, department: 1, gmail: 1 }
+    ).sort({ fname: 1 }) // Include _id
+    res.status(200).json(teachers)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Internal server error' })
+  }
+}

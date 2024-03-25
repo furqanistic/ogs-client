@@ -84,12 +84,7 @@ const CoverPage = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.5
-  ); /* Semi-transparent background to indicate modal */
+  background-color: rgba(0, 0, 0, 0.696);
   z-index: 999; /* Ensure it's above other content */
 `
 const MainSection = () => {

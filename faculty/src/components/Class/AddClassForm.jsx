@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
+import { useQuery } from 'react-query'
+import { Link } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
+import { axiosInstance } from '../../config'
 
 const pulseAnimation = keyframes`
   from {
@@ -17,7 +20,8 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  max-width: 350px;
+  min-width: 550px;
+  max-width: 600px;
   background-color: #fff;
   padding: 20px;
   border-radius: 20px;
@@ -68,6 +72,7 @@ const SignIn = styled.p`
   text-align: center;
   color: rgba(88, 87, 87, 0.822);
   font-size: 14px;
+  text-transform: capitalize;
 
   a {
     color: royalblue;
@@ -129,6 +134,13 @@ const SubmitButton = styled.button`
     cursor: pointer;
   }
 `
+const CloseBtn = styled(SubmitButton)`
+  background-color: red;
+  &:hover {
+    background-color: rgb(194, 56, 56);
+    cursor: pointer;
+  }
+`
 
 const Select = styled.select`
   width: 100%;
@@ -156,6 +168,7 @@ const SelectedSubject = styled.span`
   border-radius: 5px;
   display: flex;
   align-items: center;
+  font-weight: 300;
 
   &:hover {
     cursor: pointer;
@@ -168,6 +181,8 @@ const CrossIcon = styled.span`
 
 const AddClassForm = () => {
   const [selectedOptions, setSelectedOptions] = useState([])
+  const [selectedTeachers, setSelectedTeachers] = useState([])
+  const [TeacherNames, setTeacherNames] = useState([])
   const GradeName = [
     'Class',
     'PG',
@@ -194,14 +209,13 @@ const AddClassForm = () => {
   ]
 
   const SubjectNames = [
-    'Section',
-    'Dove',
-    'Swan',
-    'Dolphin',
-    'Red',
-    'Blue',
-    'Green',
-    'Orange',
+    'Math',
+    'Science',
+    'History',
+    'English',
+    'Geography',
+    'Art',
+    'Music',
   ]
 
   const handleSelectChange = (event) => {
@@ -214,9 +228,41 @@ const AddClassForm = () => {
       selectedOptions.filter((subject) => subject !== subjectToRemove)
     )
   }
+
+  const handleTeacherSelectChange = (event) => {
+    const value = event.target.value
+    setSelectedTeachers([...selectedTeachers, value])
+  }
+
+  const handleRemoveTeacher = (teacherToRemove) => {
+    setSelectedTeachers(
+      selectedTeachers.filter((teacher) => teacher !== teacherToRemove)
+    )
+  }
+
+  const { data, status } = useQuery(
+    'specific-teacher-option',
+    async () => {
+      // setIsLoading(true)
+      const res = await axiosInstance.get(`/teacher/options`)
+      return res.data
+    },
+    {
+      onSuccess: (data) => {
+        // Format the teacher names
+        const formattedTeachers = data.map(
+          (teacher) =>
+            `${teacher.fname} ${teacher.lname} - ${teacher.department} - ${teacher.gmail}`
+        )
+        setTeacherNames(formattedTeachers)
+      },
+    }
+  )
+
   return (
     <StyledForm>
       <Title>New Class Form</Title>
+
       <Message>Provide details for new class</Message>
       <FlexContainer>
         <Select required>
@@ -234,9 +280,10 @@ const AddClassForm = () => {
           ))}
         </Select>
       </FlexContainer>
+      <Message>Choose Subjects for this class</Message>
       <Select onChange={handleSelectChange} required>
         <Option disabled selected value=''>
-          Select Subject
+          Select Subject (You can select more than one)
         </Option>
         {SubjectNames.filter(
           (subject) => !selectedOptions.includes(subject)
@@ -257,19 +304,46 @@ const AddClassForm = () => {
           </SelectedSubject>
         ))}
       </SelectedSubjectContainer>
-      <Message>Choose Subjects Taught in that class</Message>
+      <Message>Assign All Teachers for this class</Message>
 
-      <Label>
-        <Input type='password' placeholder='' required />
-        <Span>Password</Span>
-      </Label>
-      <Label>
-        <Input type='password' placeholder='' required />
-        <Span>Confirm password</Span>
-      </Label>
-      <SubmitButton>Submit</SubmitButton>
+      <Select onChange={handleTeacherSelectChange} required>
+        <Option disabled selected value=''>
+          Select Teachers (You can select more than one)
+        </Option>
+        {TeacherNames.filter(
+          (teacher) => !selectedTeachers.includes(teacher)
+        ).map((teacher, index) => (
+          <Option key={index} value={teacher}>
+            {teacher}
+          </Option>
+        ))}
+      </Select>
+      <SelectedSubjectContainer>
+        {selectedTeachers.map((teacher, index) => (
+          <SelectedSubject
+            key={index}
+            onClick={() => handleRemoveTeacher(teacher)}
+          >
+            {teacher}
+            <CrossIcon>&times;</CrossIcon>
+          </SelectedSubject>
+        ))}
+      </SelectedSubjectContainer>
+
+      <SubmitButton>Save</SubmitButton>
+
+      <CloseBtn
+        onClick={() => {
+          window.location.reload()
+        }}
+      >
+        Close
+      </CloseBtn>
+
       <SignIn>
-        Already have an account? <a href='#'>Sign in</a>
+        Subject or Teacher not found? Click{' '}
+        <Link to='/subjects'>here for Subject</Link> &{' '}
+        <Link to='/teachers'>here for Teacher</Link>
       </SignIn>
     </StyledForm>
   )

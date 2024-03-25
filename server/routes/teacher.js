@@ -3,6 +3,7 @@ import express from 'express'
 import {
   deleteTeacherById,
   getAllTeachers,
+  getAllTeachersOption,
   getTeacherById,
   submitTeacherForm,
   updateTeacherById,
@@ -12,6 +13,9 @@ const router = express.Router()
 
 // Submit a teacher form
 router.post('/submit', submitTeacherForm)
+
+// Get all teacher with specific field in array form
+router.get('/options', getAllTeachersOption)
 
 // Get all teacher forms
 router.get('/', getAllTeachers)

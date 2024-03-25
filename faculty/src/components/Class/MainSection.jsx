@@ -1,6 +1,8 @@
 import { EmojiEmotions, LibraryBooks } from '@mui/icons-material'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import AddClassForm from './AddClassForm'
+import ClassBar from './ClassBar'
 const Wrap = styled.div`
   padding: 1rem 0;
 `
@@ -73,115 +75,145 @@ const Btn = styled.button`
     transform: scale(1.1);
   }
 `
-
+const CoverPage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed; /* Change to fixed to cover entire viewport */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Semi-transparent background to indicate modal */
+  z-index: 999; /* Ensure it's above other content */
+`
 const MainSection = () => {
+  const [showForm, setShowForm] = useState(false)
+
+  const handleButtonClick = () => {
+    setShowForm(!showForm)
+  }
+
   return (
-    <Wrap>
-      <BoxWrap>
-        <Box>
-          <BoxTitle>PG Dolphin</BoxTitle>
-          <BoxInfoWrap>
-            <EmojiEmotions />
-            <BoxLabel>Students : </BoxLabel>
-            <BoxLabelValue>0</BoxLabelValue>
-          </BoxInfoWrap>
-          <BoxInfoWrap>
-            <LibraryBooks />
-            <BoxLabel>Subjects : </BoxLabel>
-            <BoxLabelValue>0</BoxLabelValue>
-          </BoxInfoWrap>
-          <ButtonSet>
-            <Btn style={{ backgroundColor: '#3aa933' }}>View</Btn>
-            <Btn style={{ backgroundColor: '#0033ff' }}>Edit</Btn>
-          </ButtonSet>
-        </Box>
-        <Box>
-          <BoxTitle>Nursery Dove</BoxTitle>
-          <BoxInfoWrap>
-            <EmojiEmotions />
-            <BoxLabel>Students : </BoxLabel>
-            <BoxLabelValue>0</BoxLabelValue>
-          </BoxInfoWrap>
-          <BoxInfoWrap>
-            <LibraryBooks />
-            <BoxLabel>Subjects : </BoxLabel>
-            <BoxLabelValue>0</BoxLabelValue>
-          </BoxInfoWrap>
-          <ButtonSet>
-            <Btn style={{ backgroundColor: '#3aa933' }}>View</Btn>
-            <Btn style={{ backgroundColor: '#0033ff' }}>Edit</Btn>
-          </ButtonSet>
-        </Box>
-        <Box>
-          <BoxTitle>KG Swan</BoxTitle>
-          <BoxInfoWrap>
-            <EmojiEmotions />
-            <BoxLabel>Students : </BoxLabel>
-            <BoxLabelValue>0</BoxLabelValue>
-          </BoxInfoWrap>
-          <BoxInfoWrap>
-            <LibraryBooks />
-            <BoxLabel>Subjects : </BoxLabel>
-            <BoxLabelValue>0</BoxLabelValue>
-          </BoxInfoWrap>
-          <ButtonSet>
-            <Btn style={{ backgroundColor: '#3aa933' }}>View</Btn>
-            <Btn style={{ backgroundColor: '#0033ff' }}>Edit</Btn>
-          </ButtonSet>
-        </Box>
-        <Box>
-          <BoxTitle>One Red</BoxTitle>
-          <BoxInfoWrap>
-            <EmojiEmotions />
-            <BoxLabel>Students : </BoxLabel>
-            <BoxLabelValue>0</BoxLabelValue>
-          </BoxInfoWrap>
-          <BoxInfoWrap>
-            <LibraryBooks />
-            <BoxLabel>Subjects : </BoxLabel>
-            <BoxLabelValue>0</BoxLabelValue>
-          </BoxInfoWrap>
-          <ButtonSet>
-            <Btn style={{ backgroundColor: '#3aa933' }}>View</Btn>
-            <Btn style={{ backgroundColor: '#0033ff' }}>Edit</Btn>
-          </ButtonSet>
-        </Box>
-        <Box>
-          <BoxTitle>One Green</BoxTitle>
-          <BoxInfoWrap>
-            <EmojiEmotions />
-            <BoxLabel>Students : </BoxLabel>
-            <BoxLabelValue>0</BoxLabelValue>
-          </BoxInfoWrap>
-          <BoxInfoWrap>
-            <LibraryBooks />
-            <BoxLabel>Subjects : </BoxLabel>
-            <BoxLabelValue>0</BoxLabelValue>
-          </BoxInfoWrap>
-          <ButtonSet>
-            <Btn style={{ backgroundColor: '#3aa933' }}>View</Btn>
-            <Btn style={{ backgroundColor: '#0033ff' }}>Edit</Btn>
-          </ButtonSet>
-        </Box>
-        <Box>
-          <BoxTitle>One Blue</BoxTitle>
-          <BoxInfoWrap>
-            <EmojiEmotions />
-            <BoxLabel>Students : </BoxLabel>
-            <BoxLabelValue>0</BoxLabelValue>
-          </BoxInfoWrap>
-          <BoxInfoWrap>
-            <LibraryBooks />
-            <BoxLabel>Subjects : </BoxLabel>
-            <BoxLabelValue>0</BoxLabelValue>
-          </BoxInfoWrap>
-          <ButtonSet>
-            <Btn style={{ backgroundColor: '#3aa933' }}>View</Btn>
-            <Btn style={{ backgroundColor: '#0033ff' }}>Edit</Btn>
-          </ButtonSet>
-        </Box>
-      </BoxWrap>
-    </Wrap>
+    <>
+      <ClassBar onButtonClick={handleButtonClick} />
+      {showForm && (
+        <CoverPage>
+          <AddClassForm />
+        </CoverPage>
+      )}
+      <Wrap>
+        <BoxWrap>
+          <Box>
+            <BoxTitle>PG Dolphin</BoxTitle>
+            <BoxInfoWrap>
+              <EmojiEmotions />
+              <BoxLabel>Students : </BoxLabel>
+              <BoxLabelValue>0</BoxLabelValue>
+            </BoxInfoWrap>
+            <BoxInfoWrap>
+              <LibraryBooks />
+              <BoxLabel>Subjects : </BoxLabel>
+              <BoxLabelValue>0</BoxLabelValue>
+            </BoxInfoWrap>
+            <ButtonSet>
+              <Btn style={{ backgroundColor: '#3aa933' }}>View</Btn>
+              <Btn style={{ backgroundColor: '#0033ff' }}>Edit</Btn>
+            </ButtonSet>
+          </Box>
+          <Box>
+            <BoxTitle>Nursery Dove</BoxTitle>
+            <BoxInfoWrap>
+              <EmojiEmotions />
+              <BoxLabel>Students : </BoxLabel>
+              <BoxLabelValue>0</BoxLabelValue>
+            </BoxInfoWrap>
+            <BoxInfoWrap>
+              <LibraryBooks />
+              <BoxLabel>Subjects : </BoxLabel>
+              <BoxLabelValue>0</BoxLabelValue>
+            </BoxInfoWrap>
+            <ButtonSet>
+              <Btn style={{ backgroundColor: '#3aa933' }}>View</Btn>
+              <Btn style={{ backgroundColor: '#0033ff' }}>Edit</Btn>
+            </ButtonSet>
+          </Box>
+          <Box>
+            <BoxTitle>KG Swan</BoxTitle>
+            <BoxInfoWrap>
+              <EmojiEmotions />
+              <BoxLabel>Students : </BoxLabel>
+              <BoxLabelValue>0</BoxLabelValue>
+            </BoxInfoWrap>
+            <BoxInfoWrap>
+              <LibraryBooks />
+              <BoxLabel>Subjects : </BoxLabel>
+              <BoxLabelValue>0</BoxLabelValue>
+            </BoxInfoWrap>
+            <ButtonSet>
+              <Btn style={{ backgroundColor: '#3aa933' }}>View</Btn>
+              <Btn style={{ backgroundColor: '#0033ff' }}>Edit</Btn>
+            </ButtonSet>
+          </Box>
+          <Box>
+            <BoxTitle>One Red</BoxTitle>
+            <BoxInfoWrap>
+              <EmojiEmotions />
+              <BoxLabel>Students : </BoxLabel>
+              <BoxLabelValue>0</BoxLabelValue>
+            </BoxInfoWrap>
+            <BoxInfoWrap>
+              <LibraryBooks />
+              <BoxLabel>Subjects : </BoxLabel>
+              <BoxLabelValue>0</BoxLabelValue>
+            </BoxInfoWrap>
+            <ButtonSet>
+              <Btn style={{ backgroundColor: '#3aa933' }}>View</Btn>
+              <Btn style={{ backgroundColor: '#0033ff' }}>Edit</Btn>
+            </ButtonSet>
+          </Box>
+          <Box>
+            <BoxTitle>One Green</BoxTitle>
+            <BoxInfoWrap>
+              <EmojiEmotions />
+              <BoxLabel>Students : </BoxLabel>
+              <BoxLabelValue>0</BoxLabelValue>
+            </BoxInfoWrap>
+            <BoxInfoWrap>
+              <LibraryBooks />
+              <BoxLabel>Subjects : </BoxLabel>
+              <BoxLabelValue>0</BoxLabelValue>
+            </BoxInfoWrap>
+            <ButtonSet>
+              <Btn style={{ backgroundColor: '#3aa933' }}>View</Btn>
+              <Btn style={{ backgroundColor: '#0033ff' }}>Edit</Btn>
+            </ButtonSet>
+          </Box>
+          <Box>
+            <BoxTitle>One Blue</BoxTitle>
+            <BoxInfoWrap>
+              <EmojiEmotions />
+              <BoxLabel>Students : </BoxLabel>
+              <BoxLabelValue>0</BoxLabelValue>
+            </BoxInfoWrap>
+            <BoxInfoWrap>
+              <LibraryBooks />
+              <BoxLabel>Subjects : </BoxLabel>
+              <BoxLabelValue>0</BoxLabelValue>
+            </BoxInfoWrap>
+            <ButtonSet>
+              <Btn style={{ backgroundColor: '#3aa933' }}>View</Btn>
+              <Btn style={{ backgroundColor: '#0033ff' }}>Edit</Btn>
+            </ButtonSet>
+          </Box>
+        </BoxWrap>
+      </Wrap>
+    </>
   )
 }
 

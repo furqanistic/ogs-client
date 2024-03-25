@@ -39,7 +39,8 @@ const BtnSet = styled.div`
   align-items: center;
 `
 
-const ClassBar = () => {
+const ClassBar = ({ onButtonClick }) => {
+  console.log(onButtonClick)
   return (
     <WrapBtn>
       <LabelWrap>
@@ -47,7 +48,8 @@ const ClassBar = () => {
       </LabelWrap>
       <BtnSet>
         <GreenBtn variant='outlined' color='primary'>
-          <Add style={{ marginRight: '5px' }} /> Add Class
+          <Add style={{ marginRight: '5px' }} onClick={onButtonClick} /> Add
+          Class
         </GreenBtn>
       </BtnSet>
     </WrapBtn>

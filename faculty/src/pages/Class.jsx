@@ -8,7 +8,6 @@ const Class = () => {
   return (
     <Layout>
       <Topbar title='Class' />
-      <ClassBar />
       <MainSection />
     </Layout>
   )

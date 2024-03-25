@@ -8,10 +8,11 @@ import {
   Payments,
   Timeline,
 } from '@mui/icons-material'
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Layout from '../Layout'
+import AddClassForm from '../components/Class/AddClassForm'
 import Topbar from '../components/Layout/Topbar'
 
 const Size = styled.div`
@@ -75,20 +76,21 @@ const CardIcon = styled.div`
   width: 100%;
   border-radius: 10px 10px 0 0;
 
-  border: 1px solid #22ff00;
-  background-color: #0436007a;
+  /* border: 1px solid #22ff00; */
+  /* background-color: #0436007a; */
+  background-color: #04360096;
   text-decoration: none;
 `
 const CardName = styled.div`
   font-size: 1rem;
   min-height: 50px;
-  color: #000000;
+  color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 25%;
   width: 100%;
-  background-color: #22ff00;
+  /* background-color: #22ff00; */
   font-weight: 600;
   text-transform: uppercase;
   text-decoration: none;
@@ -97,8 +99,8 @@ const CardName = styled.div`
   transition: all 0.3s ease;
   &:hover {
     font-size: 1.1rem;
-    background-color: white;
-    color: #052600;
+    /* background-color: white; */
+    /* color: #052600; */
   }
 `
 const Students = () => {
@@ -106,7 +108,6 @@ const Students = () => {
     <Layout>
       <Size>
         <Topbar title='Students' />
-        <CardNav>STUDENTS CONTROL PANEL</CardNav>
         <CardSet>
           <Link to='all-admissions' style={{ textDecoration: 'none' }}>
             <Cards>
@@ -114,7 +115,7 @@ const Students = () => {
                 <Groups3
                   style={{
                     fontSize: '10rem',
-                    color: 'white',
+                    color: '#28f11a',
                   }}
                 />
               </CardIcon>
@@ -126,7 +127,7 @@ const Students = () => {
               <Boy
                 style={{
                   fontSize: '10rem',
-                  color: 'white',
+                  color: '#28f11a',
                 }}
               />
             </CardIcon>
@@ -138,7 +139,7 @@ const Students = () => {
                 <Payments
                   style={{
                     fontSize: '10rem',
-                    color: 'white',
+                    color: '#28f11a',
                   }}
                 />
               </CardIcon>
@@ -150,7 +151,7 @@ const Students = () => {
               <Paid
                 style={{
                   fontSize: '10rem',
-                  color: 'white',
+                  color: '#28f11a',
                 }}
               />
             </CardIcon>
@@ -161,7 +162,7 @@ const Students = () => {
               <Article
                 style={{
                   fontSize: '10rem',
-                  color: 'white',
+                  color: '#28f11a',
                 }}
               />
             </CardIcon>
@@ -172,7 +173,7 @@ const Students = () => {
               <AccessAlarm
                 style={{
                   fontSize: '10rem',
-                  color: 'white',
+                  color: '#28f11a',
                 }}
               />
             </CardIcon>
@@ -183,7 +184,7 @@ const Students = () => {
               <Timeline
                 style={{
                   fontSize: '10rem',
-                  color: 'white',
+                  color: '#28f11a',
                 }}
               />
             </CardIcon>
@@ -194,7 +195,7 @@ const Students = () => {
               <Notes
                 style={{
                   fontSize: '10rem',
-                  color: 'white',
+                  color: '#28f11a',
                 }}
               />
             </CardIcon>

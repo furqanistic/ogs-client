@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
 import { axiosInstance } from '../../config'
 
@@ -183,6 +183,7 @@ const AddClassForm = () => {
   const [selectedOptions, setSelectedOptions] = useState([])
   const [selectedTeachers, setSelectedTeachers] = useState([])
   const [TeacherNames, setTeacherNames] = useState([])
+  const navigate = useNavigate()
   const GradeName = [
     'Class',
     'PG',
@@ -334,7 +335,7 @@ const AddClassForm = () => {
 
       <CloseBtn
         onClick={() => {
-          window.location.reload()
+          navigate(0)
         }}
       >
         Close

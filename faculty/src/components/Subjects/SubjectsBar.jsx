@@ -46,25 +46,19 @@ const BtnSet = styled.div`
   align-items: center;
 `
 
-const ClassBar = ({ onButtonClick }) => {
+const SubjectsBar = ({ onButtonClick }) => {
   return (
     <WrapBtn>
       <LabelWrap>
-        <InfoText>Showing Total 6 Classes Here</InfoText>
+        <InfoText>Showing Total 5 Subjects Here</InfoText>
       </LabelWrap>
       <BtnSet>
-        <Link to='/subjects' style={{ textDecoration: 'none' }}>
-          <BtnTwo variant='outlined' color='primary' onClick={onButtonClick}>
-            <Visibility style={{ marginRight: '5px' }} /> Visit Subjects
-          </BtnTwo>
-        </Link>
-
         <GreenBtn variant='outlined' color='primary' onClick={onButtonClick}>
-          <Add style={{ marginRight: '5px' }} /> Add Class
+          <Add style={{ marginRight: '5px' }} /> Add Subject
         </GreenBtn>
       </BtnSet>
     </WrapBtn>
   )
 }
 
-export default ClassBar
+export default SubjectsBar

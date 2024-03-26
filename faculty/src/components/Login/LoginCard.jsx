@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
@@ -208,15 +208,28 @@ const Message = styled.p`
   font-weight: 300;
   font-style: italic;
 `
-export default function LoginCard() {
+const LoginCard = () => {
   const [setError, showSetError] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  // functions will be here
-  const handleLogin = async (e) => {
-    e.preventDefault()
+
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === 'Enter') {
+        handleLogin()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyPress)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [setError])
+
+  const handleLogin = async () => {
     dispatch(loginStart())
     try {
       const res = await axiosInstance.post('/auth/signin', {
@@ -227,44 +240,56 @@ export default function LoginCard() {
       navigate('/dashboard')
     } catch (err) {
       console.log(err)
-      showSetError(err)
+    } finally {
+      showSetError(true)
     }
   }
+
   return (
     <Wrap>
       <LoginCardWrap>
         <Title>Faculty Portal</Title>
-        <form>
-          <UserBox>
-            <Input
-              required
-              type='text'
-              onChange={(e) => setEmail(e.target.value.toLowerCase())}
-              autoComplete='off'
-            />
-            <Label>Email</Label>
-          </UserBox>
-          <UserBox>
-            <Input
-              required
-              type='password'
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete='off'
-            />
-            <Label>Password</Label>
-          </UserBox>
-          {setError && (
-            <Message>Oops! Wrong password. Verify and retry...</Message>
-          )}
-          <SubmitButton type='submit' value='Login' onClick={handleLogin}>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Submit
-          </SubmitButton>
-        </form>
+        <UserBox>
+          <Input
+            required
+            type='text'
+            onChange={(e) => setEmail(e.target.value.toLowerCase())}
+            autoComplete='off'
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                handleLogin()
+              }
+            }}
+          />
+          <Label>Email</Label>
+        </UserBox>
+        <UserBox>
+          <Input
+            required
+            type='password'
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete='off'
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleLogin()
+              }
+            }}
+          />
+          <Label>Password</Label>
+        </UserBox>
+        {setError && (
+          <Message>Oops! Wrong password. Verify and retry...</Message>
+        )}
+        <SubmitButton onClick={handleLogin}>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          Submit
+        </SubmitButton>
       </LoginCardWrap>
     </Wrap>
   )
 }
+
+export default LoginCard

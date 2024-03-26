@@ -14,6 +14,7 @@ import FeeSlip from './pages/Students/FeeSlip'
 import FeeSlipDetails from './pages/Students/FeeSlipDetails'
 import StudentAdmissions from './pages/Students/StudentAdmissions'
 import ViewStudent from './pages/Students/ViewStudent'
+import Subjects from './pages/Subjects'
 import Teachers from './pages/Teacher'
 import AddTeacher from './pages/Teacher/AddTeacher'
 import EditTeacher from './pages/Teacher/EditTeacher'
@@ -52,6 +53,7 @@ const App = () => {
             </Route>
             <Route path='users' element={<User />} />
             <Route path='class' element={<Class />} />
+            <Route path='subjects' element={<Subjects />} />
             <Route path='teachers'>
               <Route index element={<Teachers />} />
               <Route path='add' element={<AddTeacher />} />

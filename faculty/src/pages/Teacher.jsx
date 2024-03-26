@@ -5,7 +5,6 @@ import Topbar from '../components/Layout/Topbar'
 import TeacherMain from '../components/Teacher/TeacherMain'
 
 const Size = styled.div`
-  padding-left: 3rem;
   position: relative;
   min-width: 1200px;
 `

@@ -54,6 +54,8 @@ const CardSection = styled.section`
   padding: 2rem 0.5rem;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 `
 
 const Card = styled.div`

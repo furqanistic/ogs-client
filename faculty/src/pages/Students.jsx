@@ -4,6 +4,7 @@ import {
   Article,
   Boy,
   Groups3,
+  MenuBook,
   Notes,
   Paid,
   Payments,
@@ -73,8 +74,8 @@ const CardIcon = styled.div`
   border-radius: 10px 10px 0 0;
 
   /* border: 1px solid #22ff00; */
-  /* background-color: #0436007a; */
-  background-color: #04360096;
+  /* background-color: #04360096; */
+  background-color: #0ea004;
   text-decoration: none;
 `
 const CardName = styled.div`
@@ -112,7 +113,7 @@ const Students = () => {
                 <Groups3
                   style={{
                     fontSize: '10rem',
-                    color: '#28f11a',
+                    color: '#f1faf0',
                   }}
                 />
               </CardIcon>
@@ -124,7 +125,7 @@ const Students = () => {
               <Boy
                 style={{
                   fontSize: '10rem',
-                  color: '#28f11a',
+                  color: '#f1faf0',
                 }}
               />
             </CardIcon>
@@ -136,7 +137,7 @@ const Students = () => {
                 <Payments
                   style={{
                     fontSize: '10rem',
-                    color: '#28f11a',
+                    color: '#f1faf0',
                   }}
                 />
               </CardIcon>
@@ -148,7 +149,7 @@ const Students = () => {
               <Paid
                 style={{
                   fontSize: '10rem',
-                  color: '#28f11a',
+                  color: '#f1faf0',
                 }}
               />
             </CardIcon>
@@ -160,7 +161,7 @@ const Students = () => {
                 <AddBusiness
                   style={{
                     fontSize: '10rem',
-                    color: '#28f11a',
+                    color: '#f1faf0',
                   }}
                 />
               </CardIcon>
@@ -172,7 +173,7 @@ const Students = () => {
               <Article
                 style={{
                   fontSize: '10rem',
-                  color: '#28f11a',
+                  color: '#f1faf0',
                 }}
               />
             </CardIcon>
@@ -181,21 +182,21 @@ const Students = () => {
 
           <Cards>
             <CardIcon>
-              <AccessAlarm
+              <MenuBook
                 style={{
                   fontSize: '10rem',
-                  color: '#28f11a',
+                  color: '#f1faf0',
                 }}
               />
             </CardIcon>
-            <CardName>Time Table</CardName>
+            <CardName>Subjects</CardName>
           </Cards>
           <Cards>
             <CardIcon>
               <Timeline
                 style={{
                   fontSize: '10rem',
-                  color: '#28f11a',
+                  color: '#f1faf0',
                 }}
               />
             </CardIcon>

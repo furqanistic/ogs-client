@@ -1,4 +1,4 @@
-import { Search } from '@mui/icons-material'
+import { Face4, LocalLibrary, Search } from '@mui/icons-material'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import AddSubjectForm from './AddSubjectForm'
@@ -15,13 +15,14 @@ const Wrap = styled.div`
 const Box = styled.div`
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  text-align: center;
   min-width: 250px;
   flex-direction: column;
   min-height: 200px;
   margin: 2rem;
   background-color: #040290;
   border-radius: 40px;
+  border-end-start-radius: 15px;
 `
 const BoxLabel = styled.div`
   background-color: #ffffff;
@@ -29,11 +30,10 @@ const BoxLabel = styled.div`
   width: 100%;
   text-align: center;
   line-height: 3.5rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 300;
   text-transform: capitalize;
-  border-end-start-radius: 5px;
-  border-bottom-right-radius: 40px;
+  border-bottom-right-radius: 30px;
 `
 const BoxText = styled.p`
   font-size: 7rem;
@@ -75,8 +75,41 @@ const Bar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   margin-top: 15px;
+`
+const Boxed = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  background-color: #1edb2b;
+  border-bottom-right-radius: 40px;
+  border-end-start-radius: 15px;
+  border: 1px dotted #1e37db;
+`
+
+const BoxedWrap = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* margin-right: 10px; */
+  min-width: 80px;
+  /* padding: 0 1rem; */
+  height: 100%;
+  align-items: start;
+  padding-left: 10px;
+  justify-content: center;
+  font-weight: 300;
+`
+const BoxStudents = styled.span`
+  font-size: 1rem;
+  align-items: start;
+`
+const BoxTeachers = styled.span`
+  font-size: 1rem;
+  align-items: start;
+`
+const Big = styled.strong`
+  font-weight: 800;
 `
 const SubjectsMain = () => {
   const [showForm, setShowForm] = useState(false)
@@ -87,23 +120,30 @@ const SubjectsMain = () => {
   }
 
   const filteredSubjects = [
-    { id: 1, name: 'Mathematics' },
-    { id: 2, name: 'English Language Arts' },
+    { id: 1, name: 'Mathematics', numofTeachers: 2, numOfStudents: 28 },
+    {
+      id: 2,
+      name: 'English Language Arts',
+      numofTeachers: 2,
+      numOfStudents: 80,
+    },
     { id: 3, name: 'Science' },
-    { id: 4, name: 'Social Studies' },
-    { id: 5, name: 'Physical Education' },
-    { id: 6, name: 'Health' },
-    { id: 7, name: 'Art' },
-    { id: 8, name: 'Music' },
-    { id: 9, name: 'Computer Science' },
-    { id: 10, name: 'History' },
+    { id: 4, name: 'Social Studies', numofTeachers: 2, numOfStudents: 80 },
+    { id: 5, name: 'Physical Education', numofTeachers: 2, numOfStudents: 84 },
+    { id: 6, name: 'Health', numofTeachers: 2, numOfStudents: 46 },
+    { id: 7, name: 'Art', numofTeachers: 2, numOfStudents: 91 },
+    { id: 8, name: 'Music', numofTeachers: 2, numOfStudents: 55 },
+    { id: 9, name: 'Computer Science', numofTeachers: 2, numOfStudents: 71 },
   ].filter((subject) =>
     subject.name.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
   return (
     <>
-      <SubjectsBar onButtonClick={handleButtonClick} />
+      <SubjectsBar
+        onButtonClick={handleButtonClick}
+        len={filteredSubjects.length}
+      />
       {showForm && (
         <CoverPage>
           <AddSubjectForm />
@@ -123,7 +163,17 @@ const SubjectsMain = () => {
         {filteredSubjects.map((subject) => (
           <Box key={subject.id}>
             <BoxText>{subject.name.charAt(0)}</BoxText>
-            <BoxLabel>{subject.name}</BoxLabel>
+            <Boxed>
+              <BoxedWrap>
+                <BoxStudents>
+                  <Big>S :</Big> {subject.numOfStudents}
+                </BoxStudents>
+                <BoxTeachers>
+                  <Big>T :</Big> {subject.numofTeachers}
+                </BoxTeachers>
+              </BoxedWrap>
+              <BoxLabel>{subject.name}</BoxLabel>
+            </Boxed>
           </Box>
         ))}
       </Wrap>

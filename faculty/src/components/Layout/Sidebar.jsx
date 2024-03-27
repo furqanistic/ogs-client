@@ -5,6 +5,7 @@ import {
   ExitToApp,
   Face6,
   GppGood,
+  MenuBook,
   Person,
   School,
 } from '@mui/icons-material'
@@ -104,6 +105,12 @@ const Sidebar = () => {
         path: '/teachers',
       },
       {
+        name: 'Subjects',
+        icon: <MenuBook />,
+        key: 'Subjects',
+        path: '/subjects',
+      },
+      {
         name: 'Publish',
         icon: <GppGood />,
         key: 'publish',
@@ -168,6 +175,7 @@ const Sidebar = () => {
               border: '1px solid #3aa933',
               marginTop: 'auto',
             }}
+            onClick={handleClick}
           >
             <ItemIcon>
               <ExitToApp />

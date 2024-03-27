@@ -46,11 +46,11 @@ const BtnSet = styled.div`
   align-items: center;
 `
 
-const SubjectsBar = ({ onButtonClick }) => {
+const SubjectsBar = ({ onButtonClick, len }) => {
   return (
     <WrapBtn>
       <LabelWrap>
-        <InfoText>Showing Total 5 Subjects Here</InfoText>
+        <InfoText>Showing Total {len} Subjects Here</InfoText>
       </LabelWrap>
       <BtnSet>
         <GreenBtn variant='outlined' color='primary' onClick={onButtonClick}>
